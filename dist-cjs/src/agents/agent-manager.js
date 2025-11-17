@@ -1323,7 +1323,7 @@ export class AgentManager extends EventEmitter {
             } else {
                 return 1.0;
             }
-        } catch (error) {
+        } catch (_error) {
             return 0;
         }
     }
