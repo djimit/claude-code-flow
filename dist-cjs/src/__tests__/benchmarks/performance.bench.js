@@ -54,9 +54,9 @@ let PerformanceBenchmark = class PerformanceBenchmark {
 };
 describe('Performance Benchmarks', ()=>{
     let benchmark;
-    let adapter;
-    let executor;
-    let client;
+    let _adapter;
+    let _executor;
+    let _client;
     beforeAll(()=>{
         benchmark = new PerformanceBenchmark();
         adapter = new ClaudeFlowSDKAdapter({

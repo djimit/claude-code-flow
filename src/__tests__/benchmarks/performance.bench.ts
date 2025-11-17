@@ -89,9 +89,9 @@ class PerformanceBenchmark {
 
 describe('Performance Benchmarks', () => {
   let benchmark: PerformanceBenchmark;
-  let adapter: ClaudeFlowSDKAdapter;
-  let executor: TaskExecutorSDK;
-  let client: ClaudeClientV25;
+  let _adapter: ClaudeFlowSDKAdapter;
+  let _executor: TaskExecutorSDK;
+  let _client: ClaudeClientV25;
 
   beforeAll(() => {
     benchmark = new PerformanceBenchmark();
