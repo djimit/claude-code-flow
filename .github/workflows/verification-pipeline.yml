@@ -145,7 +145,7 @@ jobs:
       - name: ESLint code analysis
         run: |
           echo "🔍 Running ESLint..."
-          npm run lint -- --format=json --output-file=eslint-report.json || true
+          npm run lint -- -f json -o eslint-report.json || true
           npm run lint
 
       - name: TypeScript type checking
@@ -156,8 +156,7 @@ jobs:
       - name: Format checking
         run: |
           echo "🎨 Checking code formatting..."
-          npm run format
-          git diff --exit-code || (echo "❌ Code is not properly formatted" && exit 1)
+          npm run format:check || (echo "❌ Code is not properly formatted" && exit 1)
 
       - name: Complexity analysis
         run: |
