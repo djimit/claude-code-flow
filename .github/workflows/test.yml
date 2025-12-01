@@ -53,9 +53,7 @@ jobs:
       run: npm ci
 
     - name: Check code formatting
-      run: |
-        npm run format
-        git diff --exit-code
+      run: npm run format:check
 
     - name: Run linting
       run: npm run lint

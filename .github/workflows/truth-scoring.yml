@@ -140,7 +140,7 @@ jobs:
           echo "🔍 Running static analysis for truth scoring..."
           
           # ESLint analysis with custom rules for truth scoring
-          npm run lint -- --format json --output-file truth-scoring-data/eslint-analysis.json || true
+          npm run lint -- -f json -o truth-scoring-data/eslint-analysis.json || true
           
           # TypeScript compilation check
           npm run typecheck > truth-scoring-data/typescript-check.log 2>&1 || true
