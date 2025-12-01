@@ -54,8 +54,11 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install dependencies with retry
+        run: |
+          npm ci --legacy-peer-deps || \
+          (sleep 5 && npm ci --legacy-peer-deps) || \
+          (sleep 10 && npm ci --legacy-peer-deps --no-optional)
 
       - name: Initialize integration test session
         id: setup
@@ -153,8 +156,11 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install dependencies with retry
+        run: |
+          npm ci --legacy-peer-deps || \
+          (sleep 5 && npm ci --legacy-peer-deps) || \
+          (sleep 10 && npm ci --legacy-peer-deps --no-optional)
 
       - name: Download integration setup
         uses: actions/download-artifact@v4
@@ -277,6 +283,13 @@ jobs:
           testTaskDistribution().catch(console.error);
           "
 
+      - name: Run actual cross-agent integration tests
+        run: |
+          echo "🧪 Running actual integration test suite..."
+          NODE_OPTIONS='--experimental-vm-modules' npm run test:integration -- src/verification/tests/integration/cross-agent-communication.test.ts --maxWorkers=1
+        timeout-minutes: 10
+        continue-on-error: false
+
       - name: Upload agent coordination results
         uses: actions/upload-artifact@v4
         with:
@@ -302,8 +315,11 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install dependencies with retry
+        run: |
+          npm ci --legacy-peer-deps || \
+          (sleep 5 && npm ci --legacy-peer-deps) || \
+          (sleep 10 && npm ci --legacy-peer-deps --no-optional)
 
       - name: Download integration setup
         uses: actions/download-artifact@v4
@@ -424,8 +440,11 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install dependencies with retry
+        run: |
+          npm ci --legacy-peer-deps || \
+          (sleep 5 && npm ci --legacy-peer-deps) || \
+          (sleep 10 && npm ci --legacy-peer-deps --no-optional)
 
       - name: Test agent failure recovery
         run: |
@@ -552,8 +571,11 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install dependencies with retry
+        run: |
+          npm ci --legacy-peer-deps || \
+          (sleep 5 && npm ci --legacy-peer-deps) || \
+          (sleep 10 && npm ci --legacy-peer-deps --no-optional)
 
       - name: Test multi-agent performance
         run: |
