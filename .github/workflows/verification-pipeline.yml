@@ -50,8 +50,11 @@ jobs:
           echo "test-matrix={\"include\":[{\"os\":\"ubuntu-latest\",\"node\":\"18\"},{\"os\":\"ubuntu-latest\",\"node\":\"20\"},{\"os\":\"macos-latest\",\"node\":\"20\"},{\"os\":\"windows-latest\",\"node\":\"20\"}]}" >> $GITHUB_OUTPUT
           echo "cache-key=${{ env.CACHE_VERSION }}-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}" >> $GITHUB_OUTPUT
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install dependencies with retry
+        run: |
+          npm ci --legacy-peer-deps || \
+          (sleep 5 && npm ci --legacy-peer-deps) || \
+          (sleep 10 && npm ci --legacy-peer-deps --no-optional)
 
       - name: Cache dependencies
         uses: actions/cache@v4
@@ -86,8 +89,11 @@ jobs:
             ~/.npm
           key: ${{ needs.setup-verification.outputs.cache-key }}
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install dependencies with retry
+        run: |
+          npm ci --legacy-peer-deps || \
+          (sleep 5 && npm ci --legacy-peer-deps) || \
+          (sleep 10 && npm ci --legacy-peer-deps --no-optional)
 
       - name: Security audit
         run: |
@@ -139,8 +145,11 @@ jobs:
             ~/.npm
           key: ${{ needs.setup-verification.outputs.cache-key }}
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install dependencies with retry
+        run: |
+          npm ci --legacy-peer-deps || \
+          (sleep 5 && npm ci --legacy-peer-deps) || \
+          (sleep 10 && npm ci --legacy-peer-deps --no-optional)
 
       - name: ESLint code analysis
         run: |
@@ -191,8 +200,11 @@ jobs:
           node-version: ${{ matrix.node }}
           cache: 'npm'
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install dependencies with retry
+        run: |
+          npm ci --legacy-peer-deps || \
+          (sleep 5 && npm ci --legacy-peer-deps) || \
+          (sleep 10 && npm ci --legacy-peer-deps --no-optional)
 
       - name: Run unit tests
         run: |
@@ -249,8 +261,11 @@ jobs:
             ~/.npm
           key: ${{ needs.setup-verification.outputs.cache-key }}
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install dependencies with retry
+        run: |
+          npm ci --legacy-peer-deps || \
+          (sleep 5 && npm ci --legacy-peer-deps) || \
+          (sleep 10 && npm ci --legacy-peer-deps --no-optional)
 
       - name: Build TypeScript
         run: |
@@ -339,8 +354,11 @@ jobs:
         with:
           name: build-artifacts-${{ needs.setup-verification.outputs.verification-id }}
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install dependencies with retry
+        run: |
+          npm ci --legacy-peer-deps || \
+          (sleep 5 && npm ci --legacy-peer-deps) || \
+          (sleep 10 && npm ci --legacy-peer-deps --no-optional)
 
       - name: Run performance benchmarks
         run: |
