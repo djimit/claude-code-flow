@@ -183,8 +183,11 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install dependencies with retry
+        run: |
+          npm ci --legacy-peer-deps || \
+          (sleep 5 && npm ci --legacy-peer-deps) || \
+          (sleep 10 && npm ci --legacy-peer-deps --no-optional)
 
       - name: Validate rollback target
         id: validate
@@ -257,7 +260,7 @@ jobs:
           git checkout -b test-rollback-temp "$ROLLBACK_TARGET"
           
           # Test if the target can build
-          npm ci || true
+          npm ci --legacy-peer-deps || npm ci --legacy-peer-deps --no-optional || true
           npm run build:ts || echo "⚠️ Build test failed"
           
           # Switch back to original branch
@@ -419,8 +422,11 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install dependencies with retry
+        run: |
+          npm ci --legacy-peer-deps || \
+          (sleep 5 && npm ci --legacy-peer-deps) || \
+          (sleep 10 && npm ci --legacy-peer-deps --no-optional)
 
       - name: Verify build functionality
         run: |
