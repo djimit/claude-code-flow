@@ -55,7 +55,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --ignore-scripts
 
       - name: Initialize integration test session
         id: setup
@@ -83,12 +83,17 @@ jobs:
           TEST_SCENARIOS='["coordination","memory-sharing","task-orchestration","fault-tolerance","performance"]'
           echo "test-scenarios=$TEST_SCENARIOS" >> $GITHUB_OUTPUT
 
+      - name: Install SQLite
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y sqlite3
+
       - name: Create integration test database
         run: |
           echo "🗄️ Creating integration test database..."
-          
+
           mkdir -p integration-test-data
-          
+
           # Initialize SQLite database for integration tests
           sqlite3 ${{ env.INTEGRATION_DB_PATH }} << 'EOF'
           CREATE TABLE IF NOT EXISTS test_sessions (
@@ -154,7 +159,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --ignore-scripts
 
       - name: Download integration setup
         uses: actions/download-artifact@v4
@@ -303,7 +308,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --ignore-scripts
 
       - name: Download integration setup
         uses: actions/download-artifact@v4
@@ -425,7 +430,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --ignore-scripts
 
       - name: Test agent failure recovery
         run: |
@@ -553,7 +558,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --ignore-scripts
 
       - name: Test multi-agent performance
         run: |
