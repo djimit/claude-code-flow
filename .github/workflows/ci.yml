@@ -131,7 +131,7 @@ jobs:
       - name: Test CLI binary
         run: |
           chmod +x ./bin/claude-flow
-          ./bin/claude-flow --version
+          bash bin/claude-flow --version
 
       - name: Package build
         run: |
