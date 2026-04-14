@@ -28,5 +28,9 @@
     "noInterop": false
   },
   "minify": false,
-  "sourceMaps": true
+  "sourceMaps": true,
+  "exclude": [
+    "node_modules",
+    "src/migration"
+  ]
 }
