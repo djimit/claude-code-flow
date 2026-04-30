@@ -1,5 +1,5 @@
 ---
-name: doctor
+name: ruflo-doctor
 description: Run health checks on the Ruflo installation and fix common issues
 argument-hint: "[--fix]"
 allowed-tools: Bash(npx *)

@@ -1,6 +1,6 @@
 ---
-name: loop
-description: Start a /loop worker for periodic Ruflo task execution
+name: ruflo-loop
+description: Start a Ruflo background worker (audit, optimize, testgaps, etc.) on a recurring schedule
 ---
 $ARGUMENTS
 Start a cache-aware /loop worker. Parse the worker name from $ARGUMENTS.

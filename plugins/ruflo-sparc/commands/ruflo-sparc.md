@@ -1,5 +1,5 @@
 ---
-name: sparc
+name: ruflo-sparc
 description: SPARC methodology commands — initialize, track, advance, and report on Specification-Pseudocode-Architecture-Refinement-Completion workflows
 ---
 $ARGUMENTS

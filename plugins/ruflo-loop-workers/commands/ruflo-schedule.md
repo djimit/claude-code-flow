@@ -1,5 +1,5 @@
 ---
-name: schedule
+name: ruflo-schedule
 description: Schedule persistent workers via CronCreate
 ---
 $ARGUMENTS

@@ -1,5 +1,5 @@
 ---
-name: status
+name: ruflo-status
 description: Show Ruflo system health, MCP server status, and active agents
 ---
 $ARGUMENTS
