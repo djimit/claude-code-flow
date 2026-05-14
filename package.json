@@ -54,6 +54,7 @@
     "v3:security": "npm run security:audit && npm run security:test"
   },
   "dependencies": {
+    "@babel/plugin-transform-modules-systemjs": "^7.29.4",
     "@claude-flow/cli-core": "^3.7.0-alpha.5",
     "@claude-flow/mcp": "^3.0.0-alpha.8",
     "@claude-flow/neural": "^3.0.0-alpha.8",
