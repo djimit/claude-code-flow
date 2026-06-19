@@ -395,6 +395,26 @@ async function testSSE() {
   });
 }
 
+async function testSessionCleanup() {
+  console.log("\n── Session Cleanup ──");
+
+  await test("DELETE /mcp returns 204", async () => {
+    const res = await fetch(`${BASE}/mcp`, {
+      method: "DELETE",
+      headers: { "Mcp-Session-Id": "test-cleanup" },
+    });
+    assert(res.status === 204, `status ${res.status}`);
+  });
+
+  await test("DELETE /mcp/core returns 204", async () => {
+    const res = await fetch(`${BASE}/mcp/core`, {
+      method: "DELETE",
+      headers: { "Mcp-Session-Id": "test-cleanup" },
+    });
+    assert(res.status === 204, `status ${res.status}`);
+  });
+}
+
 async function testModels() {
   console.log("\n── Models Endpoint ──");
 
@@ -410,13 +430,23 @@ async function testNotificationsInitialized() {
   console.log("\n── Notifications ──");
 
   await test("notifications/initialized via /mcp", async () => {
-    const res = await mcpCall("/mcp", "notifications/initialized", {});
-    assert(res.result, "no result");
+    const res = await fetch(`${BASE}/mcp`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ jsonrpc: "2.0", method: "notifications/initialized" }),
+    });
+    assert(res.status === 202, `status ${res.status}`);
+    assert((await res.text()) === "", "expected empty body");
   });
 
   await test("notifications/initialized via /mcp/core", async () => {
-    const res = await mcpCall("/mcp/core", "notifications/initialized", {});
-    assert(res.result, "no result");
+    const res = await fetch(`${BASE}/mcp/core`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ jsonrpc: "2.0", method: "notifications/initialized" }),
+    });
+    assert(res.status === 202, `status ${res.status}`);
+    assert((await res.text()) === "", "expected empty body");
   });
 }
 
@@ -449,6 +479,7 @@ async function main() {
   await testToolExecution();
   await testCrossGroupExecution();
   await testSSE();
+  await testSessionCleanup();
   await testModels();
   await testNotificationsInitialized();
 

@@ -835,10 +835,22 @@ const app = express();
 app.use(express.json({ limit: "10mb" }));
 
 // ---------- CORS middleware ----------
+
+
+// ---------- MCP Streamable HTTP session ----------
+const MCP_SESSION_ID = randomUUID();
+
+// ---------- Mcp-Session-Id middleware ----------
+app.use((req, res, next) => {
+  if (req.path.startsWith("/mcp")) {
+    res.setHeader("Mcp-Session-Id", MCP_SESSION_ID);
+  }
+  next();
+});
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Mcp-Session-Id");
   if (req.method === "OPTIONS") return res.sendStatus(204);
   next();
 });
@@ -872,7 +884,7 @@ function createMcpHandler(groupName) {
           return res.json({ jsonrpc: "2.0", id, result: mcpResult });
         }
         case "notifications/initialized":
-          return res.json({ jsonrpc: "2.0", id, result: {} });
+          return res.status(202).end();
         default:
           return res.json({ jsonrpc: "2.0", id, error: { code: -32601, message: `Method not found: ${method}` } });
       }
@@ -896,6 +908,7 @@ function createMcpSseHandler(groupName) {
 for (const groupName of Object.keys(TOOL_GROUPS)) {
   app.post(`/mcp/${groupName}`, createMcpHandler(groupName));
   app.get(`/mcp/${groupName}`, createMcpSseHandler(groupName));
+  app.delete(`/mcp/${groupName}`, (_, res) => res.sendStatus(204));
 }
 
 // ---------- Catch-all /mcp — serves ALL enabled tools (backwards-compatible) ----------
@@ -926,7 +939,7 @@ app.post("/mcp", async (req, res) => {
         return res.json({ jsonrpc: "2.0", id, result: mcpResult });
       }
       case "notifications/initialized":
-        return res.json({ jsonrpc: "2.0", id, result: {} });
+        return res.status(202).end();
       default:
         return res.json({ jsonrpc: "2.0", id, error: { code: -32601, message: `Method not found: ${method}` } });
     }
@@ -942,6 +955,8 @@ app.get("/mcp", (req, res) => {
   res.setHeader("Connection", "keep-alive");
   res.write(`data: ${JSON.stringify({ type: "endpoint", url: "/mcp" })}\n\n`);
 });
+
+app.delete("/mcp", (_, res) => res.sendStatus(204));
 
 // ---------- GET /mcp-servers — returns MCP_SERVERS JSON for Chat UI config ----------
 app.get("/mcp-servers", (_, res) => {
