@@ -72,24 +72,39 @@
     "@ruvector/router-linux-x64-gnu": "^0.1.30",
     "@ruvector/sona": "^0.1.5",
     "agentdb": "^3.0.0-alpha.9",
-    "agentic-flow": "^2.0.7"
+    "agentic-flow": "^2.0.14"
   },
   "overrides": {
-    "hono": ">=4.11.4",
+    "hono": ">=4.12.27",
     "@ruvector/rvf-wasm": "0.1.5",
-    "@hono/node-server": ">=1.19.10",
+    "@hono/node-server": ">=2.0.10",
     "flatted": ">=3.4.0",
-    "tar": ">=7.5.11",
+    "tar": ">=7.5.22",
     "picomatch": ">=4.0.3",
     "path-to-regexp": ">=8.2.1",
-    "undici": ">=7.18.0",
+    "undici": ">=8.5.0",
     "minimatch": ">=10.0.0",
     "@isaacs/brace-expansion": ">=5.0.1",
     "cacache": ">=20.0.0",
     "make-fetch-happen": ">=15.0.0",
     "express-rate-limit": ">=8.4.1",
-    "protobufjs": ">=7.5.5",
-    "uuid": ">=14.0.0"
+    "protobufjs": ">=8.6.6",
+    "uuid": ">=14.0.0",
+    "@opentelemetry/core": ">=2.8.0",
+    "@opentelemetry/propagator-jaeger": ">=2.9.0",
+    "adm-zip": ">=0.6.0",
+    "agentic-flow": "$agentic-flow",
+    "axios": ">=1.18.0",
+    "brace-expansion": ">=5.0.8",
+    "fast-uri": ">=3.1.4",
+    "form-data": ">=4.0.6",
+    "http-proxy-middleware": ">=3.0.7",
+    "js-yaml": ">=4.3.0",
+    "postcss": ">=8.5.18",
+    "qs": ">=6.15.2",
+    "sharp": ">=0.35.0",
+    "vite": ">=7.3.5",
+    "ws": ">=8.21.0"
   },
   "devDependencies": {
     "@openai/codex": "^0.98.0",
@@ -98,7 +113,7 @@
     "eslint": "^8.0.0",
     "tsx": "^4.21.0",
     "typescript": "^5.0.0",
-    "vitest": "^1.0.0"
+    "vitest": "^4.1.10"
   },
   "engines": {
     "node": ">=20.0.0"
