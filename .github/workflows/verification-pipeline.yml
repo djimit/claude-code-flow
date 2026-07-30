@@ -276,6 +276,15 @@ jobs:
           ls -la *.tgz 2>/dev/null || echo "No tgz files created"
         continue-on-error: true
 
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts-${{ needs.setup-verification.outputs.verification-id }}
+          path: |
+            *.tgz
+            v3/@claude-flow/cli/bin/
+          if-no-files-found: error
+
   # Documentation verification - simplified checks
   docs-verification:
     name: 📚 Documentation Verification
