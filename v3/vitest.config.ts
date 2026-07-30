@@ -81,13 +81,7 @@ export default defineConfig({
     reporters: ['default'],
 
     // Parallel execution
-    pool: 'threads',
-    poolOptions: {
-      threads: {
-        singleThread: false,
-        isolate: true,
-      },
-    },
+    pool: 'forks',
 
     // Globals for easier testing
     globals: true,
