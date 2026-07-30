@@ -204,6 +204,9 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
+  "overrides": {
+    "@xhmikosr/decompress": "^10.2.1"
+  },
   "directories": {
     "doc": "docs",
     "example": "examples",

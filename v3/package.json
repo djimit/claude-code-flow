@@ -52,7 +52,7 @@
   },
   "packageManager": "pnpm@8.15.0",
   "dependencies": {
-    "semantic-release": "25.0.2"
+    "semantic-release": "25.0.8"
   },
   "pnpm": {
     "neverBuiltDependencies": [
@@ -60,7 +60,15 @@
     ],
     "overrides": {
       "@ruvector/gnn": "0.1.25",
-      "@ruvector/gnn-linux-x64-gnu": "0.1.25"
+      "@ruvector/gnn-linux-x64-gnu": "0.1.25",
+      "handlebars": "4.7.9",
+      "npm": "12.0.2",
+      "tar": "7.5.22"
     }
+  },
+  "overrides": {
+    "handlebars": "4.7.9",
+    "npm": "12.0.2",
+    "tar": "7.5.22"
   }
 }
