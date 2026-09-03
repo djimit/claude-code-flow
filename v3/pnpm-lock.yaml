@@ -45,7 +45,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^4.1.0
-        version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.0)
+        version: 4.1.10(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.2)
 
   '@claude-flow/aidefence':
     dependencies:
@@ -61,7 +61,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^4.1.0
-        version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.0)
+        version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.2)
 
   '@claude-flow/browser':
     dependencies:
@@ -86,7 +86,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^4.1.0
-        version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.0)
+        version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.2)
 
   '@claude-flow/claims':
     dependencies:
@@ -111,7 +111,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^4.1.0
-        version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.0)
+        version: 4.1.10(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.2)
 
   '@claude-flow/cli':
     dependencies:
@@ -151,10 +151,10 @@ importers:
         version: 3.0.0-alpha.3(@ruvector/diskann@0.1.1)(@types/node@20.19.43)(zod@3.25.76)
       '@claude-flow/memory':
         specifier: ^3.0.0-alpha.14
-        version: 3.0.0-alpha.21(@ruvector/diskann@0.1.1)(@types/node@20.19.43)(zod@3.25.76)
+        version: 3.0.0-alpha.22(@ruvector/diskann@0.1.1)(@types/node@20.19.43)(zod@3.25.76)
       '@claude-flow/plugin-gastown-bridge':
         specifier: ^0.1.3
-        version: 0.1.4(@claude-flow/memory@3.0.0-alpha.21)
+        version: 0.1.4(@claude-flow/memory@3.0.0-alpha.22)
       '@claude-flow/security':
         specifier: ^3.0.0-alpha.1
         version: 3.0.0-alpha.12
@@ -194,7 +194,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^4.1.0
-        version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.0)
+        version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.2)
 
   '@claude-flow/cli-core': {}
 
@@ -219,8 +219,8 @@ importers:
         specifier: ^9.2.0
         version: 9.3.8(@types/node@20.19.43)
       toml:
-        specifier: ^3.0.0
-        version: 3.0.0
+        specifier: ^4.2.0
+        version: 4.2.0
       yaml:
         specifier: ^2.4.0
         version: 2.9.0
@@ -239,7 +239,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^4.1.0
-        version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.0)
+        version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.2)
 
   '@claude-flow/deployment':
     dependencies:
@@ -252,7 +252,7 @@ importers:
         version: 25.0.8(typescript@5.9.3)
       vitest:
         specifier: ^4.1.0
-        version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.0)
+        version: 4.1.10(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.2)
 
   '@claude-flow/embeddings':
     dependencies:
@@ -281,7 +281,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^4.1.0
-        version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.0)
+        version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.2)
 
   '@claude-flow/guidance':
     dependencies:
@@ -290,7 +290,7 @@ importers:
         version: link:../hooks
       '@claude-flow/memory':
         specifier: ^3.0.0-alpha.2
-        version: 3.0.0-alpha.21(@ruvector/diskann@0.1.1)(@types/node@20.19.43)(zod@3.25.76)
+        version: 3.0.0-alpha.22(@ruvector/diskann@0.1.1)(@types/node@20.19.43)(zod@3.25.76)
       '@claude-flow/shared':
         specifier: ^3.0.0-alpha.1
         version: 3.0.0-alpha.8
@@ -303,13 +303,13 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^4.1.0
-        version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.0)
+        version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.2)
 
   '@claude-flow/hooks':
     dependencies:
       '@claude-flow/memory':
         specifier: ^3.0.0-alpha.2
-        version: 3.0.0-alpha.21(@ruvector/diskann@0.1.1)(@types/node@20.19.43)(zod@3.25.76)
+        version: 3.0.0-alpha.22(@ruvector/diskann@0.1.1)(@types/node@20.19.43)(zod@3.25.76)
       '@claude-flow/neural':
         specifier: ^3.0.0-alpha.2
         version: 3.0.0-alpha.9(@ruvector/diskann@0.1.1)(@types/node@20.19.43)(zod@3.25.76)
@@ -335,7 +335,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^4.1.0
-        version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.0)
+        version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.2)
 
   '@claude-flow/integration':
     dependencies:
@@ -349,7 +349,7 @@ importers:
     devDependencies:
       vitest:
         specifier: ^4.1.0
-        version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.0)
+        version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.2)
 
   '@claude-flow/mcp':
     dependencies:
@@ -380,7 +380,7 @@ importers:
         version: 8.18.1
       vitest:
         specifier: ^4.1.0
-        version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.0)
+        version: 4.1.10(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.2)
 
   '@claude-flow/memory':
     dependencies:
@@ -402,13 +402,13 @@ importers:
         version: 1.4.11
       vitest:
         specifier: ^4.1.0
-        version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.0)
+        version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.2)
 
   '@claude-flow/neural':
     dependencies:
       '@claude-flow/memory':
         specifier: ^3.0.0-alpha.2
-        version: 3.0.0-alpha.21(@ruvector/diskann@0.1.1)(@types/node@20.19.43)(zod@3.25.76)
+        version: 3.0.0-alpha.22(@ruvector/diskann@0.1.1)(@types/node@20.19.43)(zod@3.25.76)
       '@ruvector/sona':
         specifier: latest
         version: 0.1.8
@@ -428,7 +428,7 @@ importers:
     devDependencies:
       vitest:
         specifier: ^4.1.0
-        version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.0)
+        version: 4.1.10(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.2)
 
   '@claude-flow/plugin-agent-federation':
     dependencies:
@@ -447,7 +447,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^4.1.0
-        version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.0)
+        version: 4.1.10(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.2)
 
   '@claude-flow/plugin-iot-cognitum':
     dependencies:
@@ -466,7 +466,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^4.1.0
-        version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.0)
+        version: 4.1.10(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.2)
 
   '@claude-flow/plugins':
     dependencies:
@@ -475,7 +475,7 @@ importers:
         version: link:../hooks
       '@claude-flow/memory':
         specifier: ^3.0.0-alpha.2
-        version: 3.0.0-alpha.21(@ruvector/diskann@0.1.1)(@types/node@20.19.43)(zod@3.25.76)
+        version: 3.0.0-alpha.22(@ruvector/diskann@0.1.1)(@types/node@20.19.43)(zod@3.25.76)
       '@ruvector/learning-wasm':
         specifier: ^0.1.0
         version: 0.1.29
@@ -494,7 +494,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^4.1.0
-        version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.0)
+        version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.2)
 
   '@claude-flow/providers':
     dependencies:
@@ -519,7 +519,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^4.1.0
-        version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.0)
+        version: 4.1.10(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.2)
 
   '@claude-flow/security':
     dependencies:
@@ -532,7 +532,7 @@ importers:
     devDependencies:
       vitest:
         specifier: ^4.1.0
-        version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.0)
+        version: 4.1.10(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.2)
 
   '@claude-flow/shared':
     dependencies:
@@ -566,7 +566,7 @@ importers:
         version: 7.2.0
       vitest:
         specifier: ^4.1.0
-        version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.0)
+        version: 4.1.10(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.2)
       ws:
         specifier: ^8.16.0
         version: 8.21.1
@@ -578,13 +578,13 @@ importers:
     devDependencies:
       vitest:
         specifier: ^4.1.0
-        version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.0)
+        version: 4.1.10(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.2)
 
   '@claude-flow/testing':
     devDependencies:
       '@claude-flow/memory':
         specifier: ^3.0.0-alpha.2
-        version: 3.0.0-alpha.21(@ruvector/diskann@0.1.1)(@types/node@20.19.43)(zod@3.25.76)
+        version: 3.0.0-alpha.22(@ruvector/diskann@0.1.1)(@types/node@20.19.43)(zod@3.25.76)
       '@claude-flow/shared':
         specifier: ^3.0.0-alpha.1
         version: 3.0.0-alpha.8
@@ -596,7 +596,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^4.1.0
-        version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.0)
+        version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.2)
 
 packages:
 
@@ -792,12 +792,12 @@ packages:
       yaml: 2.9.0
       zod: 3.25.76
     optionalDependencies:
-      '@claude-flow/memory': 3.0.0-alpha.21(@ruvector/diskann@0.1.1)(@types/node@20.19.43)(zod@3.25.76)
+      '@claude-flow/memory': 3.0.0-alpha.22(@ruvector/diskann@0.1.1)(@types/node@20.19.43)(zod@3.25.76)
       '@napi-rs/keyring': 1.3.0
       agentdb: 3.0.0-alpha.20(@ruvector/diskann@0.1.1)(@types/node@20.19.43)(zod@3.25.76)
       agentic-flow: 3.0.0-alpha.2(@types/node@20.19.43)
       better-sqlite3: 12.11.1
-      ruvector: 0.2.40(@ruvector/diskann@0.1.1)(@ruvector/router@0.1.30)(@ruvector/ruvllm@2.6.0)(zod@3.25.76)
+      ruvector: 0.2.41(@ruvector/diskann@0.1.1)(@ruvector/router@0.1.30)(@ruvector/ruvllm@2.6.2)(zod@3.25.76)
     transitivePeerDependencies:
       - '@cfworker/json-schema'
       - '@metaharness/kernel'
@@ -892,7 +892,7 @@ packages:
     requiresBuild: true
     dependencies:
       '@claude-flow/hooks': 3.0.0-alpha.7(@claude-flow/shared@3.0.0-alpha.8)(@ruvector/diskann@0.1.1)(@types/node@20.19.43)
-      '@claude-flow/memory': 3.0.0-alpha.21(@ruvector/diskann@0.1.1)(@types/node@20.19.43)(zod@3.25.76)
+      '@claude-flow/memory': 3.0.0-alpha.22(@ruvector/diskann@0.1.1)(@types/node@20.19.43)(zod@3.25.76)
       '@claude-flow/shared': 3.0.0-alpha.8
     transitivePeerDependencies:
       - '@cfworker/json-schema'
@@ -913,7 +913,7 @@ packages:
     peerDependencies:
       '@claude-flow/shared': ^3.0.0-alpha.1
     dependencies:
-      '@claude-flow/memory': 3.0.0-alpha.21(@ruvector/diskann@0.1.1)(@types/node@20.19.43)(zod@3.25.76)
+      '@claude-flow/memory': 3.0.0-alpha.22(@ruvector/diskann@0.1.1)(@types/node@20.19.43)(zod@3.25.76)
       '@claude-flow/neural': 3.0.0-alpha.9(@ruvector/diskann@0.1.1)(@types/node@20.19.43)(zod@3.25.76)
       '@claude-flow/shared': 3.0.0-alpha.8
       zod: 3.25.76
@@ -957,11 +957,12 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@claude-flow/memory@3.0.0-alpha.21(@ruvector/diskann@0.1.1)(@types/node@20.19.43)(zod@3.25.76):
-    resolution: {integrity: sha512-5H5rJOh7nGuzmFazTvJWZIbeZvf+HJjonM98vWijzbL4kQvBDWj6zwhsxQ3wrwJSrs5ALgQQmhxQ7Mr+gagAFw==}
+  /@claude-flow/memory@3.0.0-alpha.22(@ruvector/diskann@0.1.1)(@types/node@20.19.43)(zod@3.25.76):
+    resolution: {integrity: sha512-mFwHhZ79YIkHtvmPzHoIl5j3z9MPJI7CIfOWGVOX5cNkvxEBvntra3Tp8dRk6NvgTRa0S/mofRBjJScSjYV5IQ==}
     cpu: [x64, arm64]
     os: [darwin, linux, win32]
     dependencies:
+      '@claude-flow/security': 3.0.0-alpha.12
       agentdb: 3.0.0-alpha.20(@ruvector/diskann@0.1.1)(@types/node@20.19.43)(zod@3.25.76)
       sql.js: 1.14.1
     optionalDependencies:
@@ -978,7 +979,7 @@ packages:
   /@claude-flow/neural@3.0.0-alpha.9(@ruvector/diskann@0.1.1)(@types/node@20.19.43)(zod@3.25.76):
     resolution: {integrity: sha512-u7mx6rQxHrpCyKVtP600QorSJrEhoqYEyGZgYVU1kGWwYitScJH3rzWzss95Dn+RazcCAk7yElEG/iSbhtxU6g==}
     dependencies:
-      '@claude-flow/memory': 3.0.0-alpha.21(@ruvector/diskann@0.1.1)(@types/node@20.19.43)(zod@3.25.76)
+      '@claude-flow/memory': 3.0.0-alpha.22(@ruvector/diskann@0.1.1)(@types/node@20.19.43)(zod@3.25.76)
       '@ruvector/sona': 0.1.5
     optionalDependencies:
       agentdb: 3.0.0-alpha.20(@ruvector/diskann@0.1.1)(@types/node@20.19.43)(zod@3.25.76)
@@ -992,7 +993,7 @@ packages:
       - zod
     dev: false
 
-  /@claude-flow/plugin-gastown-bridge@0.1.4(@claude-flow/memory@3.0.0-alpha.21):
+  /@claude-flow/plugin-gastown-bridge@0.1.4(@claude-flow/memory@3.0.0-alpha.22):
     resolution: {integrity: sha512-MSxrTGkQoSlt6rcgg7p3/oayuvDH8uD2411ysrzitHThwCapW1f/SWNaN3gF0MHC6TIduuk611r2tXAtesJdrA==}
     engines: {node: '>=20.0.0'}
     requiresBuild: true
@@ -1002,7 +1003,7 @@ packages:
       '@claude-flow/memory':
         optional: true
     dependencies:
-      '@claude-flow/memory': 3.0.0-alpha.21(@ruvector/diskann@0.1.1)(@types/node@20.19.43)(zod@3.25.76)
+      '@claude-flow/memory': 3.0.0-alpha.22(@ruvector/diskann@0.1.1)(@types/node@20.19.43)(zod@3.25.76)
       '@iarna/toml': 2.2.5
       uuid: 11.1.1
       zod: 3.25.76
@@ -1018,8 +1019,6 @@ packages:
       zod: 3.25.76
     optionalDependencies:
       '@napi-rs/keyring': 1.3.0
-    dev: false
-    optional: true
 
   /@claude-flow/shared@3.0.0-alpha.7:
     resolution: {integrity: sha512-5iehTHguBFjlyZqy+fRoKfZVL/nFeE93A94nUUKJvu8y7AmhfpVqtQAZbmKztwQGJ5rv7iBb3Kwl1MUo3K5QkA==}
@@ -1056,36 +1055,11 @@ packages:
     requiresBuild: true
     optional: true
 
-  /@emnapi/core@2.0.0-alpha.3:
-    resolution: {integrity: sha512-AZypUeJ/yByuxyS7BlSNRDOMLMlROYtjYdIAuBmJssVz1UJDSeYxLrdizhXCFYhedC5bqd/ASy8EuNXbVVXp9g==}
-    requiresBuild: true
-    dependencies:
-      '@emnapi/wasi-threads': 2.0.1
-      tslib: 2.8.1
-    dev: true
-    optional: true
-
   /@emnapi/runtime@1.11.3:
     resolution: {integrity: sha512-Xz4Tpyki7XyrpbUK1jR1AhdAdaXyhhY4lZ3neLodmhpuWfy2PAQN5B46sAiU4liOXGLkHypn/qU+jvfWSCYYLA==}
     requiresBuild: true
     dependencies:
       tslib: 2.8.1
-    optional: true
-
-  /@emnapi/runtime@2.0.0-alpha.3:
-    resolution: {integrity: sha512-hFPAhMUjJD9BSyCANEISPOogeXC9Zo9ZQl7L6vKnaVsMkCtzznaW/naYypeyl0Gv5rYfWYsZbpixTMpjDJzQeA==}
-    requiresBuild: true
-    dependencies:
-      tslib: 2.8.1
-    dev: true
-    optional: true
-
-  /@emnapi/wasi-threads@2.0.1:
-    resolution: {integrity: sha512-9DsSk+o5NBX0CCJT8s0EROGSGxjR/tKu6aBTaVyq+SjAEQH4XcdcRxPBRzsBLizTTJ49MJjF+jgu3qnO9GLQcQ==}
-    requiresBuild: true
-    dependencies:
-      tslib: 2.8.1
-    dev: true
     optional: true
 
   /@epic-web/invariant@1.0.0:
@@ -1988,7 +1962,7 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
-  /@modelcontextprotocol/sdk@1.30.0(zod@4.4.3):
+  /@modelcontextprotocol/sdk@1.30.0(zod@4.5.4):
     resolution: {integrity: sha512-xKd8OIzlqNzcqcNumGAa6g+PW2kjD5vrpcKOnfldAUPP3j7lnqMPwlTXQm8gF+UwH72z0lqaRbjr9hqGz0eITA==}
     engines: {node: '>=18'}
     peerDependencies:
@@ -2013,8 +1987,8 @@ packages:
       json-schema-typed: 8.0.2
       pkce-challenge: 5.0.1
       raw-body: 3.0.2
-      zod: 4.4.3
-      zod-to-json-schema: 3.25.2(zod@4.4.3)
+      zod: 4.5.4
+      zod-to-json-schema: 3.25.2(zod@4.5.4)
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -2025,7 +1999,6 @@ packages:
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
-    dev: false
     optional: true
 
   /@napi-rs/keyring-darwin-x64@1.3.0:
@@ -2034,7 +2007,6 @@ packages:
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
-    dev: false
     optional: true
 
   /@napi-rs/keyring-freebsd-x64@1.3.0:
@@ -2043,7 +2015,6 @@ packages:
     cpu: [x64]
     os: [freebsd]
     requiresBuild: true
-    dev: false
     optional: true
 
   /@napi-rs/keyring-linux-arm-gnueabihf@1.3.0:
@@ -2052,7 +2023,6 @@ packages:
     cpu: [arm]
     os: [linux]
     requiresBuild: true
-    dev: false
     optional: true
 
   /@napi-rs/keyring-linux-arm64-gnu@1.3.0:
@@ -2061,7 +2031,6 @@ packages:
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
-    dev: false
     optional: true
 
   /@napi-rs/keyring-linux-arm64-musl@1.3.0:
@@ -2070,7 +2039,6 @@ packages:
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
-    dev: false
     optional: true
 
   /@napi-rs/keyring-linux-riscv64-gnu@1.3.0:
@@ -2079,7 +2047,6 @@ packages:
     cpu: [riscv64]
     os: [linux]
     requiresBuild: true
-    dev: false
     optional: true
 
   /@napi-rs/keyring-linux-x64-gnu@1.3.0:
@@ -2088,7 +2055,6 @@ packages:
     cpu: [x64]
     os: [linux]
     requiresBuild: true
-    dev: false
     optional: true
 
   /@napi-rs/keyring-linux-x64-musl@1.3.0:
@@ -2097,7 +2063,6 @@ packages:
     cpu: [x64]
     os: [linux]
     requiresBuild: true
-    dev: false
     optional: true
 
   /@napi-rs/keyring-win32-arm64-msvc@1.3.0:
@@ -2106,7 +2071,6 @@ packages:
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
-    dev: false
     optional: true
 
   /@napi-rs/keyring-win32-ia32-msvc@1.3.0:
@@ -2115,7 +2079,6 @@ packages:
     cpu: [ia32]
     os: [win32]
     requiresBuild: true
-    dev: false
     optional: true
 
   /@napi-rs/keyring-win32-x64-msvc@1.3.0:
@@ -2124,7 +2087,6 @@ packages:
     cpu: [x64]
     os: [win32]
     requiresBuild: true
-    dev: false
     optional: true
 
   /@napi-rs/keyring@1.3.0:
@@ -2144,26 +2106,10 @@ packages:
       '@napi-rs/keyring-win32-arm64-msvc': 1.3.0
       '@napi-rs/keyring-win32-ia32-msvc': 1.3.0
       '@napi-rs/keyring-win32-x64-msvc': 1.3.0
-    dev: false
-    optional: true
-
-  /@napi-rs/wasm-runtime@1.2.1(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3):
-    resolution: {integrity: sha512-KjZdi8Q1wh89gsVmghvbrMgWl6ZWmRmHV6wjB7/g4Zf0dyO+hH3neZUtuDNPO00qq5YE5RITVWvrIZKRaAmzGQ==}
-    engines: {node: ^20.19.0 || ^22.13.0 || >=23.5.0}
-    requiresBuild: true
-    peerDependencies:
-      '@emnapi/core': ^1.7.1 || ^2.0.0-alpha.3
-      '@emnapi/runtime': ^1.7.1 || ^2.0.0-alpha.3
-    dependencies:
-      '@emnapi/core': 2.0.0-alpha.3
-      '@emnapi/runtime': 2.0.0-alpha.3
-      '@tybys/wasm-util': 0.10.3
-    dev: true
     optional: true
 
   /@noble/ed25519@2.3.0:
     resolution: {integrity: sha512-M7dvXL2B92/M7dw9+gzuydL8qn/jiqNHaoR3Q+cb1q1GHV7uwE17WCyFMG+Y+TZb5izcaXk5TdJRrDUxHXL78A==}
-    dev: false
 
   /@nodelib/fs.scandir@2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -2543,6 +2489,7 @@ packages:
   /@opentelemetry/core@2.8.0(@opentelemetry/api@1.9.1):
     resolution: {integrity: sha512-hd1Lfh8p545nNz+jq1Ejfz+Mn1hyLuxYn1YzTfFNrxr8urEWMNQLPf1Th8kjOH+HxwawCrtgBp8JpBUR4ZSgww==}
     engines: {node: ^18.19.0 || >=20.6.0}
+    requiresBuild: true
     peerDependencies:
       '@opentelemetry/api': '>=1.0.0 <1.10.0'
     dependencies:
@@ -4081,8 +4028,8 @@ packages:
     dev: false
     optional: true
 
-  /@oxc-project/types@0.142.0:
-    resolution: {integrity: sha512-7W+2q5AKQVU36fkaryontrHn3YDt1RyUYXatw9i5H8ocYe2sPKSFB6eS8WNPeRKiN1qAWWZUPm7gwFzJGrccqQ==}
+  /@oxc-project/types@0.148.0:
+    resolution: {integrity: sha512-Nm4s/jB+4FpFsPhWGEC4h7rzksesmtnMXomo6rCMcg/b8zLQuOziRgkCS1fxDCXOlJB/6Q8oABOZ/OP6RIPj9A==}
     dev: true
 
   /@peculiar/asn1-schema@2.8.0:
@@ -4156,8 +4103,17 @@ packages:
       '@pnpm/network.ca-file': 1.0.2
       config-chain: 1.1.13
 
-  /@rolldown/binding-android-arm64@1.2.1:
-    resolution: {integrity: sha512-02hOeOSryYxVrOIphmLAsqnCJWxwlzFk+pEt/N/i6OgT3lShHO7xGCU5cpgchRDHboAEbSjzgGh+O/u1GswQmA==}
+  /@rolldown/binding-android-arm-eabi@1.2.7:
+    resolution: {integrity: sha512-EypzgnYCwyVY4NDHKzGmNJT5b+XaQEBniHxsMdeIQLB/tcCzZnhqrzHpZFbX9iaxx+5RiB8caATBtfvZP7zVxQ==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm]
+    os: [android]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@rolldown/binding-android-arm64@1.2.7:
+    resolution: {integrity: sha512-l17HE9EweWaqJZhuUuNBN/FzM62xw+DECVnJyvMsxn8vJFAGLy5QfLDoYAcronkAN8VxKZHezDpulHDPx95vFw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [android]
@@ -4165,8 +4121,8 @@ packages:
     dev: true
     optional: true
 
-  /@rolldown/binding-darwin-arm64@1.2.1:
-    resolution: {integrity: sha512-fMsTOnN0OjFm3CyppWPitKnc8UlliVARUULW6cfU6AIqjdtgmSFWSk9vecHzZduv/yMWIHDlRhM1e8Iff9uAfA==}
+  /@rolldown/binding-darwin-arm64@1.2.7:
+    resolution: {integrity: sha512-8ED8ELFvHXc6OCETIn4gXObPiaR6bckM/ipXtbzlPVDRMBfEGjCKgO90F9YtfdpDatVx/ZQw7aZ1vUMf/+T3Mw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [darwin]
@@ -4174,8 +4130,8 @@ packages:
     dev: true
     optional: true
 
-  /@rolldown/binding-darwin-x64@1.2.1:
-    resolution: {integrity: sha512-1wjKdz/XLGKHaTNHjQveQ/B23TKx4ItAqm1JbyVuvNPc4Ze0Fb48s49TAd/2zcplPl8okE/UbTgmlVfwT7eFeQ==}
+  /@rolldown/binding-darwin-x64@1.2.7:
+    resolution: {integrity: sha512-/WPripjtiAIZ2tWY7ddijORT0Ujg87wxWW/qcoFVCKAWVDPhtY0xr7Dj0M3GyNGz60jGwTElhro/mkF9dT7dDQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [darwin]
@@ -4183,8 +4139,8 @@ packages:
     dev: true
     optional: true
 
-  /@rolldown/binding-freebsd-x64@1.2.1:
-    resolution: {integrity: sha512-Fa0jHR07E7YBN4vOEsbVf2briYNsuOowfLJaXULZM0ldMlaCaj2LJgLMbMe4iacRyZmvR8efFhgR9wKuGclQUg==}
+  /@rolldown/binding-freebsd-x64@1.2.7:
+    resolution: {integrity: sha512-14DI4NcqpvbICxSnGLx3PmtDaWqRP/KGSGb6C+JLLVPeZRl6dKdHba3pGsqT3vpdTqhEYIPG0MMQ8c0xYqoJxA==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [freebsd]
@@ -4192,8 +4148,8 @@ packages:
     dev: true
     optional: true
 
-  /@rolldown/binding-linux-arm-gnueabihf@1.2.1:
-    resolution: {integrity: sha512-pzkgu1SSHGgRRyRZ4fbmSgmajbVt+epaLP99NDjFft69v/ypfTi6swBMiVdh2EkQ0OSnHE1lZDM7DRGkyAzUpA==}
+  /@rolldown/binding-linux-arm-gnueabihf@1.2.7:
+    resolution: {integrity: sha512-bxrWIRvHWQvbJwi+VIie/kDJmQxcNE6xxWwZdqF/ExVAigtHkv54WTLQPb+QsZdnFy18fg7JPfWGL0RH6vwIlQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm]
     os: [linux]
@@ -4201,8 +4157,8 @@ packages:
     dev: true
     optional: true
 
-  /@rolldown/binding-linux-arm64-gnu@1.2.1:
-    resolution: {integrity: sha512-QI5SEDY8cbiYWHx0VO4vIc3UlS6a32vXHjU8Qy/17adEmZIPuByJg13UEvo9c/UCiUkdcVWY83C+b+JrwnNyUg==}
+  /@rolldown/binding-linux-arm64-gnu@1.2.7:
+    resolution: {integrity: sha512-toOY2BChBZyuxU7OYX6Tn389di4IzAqPTycVcci0O7FSfBqzRB3RZn+K5Is6ANf4tmgRd/K1yZTsNTXbkXsnLg==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [linux]
@@ -4210,8 +4166,8 @@ packages:
     dev: true
     optional: true
 
-  /@rolldown/binding-linux-arm64-musl@1.2.1:
-    resolution: {integrity: sha512-Sm41FyCeXqmYcERoYOCbGIL5hNfd8w9LQ7Y61Bev48HkcjaJqV/iiVOaiDxjVTRMS+QKrZmD8cfPt4uMVnvM+A==}
+  /@rolldown/binding-linux-arm64-musl@1.2.7:
+    resolution: {integrity: sha512-lAIXTH/aiLRLxsTgQvfhjo4K1ydWIp00+V0voOr9beb/9ZmkUFrSIb03dXNFRgMNvkE6oGsF10ioQ6UsI+vS5Q==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [linux]
@@ -4219,8 +4175,8 @@ packages:
     dev: true
     optional: true
 
-  /@rolldown/binding-linux-ppc64-gnu@1.2.1:
-    resolution: {integrity: sha512-2x+WhXTGl9yJYPbltW/BSEPTVz9OIWQyER4N+gJEDWkkn904eRcBzELqh/Hf7K0w/ubGbKNMv0ZC+94QK/IFEg==}
+  /@rolldown/binding-linux-ppc64-gnu@1.2.7:
+    resolution: {integrity: sha512-kdnwS28Pkenp/mZMRwjXXXwxQ7pIsm+bF919LUK93BOyhcLsrVKdP2p9fxpiPNPAbNuch8ypQt0pm2P2LYCAGg==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [ppc64]
     os: [linux]
@@ -4228,8 +4184,8 @@ packages:
     dev: true
     optional: true
 
-  /@rolldown/binding-linux-s390x-gnu@1.2.1:
-    resolution: {integrity: sha512-eEjmQpuRQayHPWWnywaWHkFT3ToPbP3RYy42VVd/B9aBGDA+Ol25EIWHxKQST3IiWJjikCWUF7KtbfqwZrzVwQ==}
+  /@rolldown/binding-linux-s390x-gnu@1.2.7:
+    resolution: {integrity: sha512-516OdsyLdr5E65paF3yBF55t8mfm9+gmtCsK3xI7XKXIT7EfRlHhxL8K/NR6Hu8BWSgF5+1w74lTL0+nxcc8Qw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [s390x]
     os: [linux]
@@ -4237,8 +4193,8 @@ packages:
     dev: true
     optional: true
 
-  /@rolldown/binding-linux-x64-gnu@1.2.1:
-    resolution: {integrity: sha512-/Orga1fZYkLc/56jBICcHrKchl8Z2UKdDSr3LG9ToWO1lQ6a4Livk9Xz+9WN91zsz5QR3XQz2NNoSDEvP6qadw==}
+  /@rolldown/binding-linux-x64-gnu@1.2.7:
+    resolution: {integrity: sha512-r8/z8n7GFaYRln3xmP1Cxy0HH/HLM0uBUPkEuSVEfKGDA89M0FsZRZJRSwe/tJjRx+fpH/gjorfhB8tmEbSFLA==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [linux]
@@ -4246,8 +4202,8 @@ packages:
     dev: true
     optional: true
 
-  /@rolldown/binding-linux-x64-musl@1.2.1:
-    resolution: {integrity: sha512-xxBJRL+0q0Kce7orznGWLuylHDY65vuARXZRpX+hPdv+DqK2c3NlCsVA98tlWzWNEE7yPqA/1NQ5nnCrj49Y5A==}
+  /@rolldown/binding-linux-x64-musl@1.2.7:
+    resolution: {integrity: sha512-pAsE8iiDxUg1xBqdhrTfg45AVDVpirjz00sblEYClGNNcMnDb+e8beQgqIAw6LvauX/APvgxUnwrgun/YYGBhw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [linux]
@@ -4255,8 +4211,8 @@ packages:
     dev: true
     optional: true
 
-  /@rolldown/binding-openharmony-arm64@1.2.1:
-    resolution: {integrity: sha512-M6AdXIXw3s+/8XpKMzdGDEXGS1S7kwUsy+rcTIUIOx5Ge4nXKCtAFHFV9YKkXvGcC5WMoTjAteLzlsQROVI0Yw==}
+  /@rolldown/binding-openharmony-arm64@1.2.7:
+    resolution: {integrity: sha512-lTcIYmmnQQA8Or/2DatS6oSqcdLHvendjS+zLu+FwgToynWMRSmQdpM65fTANJgIS4mjbMOo5KT2lnT9SAb96w==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [openharmony]
@@ -4264,19 +4220,8 @@ packages:
     dev: true
     optional: true
 
-  /@rolldown/binding-wasm32-wasi@1.2.1:
-    resolution: {integrity: sha512-/TX0SoRGojHzSAHpfVBbavRVSazg5U3h3Y3VXfcc0cdugq6kxdqw8LPGFiPr+/7gE/60zRcsOY2Vi9b9eT0jww==}
-    engines: {node: ^20.19.0 || ^22.13.0 || >=23.5.0}
-    requiresBuild: true
-    dependencies:
-      '@emnapi/core': 2.0.0-alpha.3
-      '@emnapi/runtime': 2.0.0-alpha.3
-      '@napi-rs/wasm-runtime': 1.2.1(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)
-    dev: true
-    optional: true
-
-  /@rolldown/binding-win32-arm64-msvc@1.2.1:
-    resolution: {integrity: sha512-EvRrivJieyHG+AO9lleZWgq+g0+S7oV2C51yuqlcyU/R9net+sI4Pj0F+lUoP2bEr6TWX3SqFaaS0SzfLxSzkw==}
+  /@rolldown/binding-win32-arm64-msvc@1.2.7:
+    resolution: {integrity: sha512-e3Gu3WxbNk/UqQhxqU7YIYO+9ZBvWNz3U+h/qRFosscMFzdRPbXYSaSWgSnklv2fz1TgzBTcti2z35c/7irsHw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [win32]
@@ -4284,8 +4229,8 @@ packages:
     dev: true
     optional: true
 
-  /@rolldown/binding-win32-x64-msvc@1.2.1:
-    resolution: {integrity: sha512-Z4eCmn5QJ/5+azF9knpLWKfVd9aidn0mAe9TpJgvBLId9Ax3t0+JVxBmT25Bv7NBbVW1TZyKjQjQReouMeH5UQ==}
+  /@rolldown/binding-win32-x64-msvc@1.2.7:
+    resolution: {integrity: sha512-W/jg5qoRSqjsEv0+dZi4e687mcHqmVuU0P4fK6qS/xjetW2Gmc1W8j//z5nAeNcC8Ttm0hV46IjcYeuVwYhuiw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [win32]
@@ -4318,6 +4263,15 @@ packages:
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
+    dev: true
+    optional: true
+
+  /@rollup/rollup-darwin-arm64@4.63.1:
+    resolution: {integrity: sha512-FQNqd1lRy/0QhDk3xeRIkSBiCpXCiDnZO3YLVdcDKN1UBiKToNftCzcXYNLshmPDUMlu2TdeS8tGcsU6f3YF1Q==}
+    cpu: [arm64]
+    os: [darwin]
+    requiresBuild: true
+    dev: false
     optional: true
 
   /@rollup/rollup-darwin-x64@4.62.3:
@@ -4650,6 +4604,7 @@ packages:
       '@ruvector/diskann-linux-arm64-gnu': 0.1.0
       '@ruvector/diskann-linux-x64-gnu': 0.1.0
       '@ruvector/diskann-win32-x64-msvc': 0.1.0
+    optional: true
 
   /@ruvector/edge-full@0.1.0:
     resolution: {integrity: sha512-GSvq2bB+aTNXpISTqccdZwOroRLSdQhi33L7569QUVi9P7a03hEtdZSX/Gk5aWtDufp230T57uLXQUA1Q0uBeQ==}
@@ -4737,6 +4692,15 @@ packages:
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
+    dev: false
+    optional: true
+
+  /@ruvector/graph-node-darwin-arm64@2.1.0:
+    resolution: {integrity: sha512-Y0lYSzIzp6TJ5meWsC2xeNlp2anmlPgQ1xWrfY9WyZ8wKkwWGOzXhvauHcHm4+7EA903pw7AH19YG3VECdmSRA==}
+    engines: {node: '>=18.0.0'}
+    cpu: [arm64]
+    os: [darwin]
+    requiresBuild: true
     optional: true
 
   /@ruvector/graph-node-darwin-x64@0.1.26:
@@ -4753,6 +4717,15 @@ packages:
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
+    dev: false
+    optional: true
+
+  /@ruvector/graph-node-darwin-x64@2.1.0:
+    resolution: {integrity: sha512-2lvhQdYTP+qk6pJ9o7Zgg82ToNBFmFC/6juB3nsiTQxkqsMxmhIqCYCR3EN5oIZ7F5IbeJjL5El87cMCEJ0BEw==}
+    engines: {node: '>=18.0.0'}
+    cpu: [x64]
+    os: [darwin]
+    requiresBuild: true
     optional: true
 
   /@ruvector/graph-node-linux-arm64-gnu@0.1.26:
@@ -4765,6 +4738,15 @@ packages:
 
   /@ruvector/graph-node-linux-arm64-gnu@2.0.4:
     resolution: {integrity: sha512-Z5OatE8CzaVCq5vgGOmowVSKOLxYvO1Dn0rvFL4d63fEvVONDpsVAMkR7rxRGHrgzMZMfpZ9EjZ0vu0KR08tRQ==}
+    engines: {node: '>=18.0.0'}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@ruvector/graph-node-linux-arm64-gnu@2.1.0:
+    resolution: {integrity: sha512-zx3uqokSsmRxhjtoId2SkXa9QYI9TQGAP3GyM69OqYOxnbjWNgDkE1h3ywAu02qwhLCCua7h0fM3ZUWFaFoiEg==}
     engines: {node: '>=18.0.0'}
     cpu: [arm64]
     os: [linux]
@@ -4786,6 +4768,15 @@ packages:
     cpu: [x64]
     os: [linux]
     requiresBuild: true
+    dev: false
+    optional: true
+
+  /@ruvector/graph-node-linux-x64-gnu@2.1.0:
+    resolution: {integrity: sha512-/EuEArc+vhHR8Hkm78bFOY9/5BYM3LPR967zDrYvYqe8DVb6P0qT8psg8gSRb13vr5W6/Ox/iO6e6oeZ6MEOhQ==}
+    engines: {node: '>=18.0.0'}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
     optional: true
 
   /@ruvector/graph-node-win32-x64-msvc@0.1.26:
@@ -4798,6 +4789,15 @@ packages:
 
   /@ruvector/graph-node-win32-x64-msvc@2.0.4:
     resolution: {integrity: sha512-+z2uyfiPmbELGjwvo5RfDSjHTJWZWQQDxDYLAnnfqV9a0oM1VklRe34t97pvGg7tdCXgEpnR6yWk3OZRemQUEQ==}
+    engines: {node: '>=18.0.0'}
+    cpu: [x64]
+    os: [win32]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@ruvector/graph-node-win32-x64-msvc@2.1.0:
+    resolution: {integrity: sha512-65+CUUn3MUCxZjm3aLeVPFsWvZGzha/WYLpfVicDo7TH1zbBOnC1VsXcdOXTpVthgziVVILxJTTVL9/Ih+7CPA==}
     engines: {node: '>=18.0.0'}
     cpu: [x64]
     os: [win32]
@@ -4825,6 +4825,19 @@ packages:
       '@ruvector/graph-node-linux-arm64-gnu': 2.0.4
       '@ruvector/graph-node-linux-x64-gnu': 2.0.4
       '@ruvector/graph-node-win32-x64-msvc': 2.0.4
+    dev: false
+    optional: true
+
+  /@ruvector/graph-node@2.1.0:
+    resolution: {integrity: sha512-pJrrMjG3hqv9Osk/fRYn54PvJmhNmq6Mw0Uxs5KPQLy0YCnJSkM8CiPalpoWgFN4tx9z3CLFrN9u//J3TokgCg==}
+    engines: {node: '>=18.0.0'}
+    requiresBuild: true
+    optionalDependencies:
+      '@ruvector/graph-node-darwin-arm64': 2.1.0
+      '@ruvector/graph-node-darwin-x64': 2.1.0
+      '@ruvector/graph-node-linux-arm64-gnu': 2.1.0
+      '@ruvector/graph-node-linux-x64-gnu': 2.1.0
+      '@ruvector/graph-node-win32-x64-msvc': 2.1.0
     optional: true
 
   /@ruvector/graph-transformer-darwin-arm64@2.0.4:
@@ -4897,6 +4910,7 @@ packages:
 
   /@ruvector/learning-wasm@0.1.29:
     resolution: {integrity: sha512-W6Fd/jhIQVQ4Cr7vKtU1rwdM3SfgTSNUmZr3uIpt/xfsET6u2lxIBrcRyuKbkNRuweOJdb4C/scEAfiDt1OCTw==}
+    requiresBuild: true
     dev: false
 
   /@ruvector/rabitq-wasm@0.1.0:
@@ -5074,6 +5088,24 @@ packages:
       '@ruvector/ruvllm-linux-arm64-gnu': 2.0.1
       '@ruvector/ruvllm-linux-x64-gnu': 2.0.1
       '@ruvector/ruvllm-win32-x64-msvc': 2.0.1
+    dev: false
+
+  /@ruvector/ruvllm@2.6.2:
+    resolution: {integrity: sha512-5bKiHOvjGfPu9tlR+ryALhJU6ULSmZxfv1rDwE47Bdp0ezNHigsvc2/ISAZ3FiT1FwWqWPfcxRsJFlkWIlZuMA==}
+    engines: {node: '>= 18'}
+    hasBin: true
+    requiresBuild: true
+    dependencies:
+      chalk: 4.1.2
+      commander: 12.1.0
+      ora: 5.4.1
+    optionalDependencies:
+      '@ruvector/ruvllm-darwin-arm64': 2.0.1
+      '@ruvector/ruvllm-darwin-x64': 2.0.1
+      '@ruvector/ruvllm-linux-arm64-gnu': 2.0.1
+      '@ruvector/ruvllm-linux-x64-gnu': 2.0.1
+      '@ruvector/ruvllm-win32-x64-msvc': 2.0.1
+    optional: true
 
   /@ruvector/rvagent-wasm@0.1.0:
     resolution: {integrity: sha512-zhcnU7XfBEfDwkDFscehq6qGU/TW4LNr287xHHXCuNsaTBPlb8YSnkuMNWg6BBIK/X+UdWAsyYESN5jbNQEaBQ==}
@@ -5133,8 +5165,8 @@ packages:
     requiresBuild: true
     optional: true
 
-  /@ruvector/rvf-wasm@0.1.8:
-    resolution: {integrity: sha512-5mesOY9Z0Ssy851+5Tl94xa+xK2j9nwvLCn4Z6gzUTm1ZIo1vUiKRWvHBbBsD1yBMpImkF3W5OG97E0SZ8qRFA==}
+  /@ruvector/rvf-wasm@0.1.9:
+    resolution: {integrity: sha512-C6kKdnv47Ud2t0U61eAjRU8dh9DgfQT6KFlGicZKfwUwVcr9NRA52xbM9hI9nd6G3iEOtNqdhkqDe0c6BUwFew==}
     requiresBuild: true
     optional: true
 
@@ -5145,7 +5177,7 @@ packages:
       '@ruvector/rvf-node': 0.1.8
     optionalDependencies:
       '@ruvector/rvf-solver': 0.1.8
-      '@ruvector/rvf-wasm': 0.1.8
+      '@ruvector/rvf-wasm': 0.1.9
     optional: true
 
   /@ruvector/rvf@0.2.3:
@@ -5155,7 +5187,7 @@ packages:
       '@ruvector/rvf-node': 0.1.8
     optionalDependencies:
       '@ruvector/rvf-solver': 0.1.8
-      '@ruvector/rvf-wasm': 0.1.8
+      '@ruvector/rvf-wasm': 0.1.9
     optional: true
 
   /@ruvector/sona-darwin-arm64@0.1.5:
@@ -5544,14 +5576,6 @@ packages:
     resolution: {integrity: sha512-OvjF+z51L3ov0OyAU0duzsYuvO01PH7x4t6DJx+guahgTnBHkhJdG7soQeTSFLWN3efnHyibZ4Z8l2EuWwJN3A==}
     dev: false
 
-  /@tybys/wasm-util@0.10.3:
-    resolution: {integrity: sha512-F3fo1MYrRJYL3zER0OUOmkutjr1Vp23m7OsSgp7nq4SP6OqX6C/56XFIPAl5bt3zaBRjmW7SGz3u/6LwFpYcOg==}
-    requiresBuild: true
-    dependencies:
-      tslib: 2.8.1
-    dev: true
-    optional: true
-
   /@types/aws-lambda@8.10.162:
     resolution: {integrity: sha512-Fn658grtLOci1oxi1391vvDWJRKNGWRSqfxRkmN/Iy3c0tQH1USMKEXcPYHLvope+ZgTFocx9FRQJx1muBL6qw==}
     requiresBuild: true
@@ -5787,7 +5811,7 @@ packages:
       obug: 2.1.4
       std-env: 4.2.0
       tinyrainbow: 3.1.1
-      vitest: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.0)
+      vitest: 4.1.10(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.2)
     dev: true
 
   /@vitest/expect@4.1.10:
@@ -5801,7 +5825,7 @@ packages:
       tinyrainbow: 3.1.1
     dev: true
 
-  /@vitest/mocker@4.1.10(vite@8.2.0):
+  /@vitest/mocker@4.1.10(vite@8.2.2):
     resolution: {integrity: sha512-v0xaezt+DKEmKfaxg133ldzADrwLGd7Ze1MfQQTYfvs8OqZIwbxyxaYURivwV7sWy5fqn3rH5uOrSp07bp44Ow==}
     peerDependencies:
       msw: ^2.4.9
@@ -5815,7 +5839,7 @@ packages:
       '@vitest/spy': 4.1.10
       estree-walker: 3.0.3
       magic-string: 0.30.21
-      vite: 8.2.0(@types/node@20.19.43)(tsx@4.23.1)
+      vite: 8.2.2(@types/node@20.19.43)(tsx@4.23.1)
     dev: true
 
   /@vitest/pretty-format@4.1.10:
@@ -6037,13 +6061,13 @@ packages:
       '@opentelemetry/semantic-conventions': 1.43.0
       '@ruvector/attention': 0.1.32
       '@ruvector/gnn': 0.1.25
-      '@ruvector/graph-node': 2.0.4
+      '@ruvector/graph-node': 2.1.0
       '@ruvector/router': 0.1.30
-      '@ruvector/ruvllm': 2.6.0
+      '@ruvector/ruvllm': 2.6.2
       '@ruvector/rvf': 0.2.3
       '@ruvector/rvf-node': 0.1.8
       '@ruvector/rvf-solver': 0.1.8
-      '@ruvector/rvf-wasm': 0.1.8
+      '@ruvector/rvf-wasm': 0.1.9
       '@ruvector/sona': 0.1.8
       argon2: 0.44.0
       better-sqlite3: 11.10.0
@@ -6051,7 +6075,7 @@ packages:
       commander: 12.1.0
       hnswlib-node: 3.0.0
       inquirer: 9.3.8(@types/node@20.19.43)
-      ruvector: 0.2.40(@ruvector/diskann@0.1.1)(@ruvector/router@0.1.30)(@ruvector/ruvllm@2.6.0)(zod@3.25.76)
+      ruvector: 0.2.41(@ruvector/diskann@0.1.1)(@ruvector/router@0.1.30)(@ruvector/ruvllm@2.6.2)(zod@3.25.76)
       ruvector-attention-wasm: 0.1.32
       ruvector-graph-transformer-wasm: 2.0.4
     transitivePeerDependencies:
@@ -6088,7 +6112,7 @@ packages:
       glob: 13.0.6
       gun: 0.2020.1241
       http-proxy-middleware: 3.0.7
-      ruvector: 0.2.40(@ruvector/diskann@0.1.1)(@ruvector/router@0.1.30)(@ruvector/ruvllm@2.6.0)(zod@3.25.76)
+      ruvector: 0.2.40(@ruvector/router@0.1.30)(@ruvector/ruvllm@2.6.0)(zod@3.25.76)
       ruvector-onnx-embeddings-wasm: 0.1.2
       tiktoken: 1.0.22
       ulid: 3.0.2
@@ -6096,13 +6120,13 @@ packages:
       yaml: 2.9.0
       zod: 3.25.76
     optionalDependencies:
-      '@rollup/rollup-darwin-arm64': 4.62.3
+      '@rollup/rollup-darwin-arm64': 4.63.1
       '@ruvector/attention': 0.1.32
       '@ruvector/sona': 0.1.8
       better-sqlite3: 11.10.0
-      onnxruntime-node: 1.27.0
+      onnxruntime-node: 1.29.0
       sharp: 0.35.3(@types/node@20.19.43)
-      sql.js: 1.14.1
+      sql.js: 1.14.2
     transitivePeerDependencies:
       - '@cfworker/json-schema'
       - '@metaharness/kernel'
@@ -6330,7 +6354,6 @@ packages:
   /bcryptjs@3.0.3:
     resolution: {integrity: sha512-GlF5wPWnSa/X5LKM1o0wz0suXIINz1iHRLvTS+sLyi7XPbe5ycmYI3DlZqVGZZtDgl4DmasFg7gOB3JYbphV5g==}
     hasBin: true
-    dev: false
 
   /before-after-hook@3.0.2:
     resolution: {integrity: sha512-Nik3Sc0ncrMK4UUdXQmAnRtzmNQTAAXmXIopizwZ1W1t8QmfJj+zL4OA2I7XPTPW5z5TDqv4hRo/JzouDJnX3A==}
@@ -7391,7 +7414,7 @@ packages:
       jose:
         optional: true
     dependencies:
-      '@modelcontextprotocol/sdk': 1.30.0(zod@4.4.3)
+      '@modelcontextprotocol/sdk': 1.30.0(zod@4.5.4)
       '@standard-schema/spec': 1.1.0
       execa: 9.6.1
       file-type: 21.3.4
@@ -7401,10 +7424,10 @@ packages:
       strict-event-emitter-types: 2.0.0
       undici: 7.29.0
       uri-templates: 0.2.0
-      xsschema: 0.4.4(zod-to-json-schema@3.25.2)(zod@4.4.3)
+      xsschema: 0.4.4(zod-to-json-schema@3.25.2)(zod@4.5.4)
       yargs: 18.1.0
-      zod: 4.4.3
-      zod-to-json-schema: 3.25.2(zod@4.4.3)
+      zod: 4.5.4
+      zod-to-json-schema: 3.25.2(zod@4.5.4)
     transitivePeerDependencies:
       - '@cfworker/json-schema'
       - '@valibot/to-json-schema'
@@ -8833,7 +8856,7 @@ packages:
       kolorist: 1.8.0
       prompts: 2.4.2
     optionalDependencies:
-      '@ruvector/ruvllm': 2.6.0
+      '@ruvector/ruvllm': 2.6.2
 
   /methods@1.1.2:
     resolution: {integrity: sha512-iclAHeNqNm68zFtnZ0e+1L2yUIdvzNoauKU4WBA3VvH/vPFieF7qfRlwUZU+DA9P9bPXIS90ulxoUoCH23sV2w==}
@@ -8964,8 +8987,8 @@ packages:
       object-assign: 4.1.1
       thenify-all: 1.6.0
 
-  /nanoid@3.3.16:
-    resolution: {integrity: sha512-bzlKTyNJ7+LdGIIwy8ijFpIqEQIvafahV7eYykJ8Cvh42EdJeODoJ6gUJXpQJvej1BddH8OqTXZNE/KfbWAu8Q==}
+  /nanoid@3.3.18:
+    resolution: {integrity: sha512-DTg4MJbGMWkfi6VZFdNt2/caMbQy4Ou+Op/hJQvGEWcnVfoA1QA+xzRKAzw9jD6+GVOOeYr/mIcuDSdug6F6+w==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
     dev: true
@@ -9211,8 +9234,8 @@ packages:
     requiresBuild: true
     optional: true
 
-  /onnxruntime-common@1.27.0:
-    resolution: {integrity: sha512-3KxL5wIVqa8Ex08jxSzncm9CMgw8CjOFyOQ7SxvG9o0cVLlhTNKXyIQuTbtX4tGPJEf73OER2xrjt4HJSBL4ow==}
+  /onnxruntime-common@1.29.0:
+    resolution: {integrity: sha512-/F63/e2VJoaVXGGNu6S5QH7jivBThGO95OzAVXXQ8hTta/b1QxI8udHa6cI3+3mAb5WWIIaMMwfZw01oivjJ1g==}
     requiresBuild: true
     dev: false
     optional: true
@@ -9246,14 +9269,14 @@ packages:
       onnxruntime-common: 1.24.3
     optional: true
 
-  /onnxruntime-node@1.27.0:
-    resolution: {integrity: sha512-QEzGwrvNBgv4uPVdnbHsOGG4G6T96mdlcFI8aAKPjMU8wOPpVocPXb6k3QGkaZagVTv2G9Bnnbo6Z3JdXr1fQw==}
+  /onnxruntime-node@1.29.0:
+    resolution: {integrity: sha512-WjiVVB72riILz8HbYvxvmjKyE/WmkYoSfKY++axo5jAR609HQg8MwiG/HhShpTcJfmmAdzxxmB+MMST3A+SiPA==}
     os: [win32, darwin, linux]
     requiresBuild: true
     dependencies:
       adm-zip: 0.6.0
       global-agent: 4.1.3
-      onnxruntime-common: 1.27.0
+      onnxruntime-common: 1.29.0
     dev: false
     optional: true
 
@@ -9540,6 +9563,11 @@ packages:
     resolution: {integrity: sha512-RvwwcruNjI1ncT5xRakeyS9Lf8lcItv34KD+aif+VH9kduAyfYBipGh12274xtenIPZ119/R9BdTBa8gAwSh0A==}
     engines: {node: '>=12'}
 
+  /picomatch@4.0.7:
+    resolution: {integrity: sha512-qcJu88Q2IWqJsDD529JKMdwGm/dvInW4HvQnRwiH9JtihJvzGOscDtHE3x1pBKeUOTysQ8kVmLnJ2kJu7yhcGA==}
+    engines: {node: '>=12'}
+    dev: true
+
   /pify@3.0.0:
     resolution: {integrity: sha512-C3FsVNH1udSEX48gGX1xfvwTWfsYWj5U+8/uK15BGzIGrKoUpghX8hWZwa/OFnakBiiVNmBvemTJR5mcy7iPcg==}
     engines: {node: '>=4'}
@@ -9615,11 +9643,11 @@ packages:
       lilconfig: 3.1.3
     dev: true
 
-  /postcss@8.5.25:
-    resolution: {integrity: sha512-DTPx3RWSSnWyzLxQnlH0rJP+EW5ekl16ZU4/psbIhA0e53kJfdgaN5vKM+xP7yJtXVu+nfdVFmlgFDEKAe4Pyw==}
+  /postcss@8.5.28:
+    resolution: {integrity: sha512-RRuzqDtt5Y9h3quz5hWhK+TPnsmVs6WwSU6LkJMeY4HstUEDuYTG8UJSdawMRzmzAtV+KEoG8N3Qg2qLy5vM/A==}
     engines: {node: ^10 || ^12 || >=14}
     dependencies:
-      nanoid: 3.3.16
+      nanoid: 3.3.18
       picocolors: 1.1.1
       source-map-js: 1.2.1
     dev: true
@@ -9950,29 +9978,29 @@ packages:
       semver-compare: 1.0.0
       sprintf-js: 1.1.3
 
-  /rolldown@1.2.1:
-    resolution: {integrity: sha512-4FKJhg8d3OiyQOA6Q1Q0hoFFpW9/OoX+VsHzpECsdsIZoOArrAK90gl59YK/Z+gnDel45bgJZK03ozH/9bCqEw==}
+  /rolldown@1.2.7:
+    resolution: {integrity: sha512-g0EtLvBjTUB7jhyV0S/TCup3v/XSVl45vUIGbOGU4QPiyjTenCe4mKuFvW9fEgYmS2Fo42AUssRmNuMziXdrig==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     dependencies:
-      '@oxc-project/types': 0.142.0
+      '@oxc-project/types': 0.148.0
       '@rolldown/pluginutils': 1.0.1
     optionalDependencies:
-      '@rolldown/binding-android-arm64': 1.2.1
-      '@rolldown/binding-darwin-arm64': 1.2.1
-      '@rolldown/binding-darwin-x64': 1.2.1
-      '@rolldown/binding-freebsd-x64': 1.2.1
-      '@rolldown/binding-linux-arm-gnueabihf': 1.2.1
-      '@rolldown/binding-linux-arm64-gnu': 1.2.1
-      '@rolldown/binding-linux-arm64-musl': 1.2.1
-      '@rolldown/binding-linux-ppc64-gnu': 1.2.1
-      '@rolldown/binding-linux-s390x-gnu': 1.2.1
-      '@rolldown/binding-linux-x64-gnu': 1.2.1
-      '@rolldown/binding-linux-x64-musl': 1.2.1
-      '@rolldown/binding-openharmony-arm64': 1.2.1
-      '@rolldown/binding-wasm32-wasi': 1.2.1
-      '@rolldown/binding-win32-arm64-msvc': 1.2.1
-      '@rolldown/binding-win32-x64-msvc': 1.2.1
+      '@rolldown/binding-android-arm-eabi': 1.2.7
+      '@rolldown/binding-android-arm64': 1.2.7
+      '@rolldown/binding-darwin-arm64': 1.2.7
+      '@rolldown/binding-darwin-x64': 1.2.7
+      '@rolldown/binding-freebsd-x64': 1.2.7
+      '@rolldown/binding-linux-arm-gnueabihf': 1.2.7
+      '@rolldown/binding-linux-arm64-gnu': 1.2.7
+      '@rolldown/binding-linux-arm64-musl': 1.2.7
+      '@rolldown/binding-linux-ppc64-gnu': 1.2.7
+      '@rolldown/binding-linux-s390x-gnu': 1.2.7
+      '@rolldown/binding-linux-x64-gnu': 1.2.7
+      '@rolldown/binding-linux-x64-musl': 1.2.7
+      '@rolldown/binding-openharmony-arm64': 1.2.7
+      '@rolldown/binding-win32-arm64-msvc': 1.2.7
+      '@rolldown/binding-win32-x64-msvc': 1.2.7
     dev: true
 
   /rollup@4.62.3:
@@ -10035,6 +10063,7 @@ packages:
   /ruvector-attention-wasm@0.1.32:
     resolution: {integrity: sha512-2pt5dhcpHXXhNEVXeeDPzshXlGo3X8vWVuMfLA+fjUuXYFsW2YYrmUSgHOvEuqVxxow2Rgn9sZpxWQSBuT470g==}
     engines: {node: '>=16.0.0'}
+    requiresBuild: true
 
   /ruvector-core-darwin-arm64@0.1.29:
     resolution: {integrity: sha512-gjZ1/J/0Nh9Mn74VdifIIkPLP/M4FqD/g+QVxWcfWcNFWhHVz+zHyxGjc6gJgrfYBquiMyP5jLfvyR3TffLanQ==}
@@ -10102,7 +10131,7 @@ packages:
       - zod
     dev: false
 
-  /ruvector@0.2.40(@ruvector/diskann@0.1.1)(@ruvector/router@0.1.30)(@ruvector/ruvllm@2.6.0)(zod@3.25.76):
+  /ruvector@0.2.40(@ruvector/router@0.1.30)(@ruvector/ruvllm@2.6.0)(zod@3.25.76):
     resolution: {integrity: sha512-PHvu4sP1Qqm12IXlzpuy3Fy8R8tt6jpetklTC2jSN0kZWwHdsaw7YvOnE8FcYFOJDbd+OvzFQvSlGiwoQq6+UQ==}
     engines: {node: '>=20.0.0'}
     hasBin: true
@@ -10132,7 +10161,6 @@ packages:
       '@modelcontextprotocol/sdk': 1.30.0(zod@3.25.76)
       '@ruvector/attention': 0.1.32
       '@ruvector/core': 0.1.31
-      '@ruvector/diskann': 0.1.1
       '@ruvector/gnn': 0.1.25
       '@ruvector/router': 0.1.30
       '@ruvector/ruvllm': 2.6.0
@@ -10149,6 +10177,57 @@ packages:
       - '@metaharness/kernel'
       - supports-color
       - zod
+    dev: false
+
+  /ruvector@0.2.41(@ruvector/diskann@0.1.1)(@ruvector/router@0.1.30)(@ruvector/ruvllm@2.6.2)(zod@3.25.76):
+    resolution: {integrity: sha512-6ox6kcONkFxKhOv6yAp6FKonn+WlNQ8t0tnK9xsOJKkQEru1psptGrObPA57VenaZ7pToEUvvgiLJYLc9uukIg==}
+    engines: {node: '>=20.0.0'}
+    hasBin: true
+    requiresBuild: true
+    peerDependencies:
+      '@ruvector/diskann': '>=0.1.0'
+      '@ruvector/pi-brain': '>=0.1.0'
+      '@ruvector/router': '>=0.1.0'
+      '@ruvector/ruvllm': '>=2.0.0'
+    peerDependenciesMeta:
+      '@ruvector/diskann':
+        optional: true
+      '@ruvector/pi-brain':
+        optional: true
+      '@ruvector/router':
+        optional: true
+      '@ruvector/ruvllm':
+        optional: true
+    dependencies:
+      '@metaharness/darwin': 0.8.0
+      '@metaharness/flywheel': 0.1.7
+      '@metaharness/harness': 0.1.0
+      '@metaharness/redblue': 0.1.4
+      '@metaharness/router': 0.3.2(@ruvector/tiny-dancer@0.1.22)
+      '@metaharness/weight-eft': 0.1.1
+      '@metaharness/workspace-lens': 0.1.1
+      '@metaharness/workspace-probe': 0.1.1
+      '@modelcontextprotocol/sdk': 1.30.0(zod@3.25.76)
+      '@ruvector/attention': 0.1.32
+      '@ruvector/core': 0.1.31
+      '@ruvector/diskann': 0.1.1
+      '@ruvector/gnn': 0.1.25
+      '@ruvector/router': 0.1.30
+      '@ruvector/ruvllm': 2.6.2
+      '@ruvector/sona': 0.1.8
+      chalk: 4.1.2
+      commander: 11.1.0
+      metaharness: 0.4.2
+      ora: 5.4.1
+    optionalDependencies:
+      '@ruvector/rvf': 0.1.9
+      '@ruvector/tiny-dancer': 0.1.22
+    transitivePeerDependencies:
+      - '@cfworker/json-schema'
+      - '@metaharness/kernel'
+      - supports-color
+      - zod
+    optional: true
 
   /rxjs@7.8.2:
     resolution: {integrity: sha512-dhKf903U/PQZY6boNNtAGdWbG85WAbjT/1xYoZIC7FAY0yWapOBQVsVrDl58W86//e1VpMNBtRV4MaXfdMySFA==}
@@ -10471,6 +10550,11 @@ packages:
   /sql.js@1.14.1:
     resolution: {integrity: sha512-gcj8zBWU5cFsi9WUP+4bFNXAyF1iRpA3LLyS/DP5xlrNzGmPIizUeBggKa8DbDwdqaKwUcTEnChtd2grWo/x/A==}
 
+  /sql.js@1.14.2:
+    resolution: {integrity: sha512-3ZGPovObMFrdw79zrUHbfdE/DLIsy8jdNdssmMSQuRAymedU6q84asPt0kgiqrdMYlPegDItiIMfmIXzZnYFcw==}
+    dev: false
+    optional: true
+
   /stackback@0.0.2:
     resolution: {integrity: sha512-1XMJE5fQo1jGH6Y/7ebnwPOBEkIEnT4QF32d5R1+VXdXveM0IBMJt8zfaxX1P3QhVwrYe+576+jkANtSS2mBbw==}
     dev: true
@@ -10767,6 +10851,12 @@ packages:
 
   /toml@3.0.0:
     resolution: {integrity: sha512-y/mWCZinnvxjTKYhJ+pYxwD0mRLVvOtdS2Awbgxln6iEnt4rk0yBxeSBHkGJcPucRiG0e55mwWp+g/05rsrd6w==}
+    requiresBuild: true
+    dev: false
+
+  /toml@4.2.0:
+    resolution: {integrity: sha512-TvAJjbHZlYmI323+srtqHQFyJsoWy6mI09ppkuj9+iRsqsVKG9fvTcOP7FHF2UCb0QSYtjEavffrKzdd0XgClg==}
+    engines: {node: '>=20'}
     dev: false
 
   /traverse@0.6.8:
@@ -11026,13 +11116,67 @@ packages:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
 
-  /vite@8.2.0(@types/node@20.19.43)(tsx@4.23.1):
-    resolution: {integrity: sha512-pn+CFpM0lwDeKwmOq1ZaBK/9sjorZcgqxki6MbY/jPEVd9vichIlmlD4HmQ5wdP5EgqQCFRaACBxMC7uEGc6lQ==}
+  /vite@8.2.2(@types/node@20.19.43)(esbuild@0.28.1):
+    resolution: {integrity: sha512-cFKLV/PRgAUlIRm5WjMjJ86jrftzpqcgH+Us+DS8mI3CDNiH30Whrz8uHL3+MOLPAgqbMBAqWdAHAphOAM+z/Q==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
       '@types/node': ^20.19.0 || >=22.12.0
-      '@vitejs/devtools': ^0.4.0
+      '@vitejs/devtools': ^0.4.0 || ^0.5.0
+      esbuild: 0.28.1
+      jiti: '>=1.21.0'
+      less: ^4.0.0
+      sass: ^1.70.0
+      sass-embedded: ^1.70.0
+      stylus: '>=0.54.8'
+      sugarss: ^5.0.0
+      terser: ^5.16.0
+      tsx: ^4.8.1
+      yaml: ^2.4.2
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+      '@vitejs/devtools':
+        optional: true
+      esbuild:
+        optional: true
+      jiti:
+        optional: true
+      less:
+        optional: true
+      sass:
+        optional: true
+      sass-embedded:
+        optional: true
+      stylus:
+        optional: true
+      sugarss:
+        optional: true
+      terser:
+        optional: true
+      tsx:
+        optional: true
+      yaml:
+        optional: true
+    dependencies:
+      '@types/node': 20.19.43
+      esbuild: 0.28.1
+      lightningcss: 1.33.0
+      picomatch: 4.0.7
+      postcss: 8.5.28
+      rolldown: 1.2.7
+      tinyglobby: 0.2.17
+    optionalDependencies:
+      fsevents: 2.3.3
+    dev: true
+
+  /vite@8.2.2(@types/node@20.19.43)(tsx@4.23.1):
+    resolution: {integrity: sha512-cFKLV/PRgAUlIRm5WjMjJ86jrftzpqcgH+Us+DS8mI3CDNiH30Whrz8uHL3+MOLPAgqbMBAqWdAHAphOAM+z/Q==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    hasBin: true
+    peerDependencies:
+      '@types/node': ^20.19.0 || >=22.12.0
+      '@vitejs/devtools': ^0.4.0 || ^0.5.0
       esbuild: 0.28.1
       jiti: '>=1.21.0'
       less: ^4.0.0
@@ -11071,16 +11215,16 @@ packages:
     dependencies:
       '@types/node': 20.19.43
       lightningcss: 1.33.0
-      picomatch: 4.0.5
-      postcss: 8.5.25
-      rolldown: 1.2.1
+      picomatch: 4.0.7
+      postcss: 8.5.28
+      rolldown: 1.2.7
       tinyglobby: 0.2.17
       tsx: 4.23.1
     optionalDependencies:
       fsevents: 2.3.3
     dev: true
 
-  /vitest@4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.0):
+  /vitest@4.1.10(@opentelemetry/api@1.9.1)(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.2):
     resolution: {integrity: sha512-R9jUTe5S4Qb0HCd4TNqpC7oGcrMssMRGXLW80ubjWsW9VH5GF8y1Y0SFLY9AbqSk6nt0PnOx4H4WNJYZ13GUPw==}
     engines: {node: ^20.0.0 || ^22.0.0 || >=24.0.0}
     hasBin: true
@@ -11125,7 +11269,7 @@ packages:
       '@types/node': 20.19.43
       '@vitest/coverage-v8': 4.1.10(vitest@4.1.10)
       '@vitest/expect': 4.1.10
-      '@vitest/mocker': 4.1.10(vite@8.2.0)
+      '@vitest/mocker': 4.1.10(vite@8.2.2)
       '@vitest/pretty-format': 4.1.10
       '@vitest/runner': 4.1.10
       '@vitest/snapshot': 4.1.10
@@ -11142,7 +11286,74 @@ packages:
       tinyexec: 1.2.4
       tinyglobby: 0.2.17
       tinyrainbow: 3.1.1
-      vite: 8.2.0(@types/node@20.19.43)(tsx@4.23.1)
+      vite: 8.2.2(@types/node@20.19.43)(tsx@4.23.1)
+      why-is-node-running: 2.3.0
+    transitivePeerDependencies:
+      - msw
+    dev: true
+
+  /vitest@4.1.10(@types/node@20.19.43)(@vitest/coverage-v8@4.1.10)(vite@8.2.2):
+    resolution: {integrity: sha512-R9jUTe5S4Qb0HCd4TNqpC7oGcrMssMRGXLW80ubjWsW9VH5GF8y1Y0SFLY9AbqSk6nt0PnOx4H4WNJYZ13GUPw==}
+    engines: {node: ^20.0.0 || ^22.0.0 || >=24.0.0}
+    hasBin: true
+    peerDependencies:
+      '@edge-runtime/vm': '*'
+      '@opentelemetry/api': ^1.9.0
+      '@types/node': ^20.0.0 || ^22.0.0 || >=24.0.0
+      '@vitest/browser-playwright': 4.1.10
+      '@vitest/browser-preview': 4.1.10
+      '@vitest/browser-webdriverio': 4.1.10
+      '@vitest/coverage-istanbul': 4.1.10
+      '@vitest/coverage-v8': 4.1.10
+      '@vitest/ui': 4.1.10
+      happy-dom: '*'
+      jsdom: '*'
+      vite: ^6.0.0 || ^7.0.0 || ^8.0.0
+    peerDependenciesMeta:
+      '@edge-runtime/vm':
+        optional: true
+      '@opentelemetry/api':
+        optional: true
+      '@types/node':
+        optional: true
+      '@vitest/browser-playwright':
+        optional: true
+      '@vitest/browser-preview':
+        optional: true
+      '@vitest/browser-webdriverio':
+        optional: true
+      '@vitest/coverage-istanbul':
+        optional: true
+      '@vitest/coverage-v8':
+        optional: true
+      '@vitest/ui':
+        optional: true
+      happy-dom:
+        optional: true
+      jsdom:
+        optional: true
+    dependencies:
+      '@types/node': 20.19.43
+      '@vitest/coverage-v8': 4.1.10(vitest@4.1.10)
+      '@vitest/expect': 4.1.10
+      '@vitest/mocker': 4.1.10(vite@8.2.2)
+      '@vitest/pretty-format': 4.1.10
+      '@vitest/runner': 4.1.10
+      '@vitest/snapshot': 4.1.10
+      '@vitest/spy': 4.1.10
+      '@vitest/utils': 4.1.10
+      es-module-lexer: 2.3.1
+      expect-type: 1.4.0
+      magic-string: 0.30.21
+      obug: 2.1.4
+      pathe: 2.0.3
+      picomatch: 4.0.5
+      std-env: 4.2.0
+      tinybench: 2.9.0
+      tinyexec: 1.2.4
+      tinyglobby: 0.2.17
+      tinyrainbow: 3.1.1
+      vite: 8.2.2(@types/node@20.19.43)(esbuild@0.28.1)
       why-is-node-running: 2.3.0
     transitivePeerDependencies:
       - msw
@@ -11259,7 +11470,7 @@ packages:
       utf-8-validate:
         optional: true
 
-  /xsschema@0.4.4(zod-to-json-schema@3.25.2)(zod@4.4.3):
+  /xsschema@0.4.4(zod-to-json-schema@3.25.2)(zod@4.5.4):
     resolution: {integrity: sha512-TMhbk8AhxO+YuDOn3rXBjGXQ+Vja3T13UPQkHx/FemhusaOzRfCSj2seykt0mdnFPsOtO9l3ANf4adcp+4NRGw==}
     peerDependencies:
       '@valibot/to-json-schema': ^1.0.0
@@ -11282,8 +11493,8 @@ packages:
       zod-to-json-schema:
         optional: true
     dependencies:
-      zod: 4.4.3
-      zod-to-json-schema: 3.25.2(zod@4.4.3)
+      zod: 4.5.4
+      zod-to-json-schema: 3.25.2(zod@4.5.4)
     dev: false
 
   /xtend@4.0.2:
@@ -11375,17 +11586,17 @@ packages:
     dependencies:
       zod: 3.25.76
 
-  /zod-to-json-schema@3.25.2(zod@4.4.3):
+  /zod-to-json-schema@3.25.2(zod@4.5.4):
     resolution: {integrity: sha512-O/PgfnpT1xKSDeQYSCfRI5Gy3hPf91mKVDuYLUHZJMiDFptvP41MSnWofm8dnCm0256ZNfZIM7DSzuSMAFnjHA==}
     peerDependencies:
       zod: ^3.25.28 || ^4
     dependencies:
-      zod: 4.4.3
+      zod: 4.5.4
     dev: false
 
   /zod@3.25.76:
     resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
 
-  /zod@4.4.3:
-    resolution: {integrity: sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ==}
+  /zod@4.5.4:
+    resolution: {integrity: sha512-sC95tT5iHHH9gtpj6A81kh+NEaRAUFN+qlUPDUbRfOMvNf5QCBqsb3WgvnpVtK5Y+4UfA6KqufotuTvMGiTlsA==}
     dev: false
