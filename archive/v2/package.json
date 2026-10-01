@@ -205,7 +205,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "overrides": {
-    "@xhmikosr/decompress": "^10.2.1"
+    "@xhmikosr/decompress": "^10.2.2"
   },
   "directories": {
     "doc": "docs",
