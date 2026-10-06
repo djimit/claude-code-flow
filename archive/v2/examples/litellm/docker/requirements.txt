@@ -1,6 +1,6 @@
 # LiteLLM Core
-litellm[proxy]==1.84.0
-litellm[extra_proxy_features]==1.84.0
+litellm[proxy]==1.93.2
+litellm[extra_proxy_features]==1.93.2
 
 # Database
 psycopg2-binary==2.9.9
