@@ -205,7 +205,20 @@
     "registry": "https://registry.npmjs.org/"
   },
   "overrides": {
-    "@xhmikosr/decompress": "^10.2.1"
+    "@xhmikosr/decompress": "^10.2.2",
+    "basic-ftp": "^6.2.2",
+    "piscina": "^4.9.4",
+    "protobufjs": ">=8.6.6",
+    "proxy-addr": "^2.0.8"
+  },
+  "pnpm": {
+    "overrides": {
+      "@xhmikosr/decompress": "^10.2.2",
+      "basic-ftp": "^6.2.2",
+      "piscina": "^4.9.4",
+      "protobufjs": ">=8.6.6",
+      "proxy-addr": "^2.0.8"
+    }
   },
   "directories": {
     "doc": "docs",
