@@ -8,6 +8,9 @@
     "start": "node index.js",
     "dev": "node --watch index.js"
   },
+  "overrides": {
+    "proxy-addr": "^2.0.8"
+  },
   "dependencies": {
     "express": "^4.21.0"
   },
