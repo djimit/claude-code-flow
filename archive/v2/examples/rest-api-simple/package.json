@@ -10,6 +10,9 @@
   "keywords": ["rest", "api", "simple", "example"],
   "author": "",
   "license": "MIT",
+  "overrides": {
+    "proxy-addr": "^2.0.8"
+  },
   "dependencies": {
     "express": "^4.22.2"
   },
