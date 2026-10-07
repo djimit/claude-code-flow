@@ -76,13 +76,16 @@
   "engines": {
     "node": ">=20.0.0"
   },
+  "overrides": {
+    "tinypool": "^2.1.2"
+  },
   "dependencies": {
     "zod": "^3.22.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
     "typescript": "^5.4.0",
-    "vitest": "^1.0.0"
+    "vitest": "^3.2.6"
   },
   "optionalDependencies": {
     "@ruvector/exotic-wasm": "^0.1.0",
