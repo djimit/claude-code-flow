@@ -61,7 +61,7 @@
     "@noble/ed25519": "^2.1.0",
     "@ruvector/rabitq-wasm": "^0.1.0",
     "semver": "^7.6.0",
-    "zod": "^3.22.4"
+    "zod": "^4.6.7"
   },
   "optionalDependencies": {
     "@claude-flow/codex": "^3.0.0-alpha.8",
@@ -116,7 +116,8 @@
     "fastmcp": {
       "zod": "^4.6.7"
     },
-    "ip-address": "^10.7.5"
+    "ip-address": "^10.7.5",
+    "undici@>=6 <7": "6.29.1"
   },
   "devDependencies": {
     "@openai/codex": "^0.98.0",

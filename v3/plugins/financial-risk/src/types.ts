@@ -572,8 +572,8 @@ export const PortfolioRiskInputSchema = z.object({
     currency: z.string().max(3).optional(),
   })).min(1).max(10000),
   riskMetrics: z.array(z.enum(['var', 'cvar', 'sharpe', 'sortino', 'max_drawdown', 'beta', 'volatility'])).optional(),
-  confidenceLevel: z.number().min(0.9).max(0.999).default(0.95),
-  horizon: z.enum(['1d', '1w', '1m', '3m', '1y']).default('1d'),
+  confidenceLevel: z.number().min(0.9).max(0.999).prefault(0.95),
+  horizon: z.enum(['1d', '1w', '1m', '3m', '1y']).prefault('1d'),
 });
 
 /**
@@ -589,8 +589,8 @@ export const AnomalyDetectInputSchema = z.object({
     currency: z.string().max(3).optional(),
     metadata: z.record(z.string(), z.unknown()).optional(),
   })).min(1).max(100000),
-  sensitivity: z.number().min(0).max(1).default(0.8),
-  context: z.enum(['fraud', 'aml', 'market_manipulation', 'all']).default('all'),
+  sensitivity: z.number().min(0).max(1).prefault(0.8),
+  context: z.enum(['fraud', 'aml', 'market_manipulation', 'all']).prefault('all'),
 });
 
 /**
@@ -603,7 +603,7 @@ export const MarketRegimeInputSchema = z.object({
     volatility: z.array(z.number().finite().min(0)).optional(),
     timestamps: z.array(z.string()).optional(),
   }),
-  lookbackPeriod: z.number().int().min(10).max(1000).default(252),
+  lookbackPeriod: z.number().int().min(10).max(1000).prefault(252),
   regimeTypes: z.array(z.enum(['bull', 'bear', 'sideways', 'high_vol', 'crisis', 'recovery'])).optional(),
 });
 
@@ -613,7 +613,7 @@ export const MarketRegimeInputSchema = z.object({
 export const ComplianceCheckInputSchema = z.object({
   entity: z.string().max(200),
   regulations: z.array(z.enum(['basel3', 'mifid2', 'dodd_frank', 'aml', 'kyc', 'fatca', 'gdpr'])).min(1),
-  scope: z.enum(['positions', 'transactions', 'capital', 'reporting', 'all']).default('all'),
+  scope: z.enum(['positions', 'transactions', 'capital', 'reporting', 'all']).prefault('all'),
   asOfDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
 });
 

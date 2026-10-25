@@ -11,7 +11,7 @@ import { z } from 'zod';
 export const AssessReadinessInputSchema = z.object({
   releaseType: z
     .enum(['major', 'minor', 'patch', 'hotfix'])
-    .default('minor')
+    .prefault('minor')
     .describe('Type of release'),
   projectPath: z.string().optional().describe('Path to project'),
   criteria: z
@@ -19,8 +19,8 @@ export const AssessReadinessInputSchema = z.object({
       z.object({
         name: z.string().describe('Criterion name'),
         category: z.enum(['quality', 'testing', 'security', 'performance', 'documentation', 'compliance']),
-        required: z.boolean().default(true).describe('If required, must pass for release'),
-        weight: z.number().min(0).max(1).default(1).describe('Weight in confidence calculation'),
+        required: z.boolean().prefault(true).describe('If required, must pass for release'),
+        weight: z.number().min(0).max(1).prefault(1).describe('Weight in confidence calculation'),
       })
     )
     .optional()
@@ -38,10 +38,10 @@ export const AssessReadinessInputSchema = z.object({
         'rollback-plan',
       ])
     )
-    .default(['quality-gates', 'test-results', 'security-scan'])
+    .prefault(['quality-gates', 'test-results', 'security-scan'])
     .describe('Checks to include in assessment'),
   compareToRelease: z.string().optional().describe('Previous release version to compare'),
-  strictMode: z.boolean().default(false).describe('All criteria must pass'),
+  strictMode: z.boolean().prefault(false).describe('All criteria must pass'),
 });
 
 export type AssessReadinessInput = z.infer<typeof AssessReadinessInputSchema>;

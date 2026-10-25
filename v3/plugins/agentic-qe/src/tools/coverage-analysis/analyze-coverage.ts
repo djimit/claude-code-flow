@@ -13,15 +13,15 @@ export const AnalyzeCoverageInputSchema = z.object({
   coverageReport: z.string().optional().describe('Path to coverage report (lcov/json)'),
   algorithm: z
     .enum(['johnson-lindenstrauss', 'full-scan'])
-    .default('johnson-lindenstrauss')
+    .prefault('johnson-lindenstrauss')
     .describe('Analysis algorithm - JL for O(log n), full-scan for O(n)'),
-  prioritize: z.boolean().default(true).describe('Prioritize gaps by risk'),
-  includeFileDetails: z.boolean().default(true).describe('Include per-file breakdown'),
+  prioritize: z.boolean().prefault(true).describe('Prioritize gaps by risk'),
+  includeFileDetails: z.boolean().prefault(true).describe('Include per-file breakdown'),
   thresholds: z
     .object({
-      line: z.number().min(0).max(100).default(80),
-      branch: z.number().min(0).max(100).default(70),
-      function: z.number().min(0).max(100).default(90),
+      line: z.number().min(0).max(100).prefault(80),
+      branch: z.number().min(0).max(100).prefault(70),
+      function: z.number().min(0).max(100).prefault(90),
     })
     .optional()
     .describe('Coverage thresholds to flag failures'),
@@ -29,7 +29,7 @@ export const AnalyzeCoverageInputSchema = z.object({
     .number()
     .min(8)
     .max(256)
-    .default(32)
+    .prefault(32)
     .describe('JL projection dimension (higher = more accurate, slower)'),
 });
 

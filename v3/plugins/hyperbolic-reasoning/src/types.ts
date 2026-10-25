@@ -350,7 +350,7 @@ export interface EntailmentQueryResult {
 export const HierarchyNodeSchema = z.object({
   id: z.string().max(200),
   parent: z.string().max(200).nullable(),
-  features: z.record(z.unknown()).optional(),
+  features: z.record(z.string(), z.unknown()).optional(),
   label: z.string().max(500).optional(),
   depth: z.number().int().min(0).optional(),
 });
@@ -370,13 +370,13 @@ export const HierarchySchema = z.object({
 
 export const EmbedHierarchyInputSchema = z.object({
   hierarchy: HierarchySchema,
-  model: z.enum(['poincare_ball', 'lorentz', 'klein', 'half_plane']).default('poincare_ball'),
+  model: z.enum(['poincare_ball', 'lorentz', 'klein', 'half_plane']).prefault('poincare_ball'),
   parameters: z.object({
-    dimensions: z.number().int().min(2).max(512).default(32),
-    curvature: z.number().min(-10).max(-0.01).default(-1.0),
-    learnCurvature: z.boolean().default(true),
-    epochs: z.number().int().min(1).max(1000).default(100),
-    learningRate: z.number().min(0.0001).max(1).default(0.01),
+    dimensions: z.number().int().min(2).max(512).prefault(32),
+    curvature: z.number().min(-10).max(-0.01).prefault(-1.0),
+    learnCurvature: z.boolean().prefault(true),
+    epochs: z.number().int().min(1).max(1000).prefault(100),
+    learningRate: z.number().min(0.0001).max(1).prefault(0.01),
   }).optional(),
 });
 
@@ -390,9 +390,9 @@ export const TaxonomicReasonInputSchema = z.object({
   }),
   taxonomy: z.string().max(200),
   inference: z.object({
-    transitive: z.boolean().default(true),
-    fuzzy: z.boolean().default(false),
-    confidence: z.number().min(0).max(1).default(0.8),
+    transitive: z.boolean().prefault(true),
+    fuzzy: z.boolean().prefault(false),
+    confidence: z.number().min(0).max(1).prefault(0.8),
   }).optional(),
 });
 
@@ -401,14 +401,14 @@ export type TaxonomicReasonInput = z.infer<typeof TaxonomicReasonInputSchema>;
 export const SemanticSearchInputSchema = z.object({
   query: z.string().max(5000),
   index: z.string().max(200),
-  searchMode: z.enum(['nearest', 'subtree', 'ancestors', 'siblings', 'cone']).default('nearest'),
+  searchMode: z.enum(['nearest', 'subtree', 'ancestors', 'siblings', 'cone']).prefault('nearest'),
   constraints: z.object({
     maxDepth: z.number().int().min(0).max(100).optional(),
     minDepth: z.number().int().min(0).max(100).optional(),
     subtreeRoot: z.string().max(200).optional(),
     nodeTypes: z.array(z.string().max(100)).optional(),
   }).optional(),
-  topK: z.number().int().min(1).max(10000).default(10),
+  topK: z.number().int().min(1).max(10000).prefault(10),
 });
 
 export type SemanticSearchInput = z.infer<typeof SemanticSearchInputSchema>;
@@ -416,7 +416,7 @@ export type SemanticSearchInput = z.infer<typeof SemanticSearchInputSchema>;
 export const HierarchyCompareInputSchema = z.object({
   source: HierarchySchema,
   target: HierarchySchema,
-  alignment: z.enum(['wasserstein', 'gromov_wasserstein', 'tree_edit', 'subtree_isomorphism']).default('gromov_wasserstein'),
+  alignment: z.enum(['wasserstein', 'gromov_wasserstein', 'tree_edit', 'subtree_isomorphism']).prefault('gromov_wasserstein'),
   metrics: z.array(z.enum(['structural_similarity', 'semantic_similarity', 'coverage', 'precision'])).optional(),
 });
 
@@ -436,8 +436,8 @@ export const EntailmentGraphInputSchema = z.object({
     premise: z.string().max(200).optional(),
     hypothesis: z.string().max(200).optional(),
   }).optional(),
-  entailmentThreshold: z.number().min(0).max(1).default(0.7),
-  transitiveClosure: z.boolean().default(true),
+  entailmentThreshold: z.number().min(0).max(1).prefault(0.7),
+  transitiveClosure: z.boolean().prefault(true),
   pruneStrategy: z.enum(['none', 'transitive_reduction', 'confidence_threshold']).optional(),
 });
 

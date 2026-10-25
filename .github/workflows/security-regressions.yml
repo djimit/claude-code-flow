@@ -11,6 +11,11 @@ on:
       - '**/pnpm-lock.yaml'
       - 'scripts/security-dependencies.test.cjs'
       - 'archive/v2/scripts/security-dependencies.test.cjs'
+      - 'archive/v2/scripts/security-agent-executor.test.cjs'
+      - 'ruflo/src/ruvocal/scripts/dependency-compatibility.test.cjs'
+      - 'archive/v2/src/execution/agent-executor.ts'
+      - 'v3/@claude-flow/security/**'
+      - 'v3/@claude-flow/shared/src/core/config/**'
       - 'ruflo/src/ruvocal/scripts/dompurify-security.test.cjs'
       - '.github/workflows/security-regressions.yml'
 
@@ -38,9 +43,14 @@ jobs:
       - run: env -i PATH="$PATH" HOME="$HOME" LANG=C.UTF-8 CI=1 node --test scripts/security-dependencies.test.cjs
       - run: npm ci --ignore-scripts --legacy-peer-deps
         working-directory: archive/v2
-      - run: env -i PATH="$PATH" HOME="$HOME" LANG=C.UTF-8 CI=1 node --test scripts/security-dependencies.test.cjs
+      - run: env -i PATH="$PATH" HOME="$HOME" LANG=C.UTF-8 CI=1 node --test scripts/security-dependencies.test.cjs scripts/security-agent-executor.test.cjs
         working-directory: archive/v2
       - run: npm ci --ignore-scripts --legacy-peer-deps
         working-directory: ruflo/src/ruvocal
-      - run: env -i PATH="$PATH" HOME="$HOME" LANG=C.UTF-8 CI=1 node --test scripts/dompurify-security.test.cjs
+      - run: env -i PATH="$PATH" HOME="$HOME" LANG=C.UTF-8 CI=1 node --test scripts/dompurify-security.test.cjs scripts/dependency-compatibility.test.cjs
         working-directory: ruflo/src/ruvocal
+      - run: corepack pnpm@8.15.0 install --frozen-lockfile --ignore-scripts
+        working-directory: v3
+      - run: env -i PATH="$PATH" HOME="$HOME" LANG=C.UTF-8 CI=1 corepack pnpm@8.15.0 --filter @claude-flow/security --filter @claude-flow/shared test
+        working-directory: v3
+      - run: npm audit --audit-level=high

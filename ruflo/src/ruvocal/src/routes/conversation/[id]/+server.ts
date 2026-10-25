@@ -153,11 +153,11 @@ export async function POST({ request, locals, params, getClientAddress }) {
 							url: z.string(),
 							headers: z
 								.optional(z.array(z.object({ key: z.string(), value: z.string() })))
-								.default([]),
+								.prefault([]),
 						})
 					)
 				)
-				.default([]),
+				.prefault([]),
 			files: z.optional(
 				z.array(
 					z.object({

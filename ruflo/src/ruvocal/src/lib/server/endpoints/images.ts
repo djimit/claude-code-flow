@@ -1,7 +1,7 @@
 import type { Sharp } from "sharp";
 import sharp from "sharp";
 import type { MessageFile } from "$lib/types/Message";
-import { z, type util } from "zod";
+import { z } from "zod";
 
 export interface ImageProcessorOptions<TMimeType extends string = string> {
 	supportedMimeTypes: TMimeType[];
@@ -22,20 +22,20 @@ export function createImageProcessorOptionsValidator<TMimeType extends string = 
 		.object({
 			supportedMimeTypes: z
 				.array(
-					z.enum<string, [TMimeType, ...TMimeType[]]>([
+					z.enum([
 						defaults.supportedMimeTypes[0],
 						...defaults.supportedMimeTypes.slice(1),
 					])
 				)
-				.default(defaults.supportedMimeTypes),
+				.prefault(defaults.supportedMimeTypes),
 			preferredMimeType: z
 				.enum([defaults.supportedMimeTypes[0], ...defaults.supportedMimeTypes.slice(1)])
-				.default(defaults.preferredMimeType as util.noUndefined<TMimeType>),
-			maxSizeInMB: z.number().positive().default(defaults.maxSizeInMB),
-			maxWidth: z.number().int().positive().default(defaults.maxWidth),
-			maxHeight: z.number().int().positive().default(defaults.maxHeight),
+				.prefault(defaults.preferredMimeType as TMimeType),
+			maxSizeInMB: z.number().positive().prefault(defaults.maxSizeInMB),
+			maxWidth: z.number().int().positive().prefault(defaults.maxWidth),
+			maxHeight: z.number().int().positive().prefault(defaults.maxHeight),
 		})
-		.default(defaults);
+		.prefault(defaults);
 }
 
 export function makeImageProcessor<TMimeType extends string = string>(

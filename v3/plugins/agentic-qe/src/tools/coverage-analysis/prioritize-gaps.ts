@@ -33,23 +33,23 @@ export const PrioritizeGapsInputSchema = z.object({
         'test-difficulty',
       ])
     )
-    .default(['complexity', 'change-frequency', 'defect-history'])
+    .prefault(['complexity', 'change-frequency', 'defect-history'])
     .describe('Prioritization factors'),
   weights: z
     .object({
-      complexity: z.number().min(0).max(1).default(0.25),
-      changeFrequency: z.number().min(0).max(1).default(0.25),
-      defectHistory: z.number().min(0).max(1).default(0.2),
-      businessCritical: z.number().min(0).max(1).default(0.15),
-      dependencyCount: z.number().min(0).max(1).default(0.1),
-      testDifficulty: z.number().min(0).max(1).default(0.05),
+      complexity: z.number().min(0).max(1).prefault(0.25),
+      changeFrequency: z.number().min(0).max(1).prefault(0.25),
+      defectHistory: z.number().min(0).max(1).prefault(0.2),
+      businessCritical: z.number().min(0).max(1).prefault(0.15),
+      dependencyCount: z.number().min(0).max(1).prefault(0.1),
+      testDifficulty: z.number().min(0).max(1).prefault(0.05),
     })
     .optional()
     .describe('Custom weights for prioritization factors'),
-  limit: z.number().min(1).max(100).default(20).describe('Maximum gaps to return'),
+  limit: z.number().min(1).max(100).prefault(20).describe('Maximum gaps to return'),
   groupBy: z
     .enum(['risk', 'file', 'type', 'none'])
-    .default('risk')
+    .prefault('risk')
     .describe('How to group the results'),
 });
 

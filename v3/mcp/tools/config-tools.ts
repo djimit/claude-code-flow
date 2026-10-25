@@ -53,33 +53,33 @@ function validateConfigPath(inputPath: string, cwd: string = process.cwd()): str
 const loadConfigSchema = z.object({
   path: z.string().optional()
     .describe('Configuration file path (defaults to ./claude-flow.config.json)'),
-  scope: z.enum(['global', 'project', 'user']).default('project')
+  scope: z.enum(['global', 'project', 'user']).prefault('project')
     .describe('Configuration scope'),
-  merge: z.boolean().default(true)
+  merge: z.boolean().prefault(true)
     .describe('Merge with default configuration'),
-  includeDefaults: z.boolean().default(false)
+  includeDefaults: z.boolean().prefault(false)
     .describe('Include default values in response'),
 });
 
 const saveConfigSchema = z.object({
-  config: z.record(z.unknown())
+  config: z.record(z.string(), z.unknown())
     .describe('Configuration object to save'),
   path: z.string().optional()
     .describe('Configuration file path (defaults to ./claude-flow.config.json)'),
-  scope: z.enum(['global', 'project', 'user']).default('project')
+  scope: z.enum(['global', 'project', 'user']).prefault('project')
     .describe('Configuration scope'),
-  merge: z.boolean().default(true)
+  merge: z.boolean().prefault(true)
     .describe('Merge with existing configuration'),
-  createBackup: z.boolean().default(true)
+  createBackup: z.boolean().prefault(true)
     .describe('Create backup of existing configuration'),
 });
 
 const validateConfigSchema = z.object({
-  config: z.record(z.unknown())
+  config: z.record(z.string(), z.unknown())
     .describe('Configuration object to validate'),
-  strict: z.boolean().default(true)
+  strict: z.boolean().prefault(true)
     .describe('Enable strict validation (fail on unknown fields)'),
-  fixIssues: z.boolean().default(false)
+  fixIssues: z.boolean().prefault(false)
     .describe('Attempt to automatically fix validation issues'),
 });
 

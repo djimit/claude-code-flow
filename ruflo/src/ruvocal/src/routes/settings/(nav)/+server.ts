@@ -7,24 +7,24 @@ import { resolveStreamingMode } from "$lib/utils/messageUpdates";
 const settingsSchema = z.object({
 	shareConversationsWithModelAuthors: z
 		.boolean()
-		.default(DEFAULT_SETTINGS.shareConversationsWithModelAuthors),
+		.prefault(DEFAULT_SETTINGS.shareConversationsWithModelAuthors),
 	welcomeModalSeen: z.boolean().optional(),
-	activeModel: z.string().default(DEFAULT_SETTINGS.activeModel),
-	customPrompts: z.record(z.string()).default({}),
-	multimodalOverrides: z.record(z.boolean()).default({}),
-	toolsOverrides: z.record(z.boolean()).default({}),
-	providerOverrides: z.record(z.string()).default({}),
+	activeModel: z.string().prefault(DEFAULT_SETTINGS.activeModel),
+	customPrompts: z.record(z.string(), z.string()).prefault({}),
+	multimodalOverrides: z.record(z.string(), z.boolean()).prefault({}),
+	toolsOverrides: z.record(z.string(), z.boolean()).prefault({}),
+	providerOverrides: z.record(z.string(), z.string()).prefault({}),
 	streamingMode: z.enum(["raw", "smooth"]).optional(),
-	directPaste: z.boolean().default(false),
-	hapticsEnabled: z.boolean().default(true),
-	hidePromptExamples: z.record(z.boolean()).default({}),
-	autopilotEnabled: z.boolean().default(true),
+	directPaste: z.boolean().prefault(false),
+	hapticsEnabled: z.boolean().prefault(true),
+	hidePromptExamples: z.record(z.string(), z.boolean()).prefault({}),
+	autopilotEnabled: z.boolean().prefault(true),
 	autopilotMaxSteps: z
 		.number()
 		.int()
 		.min(1)
 		.max(100)
-		.default(DEFAULT_SETTINGS.autopilotMaxSteps),
+		.prefault(DEFAULT_SETTINGS.autopilotMaxSteps),
 	billingOrganization: z.string().optional(),
 });
 

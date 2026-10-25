@@ -12,14 +12,14 @@ export const AuditComplianceInputSchema = z.object({
   targetPath: z.string().describe('Path to project/codebase to audit'),
   frameworks: z
     .array(z.enum(['owasp-top-10', 'sans-25', 'pci-dss', 'hipaa', 'gdpr', 'soc2', 'nist']))
-    .default(['owasp-top-10'])
+    .prefault(['owasp-top-10'])
     .describe('Compliance frameworks to audit'),
   auditType: z
     .enum(['full', 'quick', 'delta'])
-    .default('full')
+    .prefault('full')
     .describe('Type of audit - full, quick, or delta from last audit'),
-  includeEvidence: z.boolean().default(true).describe('Include evidence collection'),
-  includeRemediation: z.boolean().default(true).describe('Include remediation plan'),
+  includeEvidence: z.boolean().prefault(true).describe('Include evidence collection'),
+  includeRemediation: z.boolean().prefault(true).describe('Include remediation plan'),
   lastAuditDate: z.string().optional().describe('Last audit date for delta audits'),
 });
 

@@ -19,18 +19,18 @@ export const TDDCycleInputSchema = z.object({
   targetPath: z.string().describe('Path to implement in'),
   style: z
     .enum(['london', 'chicago'])
-    .default('london')
+    .prefault('london')
     .describe('TDD style - London (outside-in, mocks) or Chicago (inside-out, real objects)'),
-  maxCycles: z.number().min(1).max(50).default(10).describe('Maximum TDD cycles to execute'),
+  maxCycles: z.number().min(1).max(50).prefault(10).describe('Maximum TDD cycles to execute'),
   framework: z
     .enum(['vitest', 'jest', 'mocha', 'pytest', 'junit'])
-    .default('vitest')
+    .prefault('vitest')
     .describe('Test framework'),
-  coverageTarget: z.number().min(0).max(100).default(80).describe('Target coverage percentage'),
-  autoRefactor: z.boolean().default(true).describe('Automatically apply refactoring suggestions'),
+  coverageTarget: z.number().min(0).max(100).prefault(80).describe('Target coverage percentage'),
+  autoRefactor: z.boolean().prefault(true).describe('Automatically apply refactoring suggestions'),
   stopOnGreen: z
     .boolean()
-    .default(false)
+    .prefault(false)
     .describe('Stop immediately when tests pass (skip refactor phase)'),
 });
 

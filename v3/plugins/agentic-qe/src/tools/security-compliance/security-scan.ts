@@ -12,24 +12,24 @@ export const SecurityScanInputSchema = z.object({
   targetPath: z.string().describe('Path to file/directory to scan'),
   scanType: z
     .enum(['sast', 'dast', 'both'])
-    .default('sast')
+    .prefault('sast')
     .describe('Type of security scan'),
   compliance: z
     .array(z.enum(['owasp-top-10', 'sans-25', 'pci-dss', 'hipaa', 'gdpr', 'soc2']))
-    .default(['owasp-top-10'])
+    .prefault(['owasp-top-10'])
     .describe('Compliance frameworks to check'),
   severity: z
     .enum(['all', 'critical', 'high', 'medium'])
-    .default('all')
+    .prefault('all')
     .describe('Minimum severity to report'),
-  includeRemediation: z.boolean().default(true).describe('Include remediation guidance'),
+  includeRemediation: z.boolean().prefault(true).describe('Include remediation guidance'),
   scanDepth: z
     .enum(['quick', 'standard', 'deep'])
-    .default('standard')
+    .prefault('standard')
     .describe('Scan depth/thoroughness'),
   excludePatterns: z
     .array(z.string())
-    .default(['node_modules', 'dist', '*.test.ts'])
+    .prefault(['node_modules', 'dist', '*.test.ts'])
     .describe('Patterns to exclude from scanning'),
   targetUrl: z.string().optional().describe('URL for DAST scanning'),
 });

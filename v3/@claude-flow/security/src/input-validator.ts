@@ -17,25 +17,25 @@ import { z } from 'zod';
 /**
  * Custom error map for security-focused messages
  */
-const securityErrorMap: z.ZodErrorMap = (issue, ctx) => {
+const securityErrorMap: z.ZodErrorMap = (issue) => {
   switch (issue.code) {
     case z.ZodIssueCode.too_big:
       return { message: `Input exceeds maximum allowed size` };
     case z.ZodIssueCode.too_small:
       return { message: `Input below minimum required size` };
-    case z.ZodIssueCode.invalid_string:
-      if (issue.validation === 'email') {
+    case z.ZodIssueCode.invalid_format:
+      if (issue.format === 'email') {
         return { message: 'Invalid email format' };
       }
-      if (issue.validation === 'url') {
+      if (issue.format === 'url') {
         return { message: 'Invalid URL format' };
       }
-      if (issue.validation === 'uuid') {
+      if (issue.format === 'uuid') {
         return { message: 'Invalid UUID format' };
       }
       return { message: 'Invalid string format' };
     default:
-      return { message: ctx.defaultError };
+      return undefined;
   }
 };
 
@@ -160,14 +160,12 @@ export const PortSchema = z.number()
 /**
  * IP address schema (v4)
  */
-export const IPv4Schema = z.string()
-  .ip({ version: 'v4', message: 'Invalid IPv4 address' });
+export const IPv4Schema = z.ipv4('Invalid IPv4 address');
 
 /**
  * IP address schema (v4 or v6)
  */
-export const IPSchema = z.string()
-  .ip({ message: 'Invalid IP address' });
+export const IPSchema = z.union([z.ipv4(), z.ipv6()], { error: 'Invalid IP address' });
 
 // ============================================================================
 // Authentication Schemas
@@ -220,8 +218,8 @@ export const CreateUserSchema = z.object({
   email: EmailSchema,
   password: PasswordSchema,
   role: UserRoleSchema,
-  permissions: z.array(PermissionSchema).optional(),
-  isActive: z.boolean().optional().default(true),
+  permissions: z.array(PermissionSchema).max(LIMITS.MAX_ARRAY_LENGTH).optional(),
+  isActive: z.boolean().prefault(true),
 });
 
 /**
@@ -229,7 +227,7 @@ export const CreateUserSchema = z.object({
  */
 export const CreateApiKeySchema = z.object({
   name: IdentifierSchema,
-  permissions: z.array(PermissionSchema).optional(),
+  permissions: z.array(PermissionSchema).max(LIMITS.MAX_ARRAY_LENGTH).optional(),
   expiresAt: z.date().optional(),
 });
 
@@ -264,7 +262,7 @@ export const AgentTypeSchema = z.enum([
 export const SpawnAgentSchema = z.object({
   type: AgentTypeSchema,
   id: IdentifierSchema.optional(),
-  config: z.record(z.unknown()).optional(),
+  config: z.record(z.string(), z.unknown()).optional(),
   timeout: z.number().positive().optional(),
 });
 
@@ -276,7 +274,7 @@ export const TaskInputSchema = z.object({
   content: SafeStringSchema.max(10000, 'Task content too long'),
   agentType: AgentTypeSchema,
   priority: z.enum(['low', 'medium', 'high', 'critical']).optional(),
-  metadata: z.record(z.unknown()).optional(),
+  metadata: z.record(z.string(), z.unknown()).optional(),
 });
 
 // ============================================================================
@@ -319,24 +317,24 @@ export const PathSchema = z.string()
  * Security configuration schema
  */
 export const SecurityConfigSchema = z.object({
-  bcryptRounds: z.number().int().min(10).max(20).default(12),
-  jwtExpiresIn: z.string().default('24h'),
-  sessionTimeout: z.number().positive().default(3600000),
-  maxLoginAttempts: z.number().int().positive().default(5),
-  lockoutDuration: z.number().positive().default(900000),
-  requireMFA: z.boolean().default(false),
+  bcryptRounds: z.number().int().min(10).max(20).prefault(12),
+  jwtExpiresIn: z.string().prefault('24h'),
+  sessionTimeout: z.number().positive().prefault(3600000),
+  maxLoginAttempts: z.number().int().positive().prefault(5),
+  lockoutDuration: z.number().positive().prefault(900000),
+  requireMFA: z.boolean().prefault(false),
 });
 
 /**
  * Executor configuration schema
  */
 export const ExecutorConfigSchema = z.object({
-  allowedCommands: z.array(IdentifierSchema).min(1),
-  blockedPatterns: z.array(z.string()).optional(),
-  timeout: z.number().positive().default(30000),
-  maxBuffer: z.number().positive().default(10 * 1024 * 1024),
+  allowedCommands: z.array(IdentifierSchema).min(1).max(LIMITS.MAX_ARRAY_LENGTH),
+  blockedPatterns: z.array(z.string()).max(LIMITS.MAX_ARRAY_LENGTH).optional(),
+  timeout: z.number().positive().prefault(30000),
+  maxBuffer: z.number().positive().prefault(10 * 1024 * 1024),
   cwd: PathSchema.optional(),
-  allowSudo: z.boolean().default(false),
+  allowSudo: z.boolean().prefault(false),
 });
 
 // ============================================================================
@@ -394,7 +392,7 @@ export class InputValidator {
   /**
    * Safely validates input, returning result
    */
-  static safeParse<T>(schema: z.ZodSchema<T>, input: unknown): z.SafeParseReturnType<unknown, T> {
+  static safeParse<T>(schema: z.ZodSchema<T>, input: unknown): z.ZodSafeParseResult<T> {
     return schema.safeParse(input);
   }
 

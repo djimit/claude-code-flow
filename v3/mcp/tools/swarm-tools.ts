@@ -18,9 +18,9 @@ import { MCPTool, ToolContext } from '../types.js';
 
 const initSwarmSchema = z.object({
   topology: z.enum(['hierarchical', 'mesh', 'adaptive', 'collective', 'hierarchical-mesh'])
-    .default('hierarchical-mesh')
+    .prefault('hierarchical-mesh')
     .describe('Swarm coordination topology'),
-  maxAgents: z.number().int().positive().max(1000).default(15)
+  maxAgents: z.number().int().positive().max(1000).prefault(15)
     .describe('Maximum number of agents in the swarm'),
   config: z.object({
     communicationProtocol: z.enum(['direct', 'message-bus', 'pubsub']).optional(),
@@ -29,19 +29,19 @@ const initSwarmSchema = z.object({
     loadBalancing: z.boolean().optional(),
     autoScaling: z.boolean().optional(),
   }).optional().describe('Swarm configuration'),
-  metadata: z.record(z.unknown()).optional().describe('Additional metadata'),
+  metadata: z.record(z.string(), z.unknown()).optional().describe('Additional metadata'),
 });
 
 const swarmStatusSchema = z.object({
-  includeAgents: z.boolean().default(true).describe('Include individual agent information'),
-  includeMetrics: z.boolean().default(false).describe('Include performance metrics'),
-  includeTopology: z.boolean().default(false).describe('Include topology graph'),
+  includeAgents: z.boolean().prefault(true).describe('Include individual agent information'),
+  includeMetrics: z.boolean().prefault(false).describe('Include performance metrics'),
+  includeTopology: z.boolean().prefault(false).describe('Include topology graph'),
 });
 
 const scaleSwarmSchema = z.object({
   targetAgents: z.number().int().positive().max(1000)
     .describe('Target number of agents'),
-  scaleStrategy: z.enum(['gradual', 'immediate', 'adaptive']).default('gradual')
+  scaleStrategy: z.enum(['gradual', 'immediate', 'adaptive']).prefault('gradual')
     .describe('Scaling strategy'),
   agentTypes: z.array(z.string()).optional()
     .describe('Specific agent types to scale (if not provided, will scale proportionally)'),

@@ -27,11 +27,11 @@ export const AnalyzeRootCauseInputSchema = z.object({
     .describe('Defect information'),
   analysisDepth: z
     .enum(['immediate', 'standard', 'deep'])
-    .default('standard')
+    .prefault('standard')
     .describe('Depth of analysis'),
-  includeHistorical: z.boolean().default(true).describe('Include historical pattern analysis'),
-  includeRemediation: z.boolean().default(true).describe('Include remediation recommendations'),
-  maxContributingFactors: z.number().min(1).max(20).default(5).describe('Maximum factors to identify'),
+  includeHistorical: z.boolean().prefault(true).describe('Include historical pattern analysis'),
+  includeRemediation: z.boolean().prefault(true).describe('Include remediation recommendations'),
+  maxContributingFactors: z.number().min(1).max(20).prefault(5).describe('Maximum factors to identify'),
 });
 
 export type AnalyzeRootCauseInput = z.infer<typeof AnalyzeRootCauseInputSchema>;

@@ -650,9 +650,9 @@ export interface AuditLogEntry {
 export const ClauseExtractInputSchema = z.object({
   document: z.string().max(10_000_000, 'Document size exceeds 10MB limit'),
   clauseTypes: z.array(ClauseType).optional(),
-  jurisdiction: z.string().max(50).default('US'),
-  includePositions: z.boolean().default(true),
-  includeEmbeddings: z.boolean().default(false),
+  jurisdiction: z.string().max(50).prefault('US'),
+  includePositions: z.boolean().prefault(true),
+  includeEmbeddings: z.boolean().prefault(false),
   matterContext: z.object({
     matterId: z.string(),
     clientId: z.string(),
@@ -670,7 +670,7 @@ export const RiskAssessInputSchema = z.object({
   riskCategories: z.array(RiskCategory).optional(),
   industryContext: z.string().max(200).optional(),
   threshold: RiskSeverity.optional(),
-  includeFinancialImpact: z.boolean().default(true),
+  includeFinancialImpact: z.boolean().prefault(true),
   matterContext: z.object({
     matterId: z.string(),
     clientId: z.string(),
@@ -685,9 +685,9 @@ export type RiskAssessInput = z.infer<typeof RiskAssessInputSchema>;
 export const ContractCompareInputSchema = z.object({
   baseDocument: z.string().max(10_000_000),
   compareDocument: z.string().max(10_000_000),
-  comparisonMode: ComparisonMode.default('full'),
-  highlightChanges: z.boolean().default(true),
-  generateRedline: z.boolean().default(false),
+  comparisonMode: ComparisonMode.prefault('full'),
+  highlightChanges: z.boolean().prefault(true),
+  generateRedline: z.boolean().prefault(false),
   focusClauseTypes: z.array(ClauseType).optional(),
   matterContext: z.object({
     matterId: z.string(),
@@ -705,8 +705,8 @@ export const ObligationTrackInputSchema = z.object({
   party: z.string().max(200).optional(),
   timeframe: z.string().max(50).optional(),
   obligationTypes: z.array(ObligationType).optional(),
-  includeDependencies: z.boolean().default(true),
-  includeTimeline: z.boolean().default(true),
+  includeDependencies: z.boolean().prefault(true),
+  includeTimeline: z.boolean().prefault(true),
   matterContext: z.object({
     matterId: z.string(),
     clientId: z.string(),
@@ -721,8 +721,8 @@ export type ObligationTrackInput = z.infer<typeof ObligationTrackInputSchema>;
 export const PlaybookMatchInputSchema = z.object({
   document: z.string().max(10_000_000),
   playbook: z.string().max(1_000_000, 'Playbook size exceeds 1MB limit'),
-  strictness: PlaybookStrictness.default('moderate'),
-  suggestAlternatives: z.boolean().default(true),
+  strictness: PlaybookStrictness.prefault('moderate'),
+  suggestAlternatives: z.boolean().prefault(true),
   prioritizeClauses: z.array(ClauseType).optional(),
   matterContext: z.object({
     matterId: z.string(),

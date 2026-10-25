@@ -62,7 +62,7 @@ export const ThresholdSchema = z.number().min(0).max(1).describe('Threshold valu
  */
 export const CoherenceCheckInputSchema = z.object({
   vectors: EmbeddingVectorsSchema.describe('Array of embedding vectors to check for coherence'),
-  threshold: ThresholdSchema.default(0.3).describe('Energy threshold for coherence (0-1)'),
+  threshold: ThresholdSchema.prefault(0.3).describe('Energy threshold for coherence (0-1)'),
 });
 
 export type CoherenceCheckInput = z.infer<typeof CoherenceCheckInputSchema>;
@@ -83,9 +83,9 @@ export type CoherenceCheckResult = z.infer<typeof CoherenceCheckResultSchema>;
  * Schema for coherence thresholds configuration
  */
 export const CoherenceThresholdsSchema = z.object({
-  reject: ThresholdSchema.default(0.7).describe('Energy threshold for rejection'),
-  warn: ThresholdSchema.default(0.3).describe('Energy threshold for warning'),
-  allow: ThresholdSchema.default(0.3).describe('Energy threshold for automatic allow'),
+  reject: ThresholdSchema.prefault(0.7).describe('Energy threshold for rejection'),
+  warn: ThresholdSchema.prefault(0.3).describe('Energy threshold for warning'),
+  allow: ThresholdSchema.prefault(0.3).describe('Energy threshold for automatic allow'),
 });
 
 export type CoherenceThresholds = z.infer<typeof CoherenceThresholdsSchema>;
@@ -106,7 +106,7 @@ export type SpectralAnalysisType = z.infer<typeof SpectralAnalysisTypeSchema>;
  */
 export const SpectralAnalyzeInputSchema = z.object({
   adjacencyMatrix: AdjacencyMatrixSchema.describe('Adjacency matrix representing connections'),
-  analyzeType: SpectralAnalysisTypeSchema.default('stability').describe('Type of analysis'),
+  analyzeType: SpectralAnalysisTypeSchema.prefault('stability').describe('Type of analysis'),
 });
 
 export type SpectralAnalyzeInput = z.infer<typeof SpectralAnalyzeInputSchema>;
@@ -173,7 +173,7 @@ export const AgentStateSchema = z.object({
   agentId: z.string().min(1).describe('Agent identifier'),
   embedding: EmbeddingVectorSchema.describe("Agent's embedding vector"),
   vote: z.union([z.string(), z.boolean()]).optional().describe("Agent's vote"),
-  metadata: z.record(z.unknown()).optional().describe('Additional metadata'),
+  metadata: z.record(z.string(), z.unknown()).optional().describe('Additional metadata'),
 });
 
 export type AgentState = z.infer<typeof AgentStateSchema>;
@@ -186,7 +186,7 @@ export const ConsensusVerifyInputSchema = z.object({
     .array(AgentStateSchema)
     .min(1)
     .describe('Array of agent states to verify consensus'),
-  consensusThreshold: ThresholdSchema.default(0.8).describe('Required agreement threshold (0-1)'),
+  consensusThreshold: ThresholdSchema.prefault(0.8).describe('Required agreement threshold (0-1)'),
 });
 
 export type ConsensusVerifyInput = z.infer<typeof ConsensusVerifyInputSchema>;
@@ -220,7 +220,7 @@ export const PointCloudSchema = z.array(EmbeddingVectorSchema).min(1).describe('
  */
 export const QuantumTopologyInputSchema = z.object({
   points: PointCloudSchema.describe('Point cloud for topological analysis'),
-  maxDimension: z.number().int().min(0).max(3).default(2).describe('Maximum homology dimension'),
+  maxDimension: z.number().int().min(0).max(3).prefault(2).describe('Maximum homology dimension'),
 });
 
 export type QuantumTopologyInput = z.infer<typeof QuantumTopologyInputSchema>;
@@ -254,7 +254,7 @@ export const MemoryEntrySchema = z.object({
   key: z.string().min(1).describe('Unique key for the entry'),
   content: z.string().describe('Text content of the entry'),
   embedding: EmbeddingVectorSchema.describe('Embedding vector for the content'),
-  metadata: z.record(z.unknown()).optional().describe('Optional metadata'),
+  metadata: z.record(z.string(), z.unknown()).optional().describe('Optional metadata'),
 });
 
 export type MemoryEntry = z.infer<typeof MemoryEntrySchema>;
@@ -301,35 +301,35 @@ export type MemoryGateResult = z.infer<typeof MemoryGateResultSchema>;
  * Schema for coherence configuration
  */
 export const CoherenceConfigSchema = z.object({
-  warnThreshold: ThresholdSchema.default(0.3).describe('Energy threshold for warnings'),
-  rejectThreshold: ThresholdSchema.default(0.7).describe('Energy threshold for rejection'),
-  cacheEnabled: z.boolean().default(true).describe('Enable result caching'),
-  cacheTTL: z.number().int().positive().default(60000).describe('Cache TTL in milliseconds'),
+  warnThreshold: ThresholdSchema.prefault(0.3).describe('Energy threshold for warnings'),
+  rejectThreshold: ThresholdSchema.prefault(0.7).describe('Energy threshold for rejection'),
+  cacheEnabled: z.boolean().prefault(true).describe('Enable result caching'),
+  cacheTTL: z.number().int().positive().prefault(60000).describe('Cache TTL in milliseconds'),
 });
 
 /**
  * Schema for spectral configuration
  */
 export const SpectralConfigSchema = z.object({
-  stabilityThreshold: ThresholdSchema.default(0.1).describe('Spectral gap threshold for stability'),
-  maxMatrixSize: z.number().int().positive().default(1000).describe('Maximum adjacency matrix size'),
+  stabilityThreshold: ThresholdSchema.prefault(0.1).describe('Spectral gap threshold for stability'),
+  maxMatrixSize: z.number().int().positive().prefault(1000).describe('Maximum adjacency matrix size'),
 });
 
 /**
  * Schema for causal configuration
  */
 export const CausalConfigSchema = z.object({
-  maxBackdoorPaths: z.number().int().positive().default(10).describe('Maximum backdoor paths'),
-  confidenceThreshold: ThresholdSchema.default(0.8).describe('Minimum confidence threshold'),
+  maxBackdoorPaths: z.number().int().positive().prefault(10).describe('Maximum backdoor paths'),
+  confidenceThreshold: ThresholdSchema.prefault(0.8).describe('Minimum confidence threshold'),
 });
 
 /**
  * Schema for full plugin configuration
  */
 export const PrimeRadiantConfigSchema = z.object({
-  coherence: CoherenceConfigSchema.default({}),
-  spectral: SpectralConfigSchema.default({}),
-  causal: CausalConfigSchema.default({}),
+  coherence: CoherenceConfigSchema.prefault({}),
+  spectral: SpectralConfigSchema.prefault({}),
+  causal: CausalConfigSchema.prefault({}),
 });
 
 export type PrimeRadiantConfig = z.infer<typeof PrimeRadiantConfigSchema>;

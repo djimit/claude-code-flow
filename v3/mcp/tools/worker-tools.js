@@ -30,11 +30,11 @@ const dispatchWorkerSchema = z.object({
         .describe('Context for the worker (e.g., file path, topic)'),
     sessionId: z.string().optional()
         .describe('Session identifier (auto-generated if not provided)'),
-    priority: z.enum(['low', 'normal', 'high', 'critical']).default('normal')
+    priority: z.enum(['low', 'normal', 'high', 'critical']).prefault('normal')
         .describe('Worker priority'),
     timeout: z.number().optional()
         .describe('Timeout in milliseconds'),
-    metadata: z.record(z.unknown()).optional()
+    metadata: z.record(z.string(), z.unknown()).optional()
         .describe('Additional metadata'),
 });
 const workerStatusSchema = z.object({
@@ -60,7 +60,7 @@ const workerResultsSchema = z.object({
         .describe('Filter by trigger type'),
     status: z.enum(['pending', 'running', 'completed', 'failed', 'cancelled']).optional()
         .describe('Filter by status'),
-    limit: z.number().default(10)
+    limit: z.number().prefault(10)
         .describe('Maximum results to return'),
 });
 const workerContextSchema = z.object({

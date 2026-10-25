@@ -15,38 +15,38 @@ import * as os from 'os';
 // Input Schemas
 // ============================================================================
 const systemStatusSchema = z.object({
-    includeAgents: z.boolean().default(true)
+    includeAgents: z.boolean().prefault(true)
         .describe('Include agent information'),
-    includeTasks: z.boolean().default(true)
+    includeTasks: z.boolean().prefault(true)
         .describe('Include task information'),
-    includeMemory: z.boolean().default(false)
+    includeMemory: z.boolean().prefault(false)
         .describe('Include memory usage'),
-    includeConnections: z.boolean().default(false)
+    includeConnections: z.boolean().prefault(false)
         .describe('Include connection pool information'),
 });
 const systemMetricsSchema = z.object({
-    timeRange: z.enum(['1h', '6h', '24h', '7d']).default('1h')
+    timeRange: z.enum(['1h', '6h', '24h', '7d']).prefault('1h')
         .describe('Time range for metrics'),
-    includeHistogram: z.boolean().default(false)
+    includeHistogram: z.boolean().prefault(false)
         .describe('Include histogram data'),
     components: z.array(z.enum(['agents', 'tasks', 'memory', 'swarm', 'all']))
-        .default(['all'])
+        .prefault(['all'])
         .describe('Components to include'),
 });
 const systemHealthSchema = z.object({
-    deep: z.boolean().default(false)
+    deep: z.boolean().prefault(false)
         .describe('Perform deep health check (checks all dependencies)'),
-    timeout: z.number().int().positive().default(5000)
+    timeout: z.number().int().positive().prefault(5000)
         .describe('Health check timeout in milliseconds'),
     components: z.array(z.string()).optional()
         .describe('Specific components to check'),
 });
 const systemInfoSchema = z.object({
-    includeEnv: z.boolean().default(false)
+    includeEnv: z.boolean().prefault(false)
         .describe('Include environment variables (filtered for safety)'),
-    includeVersions: z.boolean().default(true)
+    includeVersions: z.boolean().prefault(true)
         .describe('Include version information'),
-    includeCapabilities: z.boolean().default(true)
+    includeCapabilities: z.boolean().prefault(true)
         .describe('Include system capabilities'),
 });
 const metricsStore = {

@@ -47,65 +47,65 @@ async function getReasoningBank() {
 // ============================================================================
 const preEditSchema = z.object({
     filePath: z.string().describe('Absolute path to the file being edited'),
-    operation: z.enum(['create', 'modify', 'delete']).default('modify').describe('Type of edit operation'),
-    includeContext: z.boolean().default(true).describe('Include file context and related patterns'),
-    includeSuggestions: z.boolean().default(true).describe('Include agent suggestions'),
+    operation: z.enum(['create', 'modify', 'delete']).prefault('modify').describe('Type of edit operation'),
+    includeContext: z.boolean().prefault(true).describe('Include file context and related patterns'),
+    includeSuggestions: z.boolean().prefault(true).describe('Include agent suggestions'),
 });
 const postEditSchema = z.object({
     filePath: z.string().describe('Absolute path to the file that was edited'),
-    operation: z.enum(['create', 'modify', 'delete']).default('modify').describe('Type of edit operation'),
+    operation: z.enum(['create', 'modify', 'delete']).prefault('modify').describe('Type of edit operation'),
     success: z.boolean().describe('Whether the edit was successful'),
     outcome: z.string().optional().describe('Description of the outcome'),
-    metadata: z.record(z.unknown()).optional().describe('Additional metadata'),
+    metadata: z.record(z.string(), z.unknown()).optional().describe('Additional metadata'),
 });
 const preCommandSchema = z.object({
     command: z.string().describe('Command to be executed'),
     workingDirectory: z.string().optional().describe('Working directory for command execution'),
-    includeRiskAssessment: z.boolean().default(true).describe('Include risk assessment'),
-    includeSuggestions: z.boolean().default(true).describe('Include safety suggestions'),
+    includeRiskAssessment: z.boolean().prefault(true).describe('Include risk assessment'),
+    includeSuggestions: z.boolean().prefault(true).describe('Include safety suggestions'),
 });
 const postCommandSchema = z.object({
     command: z.string().describe('Command that was executed'),
-    exitCode: z.number().int().default(0).describe('Command exit code'),
+    exitCode: z.number().int().prefault(0).describe('Command exit code'),
     success: z.boolean().describe('Whether the command was successful'),
     output: z.string().optional().describe('Command output'),
     error: z.string().optional().describe('Error message if failed'),
     executionTime: z.number().positive().optional().describe('Execution time in milliseconds'),
-    metadata: z.record(z.unknown()).optional().describe('Additional metadata'),
+    metadata: z.record(z.string(), z.unknown()).optional().describe('Additional metadata'),
 });
 const routeSchema = z.object({
     task: z.string().describe('Task description to route'),
     context: z.string().optional().describe('Additional context about the task'),
     preferredAgents: z.array(z.string()).optional().describe('List of preferred agent types'),
-    constraints: z.record(z.unknown()).optional().describe('Routing constraints'),
-    includeExplanation: z.boolean().default(true).describe('Include routing explanation'),
+    constraints: z.record(z.string(), z.unknown()).optional().describe('Routing constraints'),
+    includeExplanation: z.boolean().prefault(true).describe('Include routing explanation'),
 });
 const explainSchema = z.object({
     task: z.string().describe('Task description to explain routing for'),
     context: z.string().optional().describe('Additional context about the task'),
-    verbose: z.boolean().default(false).describe('Include detailed reasoning'),
+    verbose: z.boolean().prefault(false).describe('Include detailed reasoning'),
 });
 const pretrainSchema = z.object({
     repositoryPath: z.string().optional().describe('Path to repository (defaults to current)'),
-    includeGitHistory: z.boolean().default(true).describe('Include git history in analysis'),
-    includeDependencies: z.boolean().default(true).describe('Analyze dependencies'),
-    maxPatterns: z.number().int().positive().max(10000).default(1000)
+    includeGitHistory: z.boolean().prefault(true).describe('Include git history in analysis'),
+    includeDependencies: z.boolean().prefault(true).describe('Analyze dependencies'),
+    maxPatterns: z.number().int().positive().max(10000).prefault(1000)
         .describe('Maximum number of patterns to extract'),
-    force: z.boolean().default(false).describe('Force retraining even if data exists'),
+    force: z.boolean().prefault(false).describe('Force retraining even if data exists'),
 });
 const metricsSchema = z.object({
-    category: z.enum(['all', 'routing', 'edits', 'commands', 'patterns']).default('all')
+    category: z.enum(['all', 'routing', 'edits', 'commands', 'patterns']).prefault('all')
         .describe('Category of metrics to retrieve'),
-    timeRange: z.enum(['hour', 'day', 'week', 'month', 'all']).default('all')
+    timeRange: z.enum(['hour', 'day', 'week', 'month', 'all']).prefault('all')
         .describe('Time range for metrics'),
-    includeDetailedStats: z.boolean().default(false).describe('Include detailed statistics'),
-    format: z.enum(['json', 'summary']).default('summary').describe('Output format'),
+    includeDetailedStats: z.boolean().prefault(false).describe('Include detailed statistics'),
+    format: z.enum(['json', 'summary']).prefault('summary').describe('Output format'),
 });
 const listHooksSchema = z.object({
-    category: z.enum(['all', 'pre-edit', 'post-edit', 'pre-command', 'post-command', 'routing']).default('all')
+    category: z.enum(['all', 'pre-edit', 'post-edit', 'pre-command', 'post-command', 'routing']).prefault('all')
         .describe('Filter hooks by category'),
-    includeDisabled: z.boolean().default(false).describe('Include disabled hooks'),
-    includeMetadata: z.boolean().default(true).describe('Include hook metadata'),
+    includeDisabled: z.boolean().prefault(false).describe('Include disabled hooks'),
+    includeMetadata: z.boolean().prefault(true).describe('Include hook metadata'),
 });
 // ============================================================================
 // Helper Functions

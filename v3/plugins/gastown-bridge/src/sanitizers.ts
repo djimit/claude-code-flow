@@ -84,11 +84,11 @@ const REDACTED_FIELDS = new Set([
  */
 const RawBeadSchema = z.object({
   id: z.string(),
-  title: z.string().default(''),
-  description: z.string().default(''),
-  status: z.enum(['open', 'in_progress', 'closed']).default('open'),
-  priority: z.number().int().min(0).default(50),
-  labels: z.array(z.string()).default([]),
+  title: z.string().prefault(''),
+  description: z.string().prefault(''),
+  status: z.enum(['open', 'in_progress', 'closed']).prefault('open'),
+  priority: z.number().int().min(0).prefault(50),
+  labels: z.array(z.string()).prefault([]),
   parentId: z.string().optional(),
   parent_id: z.string().optional(),  // Alternative casing
   createdAt: z.union([z.string(), z.date()]).optional(),
@@ -107,28 +107,28 @@ const RawBeadSchema = z.object({
  */
 const RawFormulaSchema = z.object({
   name: z.string(),
-  description: z.string().default(''),
-  type: z.enum(['convoy', 'workflow', 'expansion', 'aspect']).default('workflow'),
-  version: z.number().int().min(1).default(1),
+  description: z.string().prefault(''),
+  type: z.enum(['convoy', 'workflow', 'expansion', 'aspect']).prefault('workflow'),
+  version: z.number().int().min(1).prefault(1),
   legs: z.array(z.object({
     id: z.string(),
-    title: z.string().default(''),
-    focus: z.string().default(''),
-    description: z.string().default(''),
+    title: z.string().prefault(''),
+    focus: z.string().prefault(''),
+    description: z.string().prefault(''),
     agent: z.string().optional(),
     order: z.number().optional(),
   })).optional(),
   steps: z.array(z.object({
     id: z.string(),
-    title: z.string().default(''),
-    description: z.string().default(''),
+    title: z.string().prefault(''),
+    description: z.string().prefault(''),
     needs: z.array(z.string()).optional(),
     duration: z.number().optional(),
     requires: z.array(z.string()).optional(),
-    metadata: z.record(z.unknown()).optional(),
+    metadata: z.record(z.string(), z.unknown()).optional(),
   })).optional(),
-  vars: z.record(z.object({
-    name: z.string().default(''),
+  vars: z.record(z.string(), z.object({
+    name: z.string().prefault(''),
     description: z.string().optional(),
     default: z.string().optional(),
     required: z.boolean().optional(),
@@ -136,7 +136,7 @@ const RawFormulaSchema = z.object({
     enum: z.array(z.string()).optional(),
   })).optional(),
   synthesis: z.object({
-    strategy: z.enum(['merge', 'sequential', 'parallel']).default('merge'),
+    strategy: z.enum(['merge', 'sequential', 'parallel']).prefault('merge'),
     format: z.string().optional(),
     description: z.string().optional(),
   }).optional(),
@@ -146,12 +146,12 @@ const RawFormulaSchema = z.object({
     outputPath: z.string().optional(),
   })).optional(),
   aspects: z.array(z.object({
-    name: z.string().default(''),
-    pointcut: z.string().default(''),
-    advice: z.string().default(''),
-    type: z.enum(['before', 'after', 'around']).default('after'),
+    name: z.string().prefault(''),
+    pointcut: z.string().prefault(''),
+    advice: z.string().prefault(''),
+    type: z.enum(['before', 'after', 'around']).prefault('after'),
   })).optional(),
-  metadata: z.record(z.unknown()).optional(),
+  metadata: z.record(z.string(), z.unknown()).optional(),
 }).passthrough();
 
 /**
@@ -160,20 +160,20 @@ const RawFormulaSchema = z.object({
 const RawConvoySchema = z.object({
   id: z.string(),
   name: z.string(),
-  trackedIssues: z.array(z.string()).default([]),
+  trackedIssues: z.array(z.string()).prefault([]),
   tracked_issues: z.array(z.string()).optional(),  // Alternative casing
-  status: z.enum(['active', 'landed', 'failed', 'paused']).default('active'),
+  status: z.enum(['active', 'landed', 'failed', 'paused']).prefault('active'),
   startedAt: z.union([z.string(), z.date()]).optional(),
   started_at: z.union([z.string(), z.date()]).optional(),
   completedAt: z.union([z.string(), z.date()]).optional(),
   completed_at: z.union([z.string(), z.date()]).optional(),
   progress: z.object({
-    total: z.number().int().min(0).default(0),
-    closed: z.number().int().min(0).default(0),
-    inProgress: z.number().int().min(0).default(0),
+    total: z.number().int().min(0).prefault(0),
+    closed: z.number().int().min(0).prefault(0),
+    inProgress: z.number().int().min(0).prefault(0),
     in_progress: z.number().int().min(0).optional(),
-    blocked: z.number().int().min(0).default(0),
-  }).default({ total: 0, closed: 0, inProgress: 0, blocked: 0 }),
+    blocked: z.number().int().min(0).prefault(0),
+  }).prefault({ total: 0, closed: 0, inProgress: 0, blocked: 0 }),
   formula: z.string().optional(),
   description: z.string().optional(),
 }).passthrough();
@@ -225,7 +225,7 @@ export function sanitizeBeadOutput(raw: string): Bead {
   if (!result.success) {
     throw BeadsError.parseFailed(
       raw,
-      new Error(result.error.errors.map(e => e.message).join('; '))
+      new Error(result.error.issues.map(e => e.message).join('; '))
     );
   }
 
@@ -298,7 +298,7 @@ export function sanitizeFormulaOutput(raw: string): Formula {
   if (!result.success) {
     throw FormulaError.parseFailed(
       'output',
-      result.error.errors.map(e => e.message).join('; ')
+      result.error.issues.map(e => e.message).join('; ')
     );
   }
 
@@ -385,7 +385,7 @@ export function sanitizeConvoyOutput(raw: string): Convoy {
   const result = RawConvoySchema.safeParse(parsed);
   if (!result.success) {
     throw ConvoyError.createFailed(
-      result.error.errors.map(e => e.message).join('; ')
+      result.error.issues.map(e => e.message).join('; ')
     );
   }
 

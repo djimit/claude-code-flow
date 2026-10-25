@@ -12,14 +12,14 @@ export const PredictDefectsInputSchema = z.object({
   targetPath: z.string().describe('Path to file/directory to analyze'),
   depth: z
     .enum(['shallow', 'medium', 'deep'])
-    .default('medium')
+    .prefault('medium')
     .describe('Analysis depth - deeper finds more but takes longer'),
-  includeRootCause: z.boolean().default(true).describe('Include root cause analysis'),
+  includeRootCause: z.boolean().prefault(true).describe('Include root cause analysis'),
   minConfidence: z
     .number()
     .min(0)
     .max(1)
-    .default(0.6)
+    .prefault(0.6)
     .describe('Minimum confidence threshold for predictions'),
   categories: z
     .array(
@@ -35,10 +35,10 @@ export const PredictDefectsInputSchema = z.object({
         'exception-handling',
       ])
     )
-    .default(['null-pointer', 'boundary', 'logic-error', 'exception-handling'])
+    .prefault(['null-pointer', 'boundary', 'logic-error', 'exception-handling'])
     .describe('Defect categories to check'),
-  useSimilarPatterns: z.boolean().default(true).describe('Use historical pattern matching'),
-  maxPredictions: z.number().min(1).max(100).default(20).describe('Maximum predictions to return'),
+  useSimilarPatterns: z.boolean().prefault(true).describe('Use historical pattern matching'),
+  maxPredictions: z.number().min(1).max(100).prefault(20).describe('Maximum predictions to return'),
 });
 
 export type PredictDefectsInput = z.infer<typeof PredictDefectsInputSchema>;

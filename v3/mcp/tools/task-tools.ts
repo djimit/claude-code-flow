@@ -32,7 +32,7 @@ function generateSecureTaskId(): string {
 const createTaskSchema = z.object({
   type: z.string().min(1).describe('Task type (e.g., code, review, test, analyze)'),
   description: z.string().min(1).describe('Task description'),
-  priority: z.number().int().min(1).max(10).default(5)
+  priority: z.number().int().min(1).max(10).prefault(5)
     .describe('Task priority (1=highest, 10=lowest)'),
   dependencies: z.array(z.string()).optional()
     .describe('Task IDs this task depends on'),
@@ -40,17 +40,17 @@ const createTaskSchema = z.object({
     .describe('Specific agent ID to assign the task to'),
   assignToAgentType: z.string().optional()
     .describe('Agent type to assign the task to (will pick available agent)'),
-  input: z.record(z.unknown()).optional()
+  input: z.record(z.string(), z.unknown()).optional()
     .describe('Task input data'),
   timeout: z.number().int().positive().optional()
     .describe('Task timeout in milliseconds'),
-  metadata: z.record(z.unknown()).optional()
+  metadata: z.record(z.string(), z.unknown()).optional()
     .describe('Additional metadata'),
 });
 
 const listTasksSchema = z.object({
   status: z.enum(['pending', 'queued', 'assigned', 'running', 'completed', 'failed', 'cancelled', 'all'])
-    .default('all')
+    .prefault('all')
     .describe('Filter by task status'),
   agentId: z.string().optional()
     .describe('Filter by assigned agent ID'),
@@ -58,21 +58,21 @@ const listTasksSchema = z.object({
     .describe('Filter by task type'),
   priority: z.number().int().min(1).max(10).optional()
     .describe('Filter by priority'),
-  limit: z.number().int().positive().max(1000).default(50)
+  limit: z.number().int().positive().max(1000).prefault(50)
     .describe('Maximum number of tasks to return'),
-  offset: z.number().int().nonnegative().default(0)
+  offset: z.number().int().nonnegative().prefault(0)
     .describe('Offset for pagination'),
-  sortBy: z.enum(['created', 'priority', 'status', 'updated']).default('created')
+  sortBy: z.enum(['created', 'priority', 'status', 'updated']).prefault('created')
     .describe('Sort order'),
-  sortOrder: z.enum(['asc', 'desc']).default('desc')
+  sortOrder: z.enum(['asc', 'desc']).prefault('desc')
     .describe('Sort direction'),
 });
 
 const taskStatusSchema = z.object({
   taskId: z.string().describe('ID of the task to get status for'),
-  includeMetrics: z.boolean().default(false)
+  includeMetrics: z.boolean().prefault(false)
     .describe('Include execution metrics'),
-  includeHistory: z.boolean().default(false)
+  includeHistory: z.boolean().prefault(false)
     .describe('Include status history'),
 });
 
@@ -80,14 +80,14 @@ const cancelTaskSchema = z.object({
   taskId: z.string().describe('ID of the task to cancel'),
   reason: z.string().optional()
     .describe('Reason for cancellation'),
-  force: z.boolean().default(false)
+  force: z.boolean().prefault(false)
     .describe('Force cancellation even if task is running'),
 });
 
 const assignTaskSchema = z.object({
   taskId: z.string().describe('ID of the task to assign'),
   agentId: z.string().describe('ID of the agent to assign to'),
-  reassign: z.boolean().default(false)
+  reassign: z.boolean().prefault(false)
     .describe('Allow reassignment if task is already assigned'),
 });
 
@@ -99,7 +99,7 @@ const updateTaskSchema = z.object({
     .describe('New description'),
   timeout: z.number().int().positive().optional()
     .describe('New timeout'),
-  metadata: z.record(z.unknown()).optional()
+  metadata: z.record(z.string(), z.unknown()).optional()
     .describe('Metadata to merge'),
 });
 
@@ -113,9 +113,9 @@ const taskDependenciesSchema = z.object({
 
 const taskResultsSchema = z.object({
   taskId: z.string().describe('ID of the task to get results for'),
-  format: z.enum(['summary', 'detailed', 'raw']).default('summary')
+  format: z.enum(['summary', 'detailed', 'raw']).prefault('summary')
     .describe('Result format'),
-  includeArtifacts: z.boolean().default(true)
+  includeArtifacts: z.boolean().prefault(true)
     .describe('Include generated artifacts'),
 });
 

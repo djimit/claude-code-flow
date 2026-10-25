@@ -13,7 +13,7 @@ export const GenerateTestsInputSchema = z.object({
   targetPath: z.string().describe('Path to file/directory to test'),
   testType: z
     .enum(['unit', 'integration', 'e2e', 'property', 'mutation', 'fuzz'])
-    .default('unit')
+    .prefault('unit')
     .describe('Type of test to generate'),
   framework: z
     .enum(['vitest', 'jest', 'mocha', 'pytest', 'junit'])
@@ -21,22 +21,22 @@ export const GenerateTestsInputSchema = z.object({
     .describe('Test framework to use'),
   coverage: z
     .object({
-      target: z.number().min(0).max(100).default(80).describe('Target coverage %'),
-      focusGaps: z.boolean().default(true).describe('Focus on coverage gaps'),
+      target: z.number().min(0).max(100).prefault(80).describe('Target coverage %'),
+      focusGaps: z.boolean().prefault(true).describe('Focus on coverage gaps'),
     })
     .optional()
     .describe('Coverage configuration'),
   style: z
     .enum(['tdd-london', 'tdd-chicago', 'bdd', 'example-based'])
-    .default('tdd-london')
+    .prefault('tdd-london')
     .describe('Test style methodology'),
   language: z
     .enum(['typescript', 'javascript', 'python', 'java', 'go', 'rust'])
     .optional()
     .describe('Programming language (auto-detected if not specified)'),
-  includeEdgeCases: z.boolean().default(true).describe('Generate edge case tests'),
-  includeMocks: z.boolean().default(true).describe('Generate mocks/stubs'),
-  maxTests: z.number().min(1).max(100).default(20).describe('Maximum tests to generate'),
+  includeEdgeCases: z.boolean().prefault(true).describe('Generate edge case tests'),
+  includeMocks: z.boolean().prefault(true).describe('Generate mocks/stubs'),
+  maxTests: z.number().min(1).max(100).prefault(20).describe('Maximum tests to generate'),
 });
 
 export type GenerateTestsInput = z.infer<typeof GenerateTestsInputSchema>;

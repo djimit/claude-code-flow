@@ -24,35 +24,35 @@ export const CalculateRiskInputSchema = z.object({
         'documentation',
       ])
     )
-    .default(['complexity', 'coverage', 'change-frequency', 'defect-density'])
+    .prefault(['complexity', 'coverage', 'change-frequency', 'defect-density'])
     .describe('Risk factors to consider'),
   weights: z
     .object({
-      complexity: z.number().min(0).max(1).default(0.2),
-      coverage: z.number().min(0).max(1).default(0.25),
-      changeFrequency: z.number().min(0).max(1).default(0.2),
-      defectDensity: z.number().min(0).max(1).default(0.15),
-      age: z.number().min(0).max(1).default(0.05),
-      coupling: z.number().min(0).max(1).default(0.05),
-      size: z.number().min(0).max(1).default(0.05),
-      teamExperience: z.number().min(0).max(1).default(0.025),
-      documentation: z.number().min(0).max(1).default(0.025),
+      complexity: z.number().min(0).max(1).prefault(0.2),
+      coverage: z.number().min(0).max(1).prefault(0.25),
+      changeFrequency: z.number().min(0).max(1).prefault(0.2),
+      defectDensity: z.number().min(0).max(1).prefault(0.15),
+      age: z.number().min(0).max(1).prefault(0.05),
+      coupling: z.number().min(0).max(1).prefault(0.05),
+      size: z.number().min(0).max(1).prefault(0.05),
+      teamExperience: z.number().min(0).max(1).prefault(0.025),
+      documentation: z.number().min(0).max(1).prefault(0.025),
     })
     .optional()
     .describe('Custom weights for risk factors'),
   granularity: z
     .enum(['file', 'module', 'function', 'project'])
-    .default('file')
+    .prefault('file')
     .describe('Level of granularity for analysis'),
   riskThresholds: z
     .object({
-      low: z.number().default(30),
-      medium: z.number().default(60),
-      high: z.number().default(80),
+      low: z.number().prefault(30),
+      medium: z.number().prefault(60),
+      high: z.number().prefault(80),
     })
     .optional()
     .describe('Thresholds for risk categorization'),
-  includeRecommendations: z.boolean().default(true).describe('Include mitigation recommendations'),
+  includeRecommendations: z.boolean().prefault(true).describe('Include mitigation recommendations'),
 });
 
 export type CalculateRiskInput = z.infer<typeof CalculateRiskInputSchema>;

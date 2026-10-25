@@ -16,11 +16,11 @@ import { z } from 'zod';
 const storeMemorySchema = z.object({
     content: z.string().min(1).describe('Memory content to store'),
     type: z.enum(['episodic', 'semantic', 'procedural', 'working'])
-        .default('episodic')
+        .prefault('episodic')
         .describe('Type of memory'),
     category: z.string().optional().describe('Memory category (e.g., code, documentation, conversation)'),
     tags: z.array(z.string()).optional().describe('Tags for categorization'),
-    metadata: z.record(z.unknown()).optional().describe('Additional metadata'),
+    metadata: z.record(z.string(), z.unknown()).optional().describe('Additional metadata'),
     importance: z.number().min(0).max(1).optional()
         .describe('Importance score (0-1)'),
     ttl: z.number().int().positive().optional()
@@ -29,36 +29,36 @@ const storeMemorySchema = z.object({
 const searchMemorySchema = z.object({
     query: z.string().min(1).describe('Search query (semantic or keyword)'),
     searchType: z.enum(['semantic', 'keyword', 'hybrid'])
-        .default('hybrid')
+        .prefault('hybrid')
         .describe('Type of search to perform'),
     type: z.enum(['episodic', 'semantic', 'procedural', 'working', 'all'])
-        .default('all')
+        .prefault('all')
         .describe('Filter by memory type'),
     category: z.string().optional().describe('Filter by category'),
     tags: z.array(z.string()).optional().describe('Filter by tags (AND logic)'),
-    limit: z.number().int().positive().max(1000).default(10)
+    limit: z.number().int().positive().max(1000).prefault(10)
         .describe('Maximum number of results'),
     minRelevance: z.number().min(0).max(1).optional()
         .describe('Minimum relevance score (0-1)'),
-    includeMetadata: z.boolean().default(true)
+    includeMetadata: z.boolean().prefault(true)
         .describe('Include metadata in results'),
 });
 const listMemorySchema = z.object({
     type: z.enum(['episodic', 'semantic', 'procedural', 'working', 'all'])
-        .default('all')
+        .prefault('all')
         .describe('Filter by memory type'),
     category: z.string().optional().describe('Filter by category'),
     tags: z.array(z.string()).optional().describe('Filter by tags'),
     sortBy: z.enum(['created', 'accessed', 'importance', 'relevance'])
-        .default('created')
+        .prefault('created')
         .describe('Sort order'),
-    sortOrder: z.enum(['asc', 'desc']).default('desc')
+    sortOrder: z.enum(['asc', 'desc']).prefault('desc')
         .describe('Sort direction'),
-    limit: z.number().int().positive().max(1000).default(50)
+    limit: z.number().int().positive().max(1000).prefault(50)
         .describe('Maximum number of results'),
-    offset: z.number().int().nonnegative().default(0)
+    offset: z.number().int().nonnegative().prefault(0)
         .describe('Offset for pagination'),
-    includeMetadata: z.boolean().default(true)
+    includeMetadata: z.boolean().prefault(true)
         .describe('Include metadata in results'),
 });
 // ============================================================================

@@ -12,24 +12,24 @@ export const TrackTrendsInputSchema = z.object({
   targetPath: z.string().optional().describe('Path to track (or all if not specified)'),
   timeRange: z
     .enum(['7d', '14d', '30d', '90d', '180d', '365d'])
-    .default('30d')
+    .prefault('30d')
     .describe('Time range for trend analysis'),
   metrics: z
     .array(z.enum(['line', 'branch', 'function', 'statement', 'overall']))
-    .default(['line', 'branch', 'overall'])
+    .prefault(['line', 'branch', 'overall'])
     .describe('Metrics to track'),
-  detectRegressions: z.boolean().default(true).describe('Flag coverage regressions'),
+  detectRegressions: z.boolean().prefault(true).describe('Flag coverage regressions'),
   regressionThreshold: z
     .number()
     .min(0)
     .max(100)
-    .default(5)
+    .prefault(5)
     .describe('Percentage drop to flag as regression'),
   groupBy: z
     .enum(['day', 'week', 'month', 'commit'])
-    .default('day')
+    .prefault('day')
     .describe('Grouping for trend data'),
-  includeProjections: z.boolean().default(true).describe('Include future projections'),
+  includeProjections: z.boolean().prefault(true).describe('Include future projections'),
   compareBaseline: z.string().optional().describe('Baseline date to compare against (ISO format)'),
 });
 

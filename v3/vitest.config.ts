@@ -15,7 +15,7 @@ export default defineConfig({
     environment: 'node',
 
     // Global test setup
-    setupFiles: ['./__tests__/setup.ts'],
+    setupFiles: [path.resolve(__dirname, './__tests__/setup.ts')],
 
     // Include patterns
     include: [

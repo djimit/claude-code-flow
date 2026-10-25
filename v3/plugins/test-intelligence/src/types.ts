@@ -182,11 +182,11 @@ export const SelectPredictiveInputSchema = z.object({
     gitDiff: z.string().max(1_000_000).optional(),
     gitRef: z.string().max(100).optional(),
   }),
-  strategy: z.enum(['fast_feedback', 'high_coverage', 'risk_based', 'balanced']).default('balanced'),
+  strategy: z.enum(['fast_feedback', 'high_coverage', 'risk_based', 'balanced']).prefault('balanced'),
   budget: z.object({
     maxTests: z.number().int().min(1).max(100000).optional(),
     maxDuration: z.number().min(1).max(86400).optional(),
-    confidence: z.number().min(0.5).max(1.0).default(0.95),
+    confidence: z.number().min(0.5).max(1.0).prefault(0.95),
   }).optional(),
 });
 
@@ -224,7 +224,7 @@ export interface SelectedTest {
 export const FlakyDetectInputSchema = z.object({
   scope: z.object({
     testSuite: z.string().max(500).optional(),
-    historyDepth: z.number().int().min(10).max(10000).default(100),
+    historyDepth: z.number().int().min(10).max(10000).prefault(100),
   }).optional(),
   analysis: z.array(z.enum([
     'intermittent_failures',
@@ -233,7 +233,7 @@ export const FlakyDetectInputSchema = z.object({
     'resource_contention',
     'environment_sensitive',
   ])).optional(),
-  threshold: z.number().min(0.01).max(0.5).default(0.1),
+  threshold: z.number().min(0.01).max(0.5).prefault(0.1),
 });
 
 export type FlakyDetectInput = z.infer<typeof FlakyDetectInputSchema>;
@@ -276,9 +276,9 @@ export type FlakinessType =
 
 export const CoverageGapsInputSchema = z.object({
   targetPaths: z.array(z.string().max(500)).max(100).optional(),
-  coverageType: z.enum(['line', 'branch', 'function', 'semantic']).default('semantic'),
-  prioritization: z.enum(['risk', 'complexity', 'churn', 'recency']).default('risk'),
-  minCoverage: z.number().min(0).max(100).default(80),
+  coverageType: z.enum(['line', 'branch', 'function', 'semantic']).prefault('semantic'),
+  prioritization: z.enum(['risk', 'complexity', 'churn', 'recency']).prefault('risk'),
+  minCoverage: z.number().min(0).max(100).prefault(80),
 });
 
 export type CoverageGapsInput = z.infer<typeof CoverageGapsInputSchema>;
@@ -317,7 +317,7 @@ export interface CoverageGap {
 export const MutationOptimizeInputSchema = z.object({
   targetPath: z.string().max(500),
   budget: z.number().int().min(1).max(10000).optional(),
-  strategy: z.enum(['random', 'coverage_guided', 'ml_guided', 'historical']).default('ml_guided'),
+  strategy: z.enum(['random', 'coverage_guided', 'ml_guided', 'historical']).prefault('ml_guided'),
   mutationTypes: z.array(z.enum([
     'arithmetic',
     'logical',
@@ -369,9 +369,9 @@ export type MutationType =
 
 export const GenerateSuggestInputSchema = z.object({
   targetFunction: z.string().max(500),
-  testStyle: z.enum(['unit', 'integration', 'property_based', 'snapshot']).default('unit'),
-  framework: z.enum(['jest', 'vitest', 'pytest', 'junit', 'mocha']).default('vitest'),
-  edgeCases: z.boolean().default(true),
+  testStyle: z.enum(['unit', 'integration', 'property_based', 'snapshot']).prefault('unit'),
+  framework: z.enum(['jest', 'vitest', 'pytest', 'junit', 'mocha']).prefault('vitest'),
+  edgeCases: z.boolean().prefault(true),
   mockStrategy: z.enum(['minimal', 'full', 'none']).optional(),
 });
 

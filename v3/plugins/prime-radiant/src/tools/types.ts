@@ -92,7 +92,7 @@ export interface PrimeRadiantBridge {
 
 export const CoherenceInputSchema = z.object({
   vectors: z.array(z.array(z.number())).min(1).describe('Array of embedding vectors to check for coherence'),
-  threshold: z.number().min(0).max(1).default(0.3).describe('Energy threshold for coherence (0-1)'),
+  threshold: z.number().min(0).max(1).prefault(0.3).describe('Energy threshold for coherence (0-1)'),
 });
 
 export type CoherenceInput = z.infer<typeof CoherenceInputSchema>;
@@ -122,7 +122,7 @@ export interface CoherenceOutput {
 
 export const SpectralInputSchema = z.object({
   matrix: z.array(z.array(z.number())).min(1).describe('Adjacency matrix representing connections'),
-  analyzeType: z.enum(['stability', 'clustering', 'connectivity']).default('stability'),
+  analyzeType: z.enum(['stability', 'clustering', 'connectivity']).prefault('stability'),
 });
 
 export type SpectralInput = z.infer<typeof SpectralInputSchema>;
@@ -194,14 +194,14 @@ export const AgentStateSchema = z.object({
   agentId: z.string().describe('Unique agent identifier'),
   embedding: z.array(z.number()).describe('Agent state embedding vector'),
   vote: z.string().optional().describe('Agent vote or decision'),
-  metadata: z.record(z.unknown()).optional().describe('Additional agent metadata'),
+  metadata: z.record(z.string(), z.unknown()).optional().describe('Additional agent metadata'),
 });
 
 export type AgentState = z.infer<typeof AgentStateSchema>;
 
 export const ConsensusInputSchema = z.object({
   agentStates: z.array(AgentStateSchema).min(1).describe('Array of agent states to verify consensus'),
-  threshold: z.number().min(0).max(1).default(0.8).describe('Required agreement threshold (0-1)'),
+  threshold: z.number().min(0).max(1).prefault(0.8).describe('Required agreement threshold (0-1)'),
 });
 
 export type ConsensusInput = z.infer<typeof ConsensusInputSchema>;
@@ -234,7 +234,7 @@ export type Simplex = z.infer<typeof SimplexSchema>;
 export const SimplicialComplexSchema = z.object({
   vertices: z.array(z.array(z.number())).describe('Vertex coordinates'),
   simplices: z.array(SimplexSchema).optional().describe('Explicit simplices (if not provided, computed from vertices)'),
-  maxDimension: z.number().int().min(0).max(3).default(2).describe('Maximum homology dimension to compute'),
+  maxDimension: z.number().int().min(0).max(3).prefault(2).describe('Maximum homology dimension to compute'),
 });
 
 export type SimplicialComplex = z.infer<typeof SimplicialComplexSchema>;
@@ -279,8 +279,8 @@ export const MemoryGateInputSchema = z.object({
   value: z.unknown().describe('Value to be stored'),
   existingVectors: z.array(z.array(z.number())).optional().describe('Existing context embeddings'),
   thresholds: z.object({
-    reject: z.number().min(0).max(1).default(0.7),
-    warn: z.number().min(0).max(1).default(0.3),
+    reject: z.number().min(0).max(1).prefault(0.7),
+    warn: z.number().min(0).max(1).prefault(0.3),
   }).optional().describe('Custom coherence thresholds'),
 });
 

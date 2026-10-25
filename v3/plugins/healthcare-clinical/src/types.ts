@@ -542,7 +542,7 @@ export const PatientSimilarityInputSchema = z.object({
     procedures: z.array(z.string().max(200)).max(100).optional(),
     allergies: z.array(z.string().max(200)).max(50).optional(),
   }),
-  topK: z.number().int().min(1).max(100).default(5),
+  topK: z.number().int().min(1).max(100).prefault(5),
   cohortFilter: z.string().max(500).optional(),
 });
 
@@ -552,7 +552,7 @@ export const PatientSimilarityInputSchema = z.object({
 export const DrugInteractionsInputSchema = z.object({
   medications: z.array(z.string().max(200)).min(1).max(50),
   conditions: z.array(z.string().max(200)).max(100).optional(),
-  severity: z.enum(['all', 'major', 'moderate', 'minor']).default('all'),
+  severity: z.enum(['all', 'major', 'moderate', 'minor']).prefault('all'),
 });
 
 /**
@@ -581,7 +581,7 @@ export const LiteratureSearchInputSchema = z.object({
     to: z.string().datetime().optional(),
   }).optional(),
   evidenceLevel: z.enum(['any', 'systematic-review', 'rct', 'cohort', 'case-control', 'case-series', 'expert-opinion']).optional(),
-  maxResults: z.number().int().min(1).max(100).default(20),
+  maxResults: z.number().int().min(1).max(100).prefault(20),
 });
 
 /**
@@ -590,8 +590,8 @@ export const LiteratureSearchInputSchema = z.object({
 export const OntologyNavigationInputSchema = z.object({
   code: z.string().max(50),
   ontology: z.enum(['icd10', 'snomed', 'loinc', 'rxnorm']),
-  direction: z.enum(['ancestors', 'descendants', 'siblings', 'related']).default('descendants'),
-  depth: z.number().int().min(1).max(10).default(2),
+  direction: z.enum(['ancestors', 'descendants', 'siblings', 'related']).prefault('descendants'),
+  depth: z.number().int().min(1).max(10).prefault(2),
 });
 
 // ============================================================================

@@ -11,6 +11,8 @@
 import { describe, it, expect } from 'vitest';
 import {
   InputValidator,
+  z,
+  SpawnAgentSchema,
   sanitizeString,
   sanitizeHtml,
   sanitizePath,
@@ -33,6 +35,36 @@ import {
 } from '../src/input-validator.js';
 
 describe('InputValidator', () => {
+  describe('native Zod 4 compatibility', () => {
+    it('applies the exported collection limit before checking user permissions', () => {
+      let visited = 0;
+      const permissions = Array(LIMITS.MAX_ARRAY_LENGTH + 1).fill('swarm.read');
+      Object.defineProperty(permissions, 0, { get() { visited++; return 'swarm.read'; } });
+      const user = { email: 'user@example.com', password: 'SecurePass123', role: 'viewer', permissions };
+      const result = CreateUserSchema.safeParse(user);
+      expect(result.success).toBe(false);
+      expect(visited).toBe(0);
+      expect(CreateUserSchema.parse({ ...user, permissions: ['swarm.read'] }).permissions).toEqual(['swarm.read']);
+    });
+
+    it('rejects an oversized collection before validating its elements', () => {
+      let visited = 0;
+      const schema = z.array(z.string().refine(() => { visited++; return true; })).max(2);
+      const result = InputValidator.safeParse(schema, ['a', 'b', 'c']);
+      expect(result.success).toBe(false);
+      expect(visited).toBe(0);
+      if (!result.success) expect(result.error.issues[0].code).toBe('too_big');
+      expect(InputValidator.validate(schema, ['a', 'b'])).toEqual(['a', 'b']);
+      expect(visited).toBe(2);
+    });
+
+    it('preserves record values and parses defaults through transforms', () => {
+      const config = { enabled: true, retries: 3 };
+      expect(SpawnAgentSchema.parse({ type: 'coder', config }).config).toEqual(config);
+      expect(InputValidator.validate(z.string().trim().toUpperCase().prefault(' test '), undefined)).toBe('TEST');
+    });
+  });
+
   describe('SafeStringSchema', () => {
     it('should accept safe strings', () => {
       expect(() => SafeStringSchema.parse('hello world')).not.toThrow();

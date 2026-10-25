@@ -310,8 +310,8 @@ describe('TokenGenerator', () => {
       // This test verifies the comparison takes consistent time
       // regardless of where the mismatch occurs
       const token = generator.generate();
-      const mismatchEarly = 'X' + token.slice(1);
-      const mismatchLate = token.slice(0, -1) + 'X';
+      const mismatchEarly = (token[0] === 'X' ? 'Y' : 'X') + token.slice(1);
+      const mismatchLate = token.slice(0, -1) + (token.at(-1) === 'X' ? 'Y' : 'X');
 
       // Both comparisons should work (timing consistency is internal)
       expect(generator.compare(token, mismatchEarly)).toBe(false);

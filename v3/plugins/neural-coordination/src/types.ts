@@ -117,9 +117,9 @@ export const NeuralConsensusInputSchema = z.object({
   proposal: ProposalSchema.describe('Proposal to reach consensus on'),
   agents: z.array(AgentSchema).min(2).max(1000)
     .describe('Agents participating in consensus'),
-  protocol: ConsensusProtocolSchema.default('iterative_refinement')
+  protocol: ConsensusProtocolSchema.prefault('iterative_refinement')
     .describe('Consensus protocol to use'),
-  maxRounds: z.number().int().min(1).max(1000).default(10)
+  maxRounds: z.number().int().min(1).max(1000).prefault(10)
     .describe('Maximum negotiation rounds'),
 });
 
@@ -188,7 +188,7 @@ export type TopologyConstraints = z.infer<typeof TopologyConstraintsSchema>;
 export const TopologyOptimizeInputSchema = z.object({
   agents: z.array(AgentSchema).min(2).max(1000)
     .describe('Agents to optimize topology for'),
-  objective: TopologyObjectiveSchema.default('minimize_latency')
+  objective: TopologyObjectiveSchema.prefault('minimize_latency')
     .describe('Optimization objective'),
   constraints: TopologyConstraintsSchema.optional()
     .describe('Topology constraints'),
@@ -258,11 +258,11 @@ export const CollectiveMemoryInputSchema = z.object({
   memory: z.object({
     key: z.string().max(500).optional(),
     value: z.unknown().optional(),
-    importance: z.number().min(0).max(1).default(0.5),
+    importance: z.number().min(0).max(1).prefault(0.5),
     expiry: z.string().datetime().optional(),
   }).optional().describe('Memory entry data'),
-  scope: MemoryScopeSchema.default('team').describe('Memory scope'),
-  consolidationStrategy: ConsolidationStrategySchema.default('ewc')
+  scope: MemoryScopeSchema.prefault('team').describe('Memory scope'),
+  consolidationStrategy: ConsolidationStrategySchema.prefault('ewc')
     .describe('Consolidation strategy for memory management'),
 });
 
@@ -303,8 +303,8 @@ export const TaskTypeSchema = z.object({
 export type TaskType = z.infer<typeof TaskTypeSchema>;
 
 export const CommunicationBudgetSchema = z.object({
-  symbolsPerMessage: z.number().int().min(1).max(100).default(10),
-  messagesPerRound: z.number().int().min(1).max(10).default(3),
+  symbolsPerMessage: z.number().int().min(1).max(100).prefault(10),
+  messagesPerRound: z.number().int().min(1).max(10).prefault(3),
 });
 
 export type CommunicationBudget = z.infer<typeof CommunicationBudgetSchema>;
@@ -313,9 +313,9 @@ export const EmergentProtocolInputSchema = z.object({
   task: TaskTypeSchema.describe('Cooperative task requiring communication'),
   communicationBudget: CommunicationBudgetSchema.optional()
     .describe('Budget for communication'),
-  trainingEpisodes: z.number().int().min(10).max(10000).default(1000)
+  trainingEpisodes: z.number().int().min(10).max(10000).prefault(1000)
     .describe('Number of training episodes'),
-  interpretability: z.boolean().default(true)
+  interpretability: z.boolean().prefault(true)
     .describe('Enable interpretability analysis'),
 });
 
@@ -374,7 +374,7 @@ export const SwarmBehaviorInputSchema = z.object({
   behavior: SwarmBehaviorTypeSchema.describe('Type of swarm behavior'),
   parameters: z.record(z.string(), z.unknown()).optional()
     .describe('Behavior-specific parameters'),
-  adaptiveRules: z.boolean().default(true)
+  adaptiveRules: z.boolean().prefault(true)
     .describe('Allow neural adaptation of behavior rules'),
   observability: ObservabilitySchema.optional()
     .describe('Observability options'),

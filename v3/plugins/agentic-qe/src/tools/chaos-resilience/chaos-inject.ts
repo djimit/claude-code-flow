@@ -25,12 +25,12 @@ export const ChaosInjectInputSchema = z.object({
       'packet-loss',
     ])
     .describe('Type of failure to inject'),
-  duration: z.number().min(1).max(3600).default(30).describe('Duration in seconds'),
-  intensity: z.number().min(0).max(1).default(0.5).describe('Intensity 0-1'),
-  dryRun: z.boolean().default(true).describe('If true, simulate without actual injection'),
-  rollbackOnFailure: z.boolean().default(true).describe('Auto-rollback if issues detected'),
-  monitorMetrics: z.boolean().default(true).describe('Monitor system metrics during chaos'),
-  notifyChannels: z.array(z.string()).default([]).describe('Notification channels'),
+  duration: z.number().min(1).max(3600).prefault(30).describe('Duration in seconds'),
+  intensity: z.number().min(0).max(1).prefault(0.5).describe('Intensity 0-1'),
+  dryRun: z.boolean().prefault(true).describe('If true, simulate without actual injection'),
+  rollbackOnFailure: z.boolean().prefault(true).describe('Auto-rollback if issues detected'),
+  monitorMetrics: z.boolean().prefault(true).describe('Monitor system metrics during chaos'),
+  notifyChannels: z.array(z.string()).prefault([]).describe('Notification channels'),
   parameters: z
     .object({
       latencyMs: z.number().optional().describe('Latency to add in ms'),

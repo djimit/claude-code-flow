@@ -376,21 +376,21 @@ const issueListAvailableSchema = z.object({
     .describe('Filter by priority'),
   labels: z.array(z.string()).optional().describe('Filter by labels'),
   repository: z.string().optional().describe('Filter by repository'),
-  limit: z.number().int().positive().max(100).default(50).describe('Maximum results'),
-  offset: z.number().int().nonnegative().default(0).describe('Pagination offset'),
+  limit: z.number().int().positive().max(100).prefault(50).describe('Maximum results'),
+  offset: z.number().int().nonnegative().prefault(0).describe('Pagination offset'),
 });
 
 const issueListMineSchema = z.object({
   claimantId: z.string().min(1).describe('Claimant ID'),
   status: z.enum(['active', 'blocked', 'in-review', 'completed', 'released', 'stolen']).optional()
     .describe('Filter by status'),
-  limit: z.number().int().positive().max(100).default(50).describe('Maximum results'),
-  offset: z.number().int().nonnegative().default(0).describe('Pagination offset'),
+  limit: z.number().int().positive().max(100).prefault(50).describe('Maximum results'),
+  offset: z.number().int().nonnegative().prefault(0).describe('Pagination offset'),
 });
 
 const issueBoardSchema = z.object({
-  includeAgents: z.boolean().default(true).describe('Include agent claims'),
-  includeHumans: z.boolean().default(true).describe('Include human claims'),
+  includeAgents: z.boolean().prefault(true).describe('Include agent claims'),
+  includeHumans: z.boolean().prefault(true).describe('Include human claims'),
   groupBy: z.enum(['claimant', 'priority', 'status']).optional()
     .describe('Group claims by field'),
 });
@@ -412,7 +412,7 @@ const issueStealSchema = z.object({
 const issueGetStealableSchema = z.object({
   priority: z.enum(['critical', 'high', 'medium', 'low']).optional()
     .describe('Filter by priority'),
-  limit: z.number().int().positive().max(100).default(50).describe('Maximum results'),
+  limit: z.number().int().positive().max(100).prefault(50).describe('Maximum results'),
 });
 
 const issueContestStealSchema = z.object({
@@ -428,23 +428,23 @@ const agentLoadInfoSchema = z.object({
 
 const swarmRebalanceSchema = z.object({
   strategy: z.enum(['round-robin', 'least-loaded', 'priority-based', 'capability-based'])
-    .default('least-loaded').describe('Rebalancing strategy'),
-  dryRun: z.boolean().default(false).describe('Simulate without making changes'),
+    .prefault('least-loaded').describe('Rebalancing strategy'),
+  dryRun: z.boolean().prefault(false).describe('Simulate without making changes'),
 });
 
 const swarmLoadOverviewSchema = z.object({
-  includeRecommendations: z.boolean().default(true)
+  includeRecommendations: z.boolean().prefault(true)
     .describe('Include optimization recommendations'),
 });
 
 // Additional Tools Schemas
 const claimHistorySchema = z.object({
   issueId: z.string().min(1).describe('Issue ID to get history for'),
-  limit: z.number().int().positive().max(100).default(50).describe('Maximum entries'),
+  limit: z.number().int().positive().max(100).prefault(50).describe('Maximum entries'),
 });
 
 const claimMetricsSchema = z.object({
-  timeRange: z.enum(['1h', '24h', '7d', '30d', 'all']).default('24h')
+  timeRange: z.enum(['1h', '24h', '7d', '30d', 'all']).prefault('24h')
     .describe('Time range for metrics'),
 });
 

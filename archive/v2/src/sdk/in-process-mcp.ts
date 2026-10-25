@@ -91,7 +91,7 @@ export function createSessionMcpServer(): McpSdkServerConfigWithInstance {
         description: 'Create a new session with initial data',
         parameters: z.object({
           sessionId: z.string().describe('Session identifier'),
-          data: z.record(z.any()).optional().describe('Initial session data'),
+          data: z.record(z.string(), z.any()).optional().describe('Initial session data'),
         }),
         execute: async ({ sessionId, data = {} }) => {
           if (sessions.has(sessionId)) {
@@ -139,7 +139,7 @@ export function createSessionMcpServer(): McpSdkServerConfigWithInstance {
         description: 'Update session data (merges with existing)',
         parameters: z.object({
           sessionId: z.string().describe('Session identifier'),
-          data: z.record(z.any()).describe('Data to merge'),
+          data: z.record(z.string(), z.any()).describe('Data to merge'),
         }),
         execute: async ({ sessionId, data }) => {
           const session = sessions.get(sessionId);
