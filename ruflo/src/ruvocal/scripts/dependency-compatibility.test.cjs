@@ -2,6 +2,25 @@ const assert = require('node:assert/strict');
 const { Writable } = require('node:stream');
 const test = require('node:test');
 const parquet = require('parquetjs');
+const fs = require('node:fs');
+const vm = require('node:vm');
+const ts = require('typescript');
+const { z } = require('zod');
+
+test('partial model overrides preserve omitted provider capabilities', () => {
+  const source = fs.readFileSync('src/lib/server/models.ts', 'utf8');
+  const start = source.indexOf('const modelConfig =');
+  const end = source.indexOf('type ModelOverride =');
+  assert.ok(start >= 0 && end > start);
+  // Isolate these actual schemas from the module's automatic provider refresh.
+  const { outputText } = ts.transpileModule(source.slice(start, end), { compilerOptions: { target: ts.ScriptTarget.ES2022 } });
+  const schema = vm.runInNewContext(`${outputText}\noverrideEntrySchema`, { z, endpointSchema: z.unknown() });
+  const override = schema.parse({ id: 'ordinary-model', displayName: 'Renamed' });
+  assert.deepEqual(override, { id: 'ordinary-model', displayName: 'Renamed' });
+  const discovered = { multimodal: true, supportsTools: true, preprompt: 'ordinary prompt' };
+  assert.deepEqual({ ...discovered, ...override }, { ...discovered, id: 'ordinary-model', displayName: 'Renamed' });
+  assert.equal(schema.parse({ id: 'ordinary-model', multimodal: false }).multimodal, false);
+});
 
 test('patched Thrift preserves Parquet metadata and row round trips', async () => {
   const chunks = [];

@@ -7,6 +7,21 @@ const vm = require('node:vm');
 const test = require('node:test');
 const ts = require('typescript');
 
+function loadSource(relativePath, mocks) {
+  const sourcePath = path.resolve(relativePath);
+  const source = fs.readFileSync(sourcePath, 'utf8').replaceAll('import.meta.url', JSON.stringify(pathToFileURL(sourcePath).href));
+  const { outputText } = ts.transpileModule(source, { compilerOptions: {
+    module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, esModuleInterop: true,
+  } });
+  const mod = { exports: {} };
+  vm.runInNewContext(outputText, {
+    module: mod, exports: mod.exports, process,
+    require: name => mocks[name] ?? require(name),
+    console: { log() {}, warn() {}, error() {} },
+  });
+  return mod.exports;
+}
+
 test('agent execution passes task text and CLI options as literal arguments', async () => {
   const calls = [];
   let failure;
@@ -16,18 +31,9 @@ test('agent execution passes task text and CLI options as literal arguments', as
     if (failure) throw failure;
     return { stdout: args.includes('info') ? '{"name":"reviewer"}' : 'coder\nreviewer\n', stderr: '' };
   };
-  const sourcePath = path.resolve('src/execution/agent-executor.ts');
-  const source = fs.readFileSync(sourcePath, 'utf8').replaceAll('import.meta.url', JSON.stringify(pathToFileURL(sourcePath).href));
-  const { outputText } = ts.transpileModule(source, { compilerOptions: {
-    module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, esModuleInterop: true,
-  } });
-  const mod = { exports: {} };
-  vm.runInNewContext(outputText, {
-    module: mod, exports: mod.exports, process,
-    require: name => name === 'child_process' ? { execFile } : require(name),
-    console: { log() {}, warn() {}, error() {} },
-  });
-  const executor = new mod.exports.AgentExecutor();
+  const runner = loadSource('src/execution/agentic-flow-cli.js', { child_process: { execFile } });
+  const { AgentExecutor } = loadSource('src/execution/agent-executor.ts', { './agentic-flow-cli.js': runner });
+  const executor = new AgentExecutor();
   const task = 'Write "hello world" in Dutch';
   const result = await executor.execute({ agent: 'coder', task, model: 'example model', temperature: 0, maxTokens: 10 });
   assert.equal(result.success, true);
@@ -40,11 +46,20 @@ test('agent execution passes task text and CLI options as literal arguments', as
   await executor.initializeMemory();
   assert.equal((await executor.getMemoryStats()).enabled, true);
   await executor.consolidateMemories();
+  const { agentCommand } = loadSource('src/cli/simple-commands/agent.js', {
+    '../../execution/agentic-flow-cli.js': runner,
+    '../utils.js': { printSuccess() {}, printError() {}, printWarning() {} },
+    './performance-hooks.js': { onAgentSpawn() {}, onAgentAction() {} },
+  });
+  await agentCommand(['run', 'coder', task], { model: 'example model' });
+  assert.deepEqual(Array.from(calls.at(-1).args.slice(1)), ['--agent', 'coder', '--task', task, '--model', 'example model']);
+  await agentCommand(['config', 'set', 'DEFAULT_MODEL', 'example model'], {});
+  assert.deepEqual(Array.from(calls.at(-1).args.slice(1)), ['config', 'set', 'DEFAULT_MODEL', 'example model']);
   failure = new Error('process unavailable');
   const failed = await executor.execute({ agent: 'coder', task: 'ordinary task' });
   assert.equal(failed.success, false);
   assert.equal(failed.error, 'process unavailable');
-  for (const call of calls) assert.notEqual(call.options.shell, true);
+  for (const call of calls) assert.equal(call.options.shell, false);
 });
 
 test('upgraded agentic-flow preserves the ReasoningBank adapter export contract', async () => {

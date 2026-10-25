@@ -3,13 +3,7 @@
  * Integrates agentic-flow agents with claude-flow hooks and coordination
  */
 
-import { execFile } from 'child_process';
-import { createRequire } from 'module';
-import { promisify } from 'util';
-import path from 'path';
-import fs from 'fs-extra';
-
-const execFileAsync = promisify(execFile);
+import { runAgenticFlow } from './agentic-flow-cli.js';
 
 export interface AgentExecutionOptions {
   agent: string;
@@ -57,17 +51,12 @@ export interface AgentExecutionResult {
 }
 
 export class AgentExecutor {
-  private readonly agenticFlowPath: string;
   private readonly hooksManager: any;
   private memoryEnabled: boolean = false;
   private memoryDatabase: string = '.swarm/memory.db';
 
   constructor(hooksManager?: any) {
     this.hooksManager = hooksManager;
-    // Agentic-flow is installed as npm dependency
-    const packagePath = createRequire(import.meta.url).resolve('agentic-flow/package.json');
-    const packageJson = fs.readJsonSync(packagePath);
-    this.agenticFlowPath = path.resolve(path.dirname(packagePath), packageJson.bin['agentic-flow']);
   }
 
   /**
@@ -77,8 +66,8 @@ export class AgentExecutor {
     const db = dbPath || this.memoryDatabase;
 
     try {
-      const { stdout } = await execFileAsync(
-        process.execPath, [this.agenticFlowPath, 'reasoningbank', 'init']
+      const { stdout } = await runAgenticFlow(
+        ['reasoningbank', 'init']
       );
 
       this.memoryEnabled = true;
@@ -99,8 +88,8 @@ export class AgentExecutor {
     }
 
     try {
-      const { stdout } = await execFileAsync(
-        process.execPath, [this.agenticFlowPath, 'reasoningbank', 'status']
+      const { stdout } = await runAgenticFlow(
+        ['reasoningbank', 'status']
       );
       return { enabled: true, output: stdout };
     } catch (error: any) {
@@ -115,8 +104,8 @@ export class AgentExecutor {
     if (!this.memoryEnabled) return;
 
     try {
-      await execFileAsync(
-        process.execPath, [this.agenticFlowPath, 'reasoningbank', 'consolidate']
+      await runAgenticFlow(
+        ['reasoningbank', 'consolidate']
       );
       console.log('✅ Memory consolidation complete');
     } catch (error: any) {
@@ -156,7 +145,7 @@ export class AgentExecutor {
       const args = this.buildArguments(options);
 
       // Execute command
-      const { stdout, stderr } = await execFileAsync(process.execPath, [this.agenticFlowPath, ...args], {
+      const { stdout, stderr } = await runAgenticFlow(args, {
         timeout: options.timeout || 300000, // 5 minutes default
         maxBuffer: 10 * 1024 * 1024, // 10MB buffer,
       });
@@ -223,7 +212,7 @@ export class AgentExecutor {
       const args = ['agent', 'list'];
       if (source) args.push('--filter', source);
 
-      const { stdout } = await execFileAsync(process.execPath, [this.agenticFlowPath, ...args]);
+      const { stdout } = await runAgenticFlow(args);
 
       // Parse agent list from output
       const agents = stdout
@@ -244,7 +233,7 @@ export class AgentExecutor {
   async getAgentInfo(agentName: string): Promise<any> {
     try {
       // Agentic-flow uses 'agent info' command
-      const { stdout } = await execFileAsync(process.execPath, [this.agenticFlowPath, 'agent', 'info', agentName]);
+      const { stdout } = await runAgenticFlow(['agent', 'info', agentName]);
 
       // Try to parse as JSON if it looks like JSON
       if (stdout.trim().startsWith('{')) {

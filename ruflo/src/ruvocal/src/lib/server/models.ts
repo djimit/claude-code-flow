@@ -67,6 +67,13 @@ const modelConfig = z.object({
 type ModelConfig = z.infer<typeof modelConfig>;
 
 const overrideEntrySchema = modelConfig
+	.extend({
+		preprompt: modelConfig.shape.preprompt.unwrap(),
+		multimodal: modelConfig.shape.multimodal.unwrap(),
+		supportsTools: modelConfig.shape.supportsTools.unwrap(),
+		unlisted: modelConfig.shape.unlisted.unwrap(),
+		systemRoleSupported: modelConfig.shape.systemRoleSupported.unwrap(),
+	})
 	.partial()
 	.extend({
 		id: z.string().optional(),

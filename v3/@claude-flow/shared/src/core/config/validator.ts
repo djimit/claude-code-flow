@@ -44,7 +44,7 @@ export interface ValidationError {
  */
 function zodErrorToValidationErrors(error: ZodError): ValidationError[] {
   return error.issues.map((e) => ({
-    path: e.path.join('.'),
+    path: e.path.map(String).join('.'),
     message: e.message,
     code: e.code,
   }));

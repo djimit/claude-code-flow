@@ -1,10 +1,7 @@
 // agent.js - Agent management commands
 import { printSuccess, printError, printWarning } from '../utils.js';
 import { onAgentSpawn, onAgentAction } from './performance-hooks.js';
-import { exec } from 'child_process';
-import { promisify } from 'util';
-
-const execAsync = promisify(exec);
+import { runAgenticFlow } from '../../execution/agentic-flow-cli.js';
 
 export async function agentCommand(subArgs, flags) {
   const agentCmd = subArgs[0];
@@ -145,7 +142,7 @@ async function executeAgentTask(subArgs, flags) {
     console.log('\n⏳ Running agent... (this may take a moment)\n');
 
     // Execute agentic-flow
-    const { stdout, stderr } = await execAsync(cmd, {
+    const { stdout, stderr } = await runAgenticFlow(cmd, {
       timeout: flags.timeout || 300000,
       maxBuffer: 10 * 1024 * 1024,
     });
@@ -170,11 +167,11 @@ async function executeAgentTask(subArgs, flags) {
 }
 
 function buildAgenticFlowCommand(agent, task, flags) {
-  const parts = ['npx', 'agentic-flow'];
+  const parts = [];
 
   // Agentic-flow uses --agent flag directly (no 'execute' subcommand)
   parts.push('--agent', agent);
-  parts.push('--task', `"${task.replace(/"/g, '\\"')}"`);
+  parts.push('--task', task);
 
   if (flags.provider) {
     parts.push('--provider', flags.provider);
@@ -272,7 +269,7 @@ function buildAgenticFlowCommand(agent, task, flags) {
     parts.push('--gemini-key', flags.geminiKey);
   }
 
-  return parts.join(' ');
+  return parts;
 }
 
 async function listAgenticFlowAgents(subArgs, flags) {
@@ -280,7 +277,7 @@ async function listAgenticFlowAgents(subArgs, flags) {
 
   try {
     // Agentic-flow uses 'agent list' command
-    const { stdout } = await execAsync('npx agentic-flow agent list', {
+    const { stdout } = await runAgenticFlow(['agent', 'list'], {
       timeout: 30000,
     });
 
@@ -304,29 +301,29 @@ async function createAgent(subArgs, flags) {
 
   try {
     // Build command for agentic-flow agent create
-    let cmd = 'npx agentic-flow agent create';
+    let cmd = ['agent', 'create'];
 
     if (flags.name) {
-      cmd += ` --name "${flags.name}"`;
+      cmd.push('--name', flags.name);
     }
 
     if (flags.description) {
-      cmd += ` --description "${flags.description}"`;
+      cmd.push('--description', flags.description);
     }
 
     if (flags.category) {
-      cmd += ` --category "${flags.category}"`;
+      cmd.push('--category', flags.category);
     }
 
     if (flags.prompt) {
-      cmd += ` --prompt "${flags.prompt}"`;
+      cmd.push('--prompt', flags.prompt);
     }
 
     if (flags.tools) {
-      cmd += ` --tools "${flags.tools}"`;
+      cmd.push('--tools', flags.tools);
     }
 
-    const { stdout, stderr } = await execAsync(cmd, {
+    const { stdout, stderr } = await runAgenticFlow(cmd, {
       timeout: 60000,
       maxBuffer: 10 * 1024 * 1024,
     });
@@ -364,7 +361,7 @@ async function getAgentInfo(subArgs, flags) {
   printSuccess(`📊 Getting information for agent: ${agentName}`);
 
   try {
-    const { stdout } = await execAsync(`npx agentic-flow agent info ${agentName}`, {
+    const { stdout } = await runAgenticFlow(['agent', 'info', agentName], {
       timeout: 30000,
     });
 
@@ -381,7 +378,7 @@ async function checkAgentConflicts(subArgs, flags) {
   printSuccess('🔍 Checking for agent conflicts between package and local agents...');
 
   try {
-    const { stdout } = await execAsync('npx agentic-flow agent conflicts', {
+    const { stdout } = await runAgenticFlow(['agent', 'conflicts'], {
       timeout: 30000,
     });
 
@@ -447,7 +444,7 @@ async function initializeMemory(subArgs, flags) {
   console.log(`Database: ${dbPath}`);
 
   try {
-    const { stdout, stderr } = await execAsync('npx agentic-flow reasoningbank init', {
+    const { stdout, stderr } = await runAgenticFlow(['reasoningbank', 'init'], {
       timeout: 30000,
     });
 
@@ -474,7 +471,7 @@ async function getMemoryStatus(subArgs, flags) {
   printSuccess('🧠 ReasoningBank Status:');
 
   try {
-    const { stdout } = await execAsync('npx agentic-flow reasoningbank status', {
+    const { stdout } = await runAgenticFlow(['reasoningbank', 'status'], {
       timeout: 30000,
     });
 
@@ -492,7 +489,7 @@ async function consolidateMemory(subArgs, flags) {
   console.log('This will deduplicate and prune old/low-quality memories');
 
   try {
-    const { stdout } = await execAsync('npx agentic-flow reasoningbank consolidate', {
+    const { stdout } = await runAgenticFlow(['reasoningbank', 'consolidate'], {
       timeout: 60000,
     });
 
@@ -515,13 +512,13 @@ async function listMemories(subArgs, flags) {
   }
 
   try {
-    let cmd = 'npx agentic-flow reasoningbank list';
+    let cmd = ['reasoningbank', 'list'];
     if (domain) {
-      cmd += ` --domain ${domain}`;
+      cmd.push('--domain', domain);
     }
-    cmd += ` --limit ${limit}`;
+    cmd.push('--limit', limit);
 
-    const { stdout } = await execAsync(cmd, {
+    const { stdout } = await runAgenticFlow(cmd, {
       timeout: 30000,
     });
 
@@ -538,7 +535,7 @@ async function runMemoryDemo(subArgs, flags) {
   console.log('This will show how memory improves task success over time\n');
 
   try {
-    const { stdout } = await execAsync('npx agentic-flow reasoningbank demo', {
+    const { stdout } = await runAgenticFlow(['reasoningbank', 'demo'], {
       timeout: 120000,
     });
 
@@ -555,7 +552,7 @@ async function runMemoryTest(subArgs, flags) {
   printSuccess('🧪 Running ReasoningBank integration tests...');
 
   try {
-    const { stdout } = await execAsync('npx agentic-flow reasoningbank test', {
+    const { stdout } = await runAgenticFlow(['reasoningbank', 'test'], {
       timeout: 120000,
     });
 
@@ -572,7 +569,7 @@ async function runMemoryBenchmark(subArgs, flags) {
   printSuccess('⚡ Running ReasoningBank performance benchmarks...');
 
   try {
-    const { stdout } = await execAsync('npx agentic-flow reasoningbank benchmark', {
+    const { stdout } = await runAgenticFlow(['reasoningbank', 'benchmark'], {
       timeout: 120000,
     });
 
@@ -655,7 +652,7 @@ async function agenticConfigSet(subArgs, flags) {
   printSuccess(`🔧 Setting agentic-flow configuration: ${key}`);
 
   try {
-    const { stdout } = await execAsync(`npx agentic-flow config set ${key} "${value}"`, {
+    const { stdout } = await runAgenticFlow(['config', 'set', key, value], {
       timeout: 30000,
     });
     console.log(stdout);
@@ -678,7 +675,7 @@ async function agenticConfigGet(subArgs, flags) {
   }
 
   try {
-    const { stdout } = await execAsync(`npx agentic-flow config get ${key}`, {
+    const { stdout } = await runAgenticFlow(['config', 'get', key], {
       timeout: 30000,
     });
     console.log(stdout);
@@ -693,12 +690,12 @@ async function agenticConfigList(subArgs, flags) {
   printSuccess('📋 Listing agentic-flow configurations...');
 
   try {
-    let cmd = 'npx agentic-flow config list';
+    let cmd = ['config', 'list'];
     if (flags.showSecrets) {
-      cmd += ' --show-secrets';
+      cmd.push('--show-secrets');
     }
 
-    const { stdout } = await execAsync(cmd, { timeout: 30000 });
+    const { stdout } = await runAgenticFlow(cmd, { timeout: 30000 });
     console.log(stdout);
 
     if (!flags.showSecrets) {
@@ -722,7 +719,7 @@ async function agenticConfigDelete(subArgs, flags) {
   printWarning(`⚠️  Deleting configuration: ${key}`);
 
   try {
-    const { stdout } = await execAsync(`npx agentic-flow config delete ${key}`, {
+    const { stdout } = await runAgenticFlow(['config', 'delete', key], {
       timeout: 30000,
     });
     console.log(stdout);
@@ -744,7 +741,7 @@ async function agenticConfigReset(subArgs, flags) {
   printWarning('🔄 Resetting agentic-flow configurations...');
 
   try {
-    const { stdout } = await execAsync('npx agentic-flow config reset --force', {
+    const { stdout } = await runAgenticFlow(['config', 'reset', '--force'], {
       timeout: 30000,
     });
     console.log(stdout);
@@ -760,7 +757,7 @@ async function agenticConfigWizard(subArgs, flags) {
   printSuccess('🧙 Starting agentic-flow configuration wizard...');
 
   try {
-    const { stdout } = await execAsync('npx agentic-flow config wizard', {
+    const { stdout } = await runAgenticFlow(['config', 'wizard'], {
       timeout: 300000,
     });
     console.log(stdout);
@@ -820,12 +817,12 @@ async function agenticMcpStart(subArgs, flags) {
   printSuccess('🚀 Starting agentic-flow MCP server...');
 
   try {
-    let cmd = 'npx agentic-flow mcp start';
-    if (flags.port) cmd += ` --port ${flags.port}`;
-    if (flags.host) cmd += ` --host ${flags.host}`;
-    if (flags.daemon || flags.background) cmd += ' --daemon';
+    let cmd = ['mcp', 'start'];
+    if (flags.port) cmd.push('--port', flags.port);
+    if (flags.host) cmd.push('--host', flags.host);
+    if (flags.daemon || flags.background) cmd.push('--daemon');
 
-    const { stdout } = await execAsync(cmd, { timeout: 60000 });
+    const { stdout } = await runAgenticFlow(cmd, { timeout: 60000 });
     console.log(stdout);
     printSuccess('✅ MCP server started!');
   } catch (error) {
@@ -839,7 +836,7 @@ async function agenticMcpStop(subArgs, flags) {
   printWarning('🛑 Stopping agentic-flow MCP server...');
 
   try {
-    const { stdout } = await execAsync('npx agentic-flow mcp stop', { timeout: 30000 });
+    const { stdout } = await runAgenticFlow(['mcp', 'stop'], { timeout: 30000 });
     console.log(stdout);
     printSuccess('✅ MCP server stopped!');
   } catch (error) {
@@ -853,10 +850,10 @@ async function agenticMcpStatus(subArgs, flags) {
   printSuccess('📊 Getting agentic-flow MCP server status...');
 
   try {
-    let cmd = 'npx agentic-flow mcp status';
-    if (flags.detailed || flags.verbose) cmd += ' --detailed';
+    let cmd = ['mcp', 'status'];
+    if (flags.detailed || flags.verbose) cmd.push('--detailed');
 
-    const { stdout } = await execAsync(cmd, { timeout: 30000 });
+    const { stdout } = await runAgenticFlow(cmd, { timeout: 30000 });
     console.log(stdout);
   } catch (error) {
     printError('❌ Failed to get MCP status');
@@ -869,12 +866,12 @@ async function agenticMcpList(subArgs, flags) {
   printSuccess('📋 Listing agentic-flow MCP tools...');
 
   try {
-    let cmd = 'npx agentic-flow mcp list';
-    if (flags.server) cmd += ` --server ${flags.server}`;
-    if (flags.category) cmd += ` --category ${flags.category}`;
-    if (flags.detailed || flags.verbose) cmd += ' --detailed';
+    let cmd = ['mcp', 'list'];
+    if (flags.server) cmd.push('--server', flags.server);
+    if (flags.category) cmd.push('--category', flags.category);
+    if (flags.detailed || flags.verbose) cmd.push('--detailed');
 
-    const { stdout } = await execAsync(cmd, { timeout: 30000 });
+    const { stdout } = await runAgenticFlow(cmd, { timeout: 30000 });
     console.log(stdout);
   } catch (error) {
     printError('❌ Failed to list MCP tools');
@@ -887,12 +884,12 @@ async function agenticMcpLogs(subArgs, flags) {
   printSuccess('📄 Getting agentic-flow MCP logs...');
 
   try {
-    let cmd = 'npx agentic-flow mcp logs';
-    if (flags.lines) cmd += ` --lines ${flags.lines}`;
-    if (flags.follow || flags.f) cmd += ' --follow';
-    if (flags.error) cmd += ' --error';
+    let cmd = ['mcp', 'logs'];
+    if (flags.lines) cmd.push('--lines', flags.lines);
+    if (flags.follow || flags.f) cmd.push('--follow');
+    if (flags.error) cmd.push('--error');
 
-    const { stdout } = await execAsync(cmd, {
+    const { stdout } = await runAgenticFlow(cmd, {
       timeout: flags.follow ? 0 : 30000,
       maxBuffer: 10 * 1024 * 1024
     });

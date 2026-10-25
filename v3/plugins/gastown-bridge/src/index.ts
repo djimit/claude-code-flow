@@ -17,6 +17,7 @@
  */
 
 import { EventEmitter } from 'events';
+import { z } from 'zod';
 
 import type {
   Bead,
@@ -1211,41 +1212,10 @@ export class GasTownBridgePlugin extends EventEmitter implements IPlugin {
     };
   }
 
-  private zodToJsonSchema(zodSchema: unknown): { type: 'object'; properties: Record<string, unknown>; required?: string[] } {
-    // Simplified conversion - in production use zod-to-json-schema
-    try {
-      const schema = zodSchema as { _def?: { shape?: () => Record<string, unknown> } };
-      if (schema._def?.shape) {
-        const shape = schema._def.shape();
-        const properties: Record<string, unknown> = {};
-        const required: string[] = [];
-
-        for (const [key, value] of Object.entries(shape)) {
-          const fieldSchema = value as { _def?: { typeName?: string; innerType?: unknown } };
-          const typeName = fieldSchema._def?.typeName ?? 'ZodString';
-
-          // Map Zod types to JSON Schema types
-          let jsonType = 'string';
-          if (typeName.includes('Number')) jsonType = 'number';
-          else if (typeName.includes('Boolean')) jsonType = 'boolean';
-          else if (typeName.includes('Array')) jsonType = 'array';
-          else if (typeName.includes('Object')) jsonType = 'object';
-
-          properties[key] = { type: jsonType };
-
-          // Check if required (not optional)
-          if (!typeName.includes('Optional') && !typeName.includes('Default')) {
-            required.push(key);
-          }
-        }
-
-        return { type: 'object', properties, required: required.length > 0 ? required : undefined };
-      }
-    } catch {
-      // Fallback
-    }
-
-    return { type: 'object', properties: {} };
+  private zodToJsonSchema(zodSchema: z.ZodType): { type: 'object'; properties: Record<string, unknown>; required?: string[] } {
+    const schema = z.toJSONSchema(zodSchema, { io: 'input', target: 'draft-7', unrepresentable: 'any' });
+    if (schema.type !== 'object') throw new Error('MCP input schema must be an object');
+    return { ...schema, type: 'object', properties: schema.properties ?? {} };
   }
 
   private createToolContext(pluginContext: PluginContext): ToolContext {
