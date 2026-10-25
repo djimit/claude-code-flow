@@ -31,7 +31,7 @@ overrides:
   fast-uri@>=3 <3.1.6: 3.1.8
   js-yaml@>=4 <4.3.2: 4.3.2
   undici@>=7 <7.30.1: 7.30.1
-  toml@<4.2.0: 4.3.0
+  toml@<5.0.1: 5.0.1
 
 importers:
 
@@ -798,7 +798,7 @@ packages:
       inquirer: 9.3.8(@types/node@20.19.43)
       semver: 7.7.3
       sql.js: 1.14.1
-      toml: 4.3.0
+      toml: 5.0.1
       ws: 8.21.1
       yaml: 2.9.0
       zod: 3.25.76
@@ -850,7 +850,7 @@ packages:
       commander: 12.1.0
       fs-extra: 11.4.0
       inquirer: 9.3.8(@types/node@20.19.43)
-      toml: 4.3.0
+      toml: 5.0.1
       yaml: 2.9.0
     transitivePeerDependencies:
       - '@types/node'
@@ -10968,8 +10968,8 @@ packages:
       ieee754: 1.2.1
     dev: false
 
-  /toml@4.3.0:
-    resolution: {integrity: sha512-lVb8X9BsPVuH0M4BKeS91tXAmJvCjQ5UIyAbQFaxkKGyUFK2RPkhwaFSQH8vbpl1d23eu/IBH+dwVMHWaq9A5A==}
+  /toml@5.0.1:
+    resolution: {integrity: sha512-EqYNA/YvUNndrA2B3O2ojzLQoTQrBxeZ9UIjQwk8t10oe6n7dwclBwd9IdZQTOKwe6vWX+AXtl6IntXRbepdxQ==}
     engines: {node: '>=20'}
     dev: false
 
