@@ -31,7 +31,7 @@ import { z } from 'zod';
 const trajectoryBeginSchema = z.object({
     sessionId: z.string().optional()
         .describe('Session identifier'),
-    context: z.record(z.unknown()).optional()
+    context: z.record(z.string(), z.unknown()).optional()
         .describe('Initial context for the trajectory'),
 });
 const trajectoryStepSchema = z.object({
@@ -43,13 +43,13 @@ const trajectoryStepSchema = z.object({
         .describe('Observation from action'),
     reward: z.number().optional()
         .describe('Reward signal (-1 to 1)'),
-    metadata: z.record(z.unknown()).optional()
+    metadata: z.record(z.string(), z.unknown()).optional()
         .describe('Additional step metadata'),
 });
 const trajectoryContextSchema = z.object({
     trajectoryId: z.string()
         .describe('Trajectory ID'),
-    context: z.record(z.unknown())
+    context: z.record(z.string(), z.unknown())
         .describe('Context to add'),
 });
 const trajectoryEndSchema = z.object({
@@ -57,7 +57,7 @@ const trajectoryEndSchema = z.object({
         .describe('Trajectory ID'),
     verdict: z.enum(['success', 'failure', 'partial'])
         .describe('Final verdict for the trajectory'),
-    triggerLearning: z.boolean().default(true)
+    triggerLearning: z.boolean().prefault(true)
         .describe('Whether to trigger learning from this trajectory'),
 });
 const trajectoryListSchema = z.object({
@@ -65,7 +65,7 @@ const trajectoryListSchema = z.object({
         .describe('Filter by session ID'),
     verdict: z.enum(['success', 'failure', 'partial']).optional()
         .describe('Filter by verdict'),
-    limit: z.number().default(20)
+    limit: z.number().prefault(20)
         .describe('Maximum trajectories to return'),
 });
 const patternFindSchema = z.object({
@@ -73,9 +73,9 @@ const patternFindSchema = z.object({
         .describe('Query to find similar patterns'),
     category: z.string().optional()
         .describe('Filter by category'),
-    topK: z.number().default(5)
+    topK: z.number().prefault(5)
         .describe('Number of patterns to return'),
-    threshold: z.number().default(0.7)
+    threshold: z.number().prefault(0.7)
         .describe('Similarity threshold (0-1)'),
 });
 const loraApplySchema = z.object({
@@ -83,7 +83,7 @@ const loraApplySchema = z.object({
         .describe('LoRA adapter ID (auto-select if not provided)'),
     input: z.string()
         .describe('Input to adapt'),
-    strength: z.number().default(0.5)
+    strength: z.number().prefault(0.5)
         .describe('Adaptation strength (0-1)'),
 });
 const profileGetSchema = z.object({

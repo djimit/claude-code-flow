@@ -436,7 +436,7 @@ export const BottleneckDetectInputSchema = z.object({
     spans: z.array(z.unknown()).max(1_000_000),
     metrics: z.record(z.string(), z.unknown()).optional(),
   }),
-  analysisScope: z.array(z.enum(['cpu', 'memory', 'io', 'network', 'database', 'render', 'all'])).default(['all']),
+  analysisScope: z.array(z.enum(['cpu', 'memory', 'io', 'network', 'database', 'render', 'all'])).prefault(['all']),
   threshold: z.object({
     latencyP95: z.number().min(0).max(86400000).optional(),
     throughput: z.number().min(0).optional(),
@@ -468,7 +468,7 @@ export const QueryOptimizeInputSchema = z.object({
     resultSize: z.number().int().min(0).optional(),
   })).min(1).max(10000),
   patterns: z.array(z.enum(['n_plus_1', 'missing_index', 'full_scan', 'large_result', 'slow_join'])).optional(),
-  suggestIndexes: z.boolean().default(true),
+  suggestIndexes: z.boolean().prefault(true),
 });
 
 export type QueryOptimizeInput = z.infer<typeof QueryOptimizeInputSchema>;

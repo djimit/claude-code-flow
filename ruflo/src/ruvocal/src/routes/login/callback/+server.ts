@@ -14,14 +14,12 @@ const sanitizeJSONEnv = (val: string, fallback: string) => {
 
 const allowedUserEmails = z
 	.array(z.string().email())
-	.optional()
-	.default([])
+	.prefault([])
 	.parse(JSON5.parse(sanitizeJSONEnv(config.ALLOWED_USER_EMAILS, "[]")));
 
 const allowedUserDomains = z
 	.array(z.string().regex(/\.\w+$/)) // Contains at least a dot
-	.optional()
-	.default([])
+	.prefault([])
 	.parse(JSON5.parse(sanitizeJSONEnv(config.ALLOWED_USER_DOMAINS, "[]")));
 
 export async function GET({ url, locals, cookies, request, getClientAddress }) {

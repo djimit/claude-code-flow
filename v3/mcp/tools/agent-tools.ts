@@ -69,9 +69,9 @@ const agentTypeSchema = z.enum(ALLOWED_AGENT_TYPES).or(
 const spawnAgentSchema = z.object({
   agentType: agentTypeSchema.describe('Type of agent to spawn'),
   id: z.string().optional().describe('Optional agent ID (auto-generated if not provided)'),
-  config: z.record(z.unknown()).optional().describe('Agent-specific configuration'),
-  priority: z.enum(['low', 'normal', 'high', 'critical']).default('normal'),
-  metadata: z.record(z.unknown()).optional().describe('Additional metadata'),
+  config: z.record(z.string(), z.unknown()).optional().describe('Agent-specific configuration'),
+  priority: z.enum(['low', 'normal', 'high', 'critical']).prefault('normal'),
+  metadata: z.record(z.string(), z.unknown()).optional().describe('Additional metadata'),
 });
 
 const listAgentsSchema = z.object({
@@ -83,14 +83,14 @@ const listAgentsSchema = z.object({
 
 const terminateAgentSchema = z.object({
   agentId: z.string().describe('ID of the agent to terminate'),
-  graceful: z.boolean().default(true).describe('Whether to gracefully shutdown the agent'),
+  graceful: z.boolean().prefault(true).describe('Whether to gracefully shutdown the agent'),
   reason: z.string().optional().describe('Reason for termination'),
 });
 
 const agentStatusSchema = z.object({
   agentId: z.string().describe('ID of the agent to get status for'),
-  includeMetrics: z.boolean().default(false).describe('Include performance metrics'),
-  includeHistory: z.boolean().default(false).describe('Include execution history'),
+  includeMetrics: z.boolean().prefault(false).describe('Include performance metrics'),
+  includeHistory: z.boolean().prefault(false).describe('Include execution history'),
 });
 
 // ============================================================================

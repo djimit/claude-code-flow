@@ -20,20 +20,20 @@ export const FindSimilarDefectsInputSchema = z.object({
     .describe('Query parameters for finding similar defects'),
   searchScope: z
     .enum(['project', 'organization', 'global'])
-    .default('project')
+    .prefault('project')
     .describe('Scope of search'),
-  maxResults: z.number().min(1).max(50).default(10).describe('Maximum results to return'),
+  maxResults: z.number().min(1).max(50).prefault(10).describe('Maximum results to return'),
   minSimilarity: z
     .number()
     .min(0)
     .max(1)
-    .default(0.6)
+    .prefault(0.6)
     .describe('Minimum similarity threshold'),
-  includeResolved: z.boolean().default(true).describe('Include resolved defects'),
-  includeAnalysis: z.boolean().default(true).describe('Include similarity analysis'),
+  includeResolved: z.boolean().prefault(true).describe('Include resolved defects'),
+  includeAnalysis: z.boolean().prefault(true).describe('Include similarity analysis'),
   groupBy: z
     .enum(['none', 'category', 'resolution', 'component'])
-    .default('none')
+    .prefault('none')
     .describe('Group results by'),
 });
 

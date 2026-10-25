@@ -30,9 +30,9 @@ const spawnEphemeralSchema = z.object({
         .describe('Time-to-live in milliseconds'),
     capabilities: z.array(z.string()).optional()
         .describe('Required capabilities'),
-    priority: z.enum(['low', 'normal', 'high', 'critical']).default('normal')
+    priority: z.enum(['low', 'normal', 'high', 'critical']).prefault('normal')
         .describe('Priority for swarm selection'),
-    waitForCompletion: z.boolean().default(false)
+    waitForCompletion: z.boolean().prefault(false)
         .describe('Wait for agent to complete'),
     completionTimeout: z.number().optional()
         .describe('Timeout when waiting for completion (ms)'),
@@ -48,7 +48,7 @@ const listEphemeralSchema = z.object({
         .describe('Filter by swarm ID'),
     status: z.enum(['spawning', 'active', 'completing', 'terminated']).optional()
         .describe('Filter by status'),
-    limit: z.number().default(50)
+    limit: z.number().prefault(50)
         .describe('Maximum results to return'),
 });
 const registerSwarmSchema = z.object({
@@ -58,7 +58,7 @@ const registerSwarmSchema = z.object({
         .describe('Human-readable swarm name'),
     capabilities: z.array(z.string())
         .describe('Swarm capabilities'),
-    maxAgents: z.number().default(100)
+    maxAgents: z.number().prefault(100)
         .describe('Maximum agents this swarm can handle'),
     endpoint: z.string().optional()
         .describe('Swarm communication endpoint'),
@@ -76,7 +76,7 @@ const proposeSchema = z.object({
         .describe('Proposal type'),
     value: z.unknown()
         .describe('Proposal value'),
-    timeoutMs: z.number().default(30000)
+    timeoutMs: z.number().prefault(30000)
         .describe('Proposal timeout in milliseconds'),
 });
 const voteSchema = z.object({

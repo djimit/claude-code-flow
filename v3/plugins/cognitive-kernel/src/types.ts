@@ -82,8 +82,8 @@ export type ConsolidationTarget = z.infer<typeof ConsolidationTargetSchema>;
 export const MemorySlotSchema = z.object({
   id: z.string().max(100).optional(),
   content: z.unknown().optional(),
-  priority: z.number().min(0).max(1).default(0.5),
-  decay: z.number().min(0).max(1).default(0.1),
+  priority: z.number().min(0).max(1).prefault(0.5),
+  decay: z.number().min(0).max(1).prefault(0.1),
 });
 
 export type MemorySlot = z.infer<typeof MemorySlotSchema>;
@@ -91,7 +91,7 @@ export type MemorySlot = z.infer<typeof MemorySlotSchema>;
 export const WorkingMemoryInputSchema = z.object({
   action: WorkingMemoryActionSchema.describe('Memory action to perform'),
   slot: MemorySlotSchema.optional().describe('Memory slot data'),
-  capacity: z.number().int().min(1).max(20).default(7)
+  capacity: z.number().int().min(1).max(20).prefault(7)
     .describe('Working memory capacity (Miller number)'),
   consolidationTarget: ConsolidationTargetSchema.optional()
     .describe('Target memory system for consolidation'),
@@ -157,7 +157,7 @@ export type AttentionTarget = z.infer<typeof AttentionTargetSchema>;
 export const AttentionFiltersSchema = z.object({
   includePatterns: z.array(z.string().max(200)).max(50).optional(),
   excludePatterns: z.array(z.string().max(200)).max(50).optional(),
-  noveltyBias: z.number().min(0).max(1).default(0.5),
+  noveltyBias: z.number().min(0).max(1).prefault(0.5),
 });
 
 export type AttentionFilters = z.infer<typeof AttentionFiltersSchema>;
@@ -238,7 +238,7 @@ export const MetaMonitorInputSchema = z.object({
     .describe('Types of monitoring to perform'),
   reflection: ReflectionSchema.optional()
     .describe('Reflection configuration'),
-  interventions: z.boolean().default(true)
+  interventions: z.boolean().prefault(true)
     .describe('Allow automatic corrective interventions'),
 });
 
@@ -303,8 +303,8 @@ export const TaskSchema = z.object({
 export type Task = z.infer<typeof TaskSchema>;
 
 export const AdaptivitySchema = z.object({
-  fading: z.boolean().default(true),
-  monitoring: z.boolean().default(true),
+  fading: z.boolean().prefault(true),
+  monitoring: z.boolean().prefault(true),
 });
 
 export type Adaptivity = z.infer<typeof AdaptivitySchema>;
@@ -363,9 +363,9 @@ export type LoadAssessment = z.infer<typeof LoadAssessmentSchema>;
 export const CognitiveLoadInputSchema = z.object({
   assessment: LoadAssessmentSchema.optional()
     .describe('Current load assessment'),
-  optimization: LoadOptimizationSchema.default('balanced')
+  optimization: LoadOptimizationSchema.prefault('balanced')
     .describe('Optimization strategy'),
-  threshold: z.number().min(0).max(1).default(0.8)
+  threshold: z.number().min(0).max(1).prefault(0.8)
     .describe('Maximum total load threshold'),
 });
 

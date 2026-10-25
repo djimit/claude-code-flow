@@ -532,7 +532,7 @@ export const StepSchema = z.object({
   needs: z.array(z.string()).optional(),
   duration: z.number().optional(),
   requires: z.array(z.string()).optional(),
-  metadata: z.record(z.unknown()).optional(),
+  metadata: z.record(z.string(), z.unknown()).optional(),
 });
 
 /**
@@ -598,10 +598,10 @@ export const FormulaSchema = z.object({
   legs: z.array(LegSchema).optional(),
   synthesis: SynthesisSchema.optional(),
   steps: z.array(StepSchema).optional(),
-  vars: z.record(VarSchema).optional(),
+  vars: z.record(z.string(), VarSchema).optional(),
   templates: z.array(TemplateSchema).optional(),
   aspects: z.array(AspectSchema).optional(),
-  metadata: z.record(z.unknown()).optional(),
+  metadata: z.record(z.string(), z.unknown()).optional(),
 });
 
 /**
@@ -681,15 +681,15 @@ export const SyncDirectionSchema = z.enum(['pull', 'push', 'both']);
  * Configuration schema
  */
 export const GasTownConfigSchema = z.object({
-  townRoot: z.string().default('~/gt'),
-  enableBeadsSync: z.boolean().default(true),
-  syncInterval: z.number().int().positive().default(60000),
-  nativeFormulas: z.boolean().default(true),
-  enableConvoys: z.boolean().default(true),
-  autoCreateBeads: z.boolean().default(false),
-  enableGUPP: z.boolean().default(false),
-  guppCheckInterval: z.number().int().positive().default(5000),
-  cliTimeout: z.number().int().positive().default(30000),
+  townRoot: z.string().prefault('~/gt'),
+  enableBeadsSync: z.boolean().prefault(true),
+  syncInterval: z.number().int().positive().prefault(60000),
+  nativeFormulas: z.boolean().prefault(true),
+  enableConvoys: z.boolean().prefault(true),
+  autoCreateBeads: z.boolean().prefault(false),
+  enableGUPP: z.boolean().prefault(false),
+  guppCheckInterval: z.number().int().positive().prefault(5000),
+  cliTimeout: z.number().int().positive().prefault(30000),
 });
 
 // ============================================================================

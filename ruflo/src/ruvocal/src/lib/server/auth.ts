@@ -36,7 +36,7 @@ export interface OIDCUserInfo {
 const stringWithDefault = (value: string) =>
 	z
 		.string()
-		.default(value)
+		.prefault(value)
 		.transform((el) => (el ? el : value));
 
 export const OIDConfig = z
@@ -59,12 +59,12 @@ export const loginEnabled = !!OIDConfig.CLIENT_ID;
 
 const sameSite = z
 	.enum(["lax", "none", "strict"])
-	.default(dev || config.ALLOW_INSECURE_COOKIES === "true" ? "lax" : "none")
+	.prefault(dev || config.ALLOW_INSECURE_COOKIES === "true" ? "lax" : "none")
 	.parse(config.COOKIE_SAMESITE === "" ? undefined : config.COOKIE_SAMESITE);
 
 const secure = z
 	.boolean()
-	.default(!(dev || config.ALLOW_INSECURE_COOKIES === "true"))
+	.prefault(!(dev || config.ALLOW_INSECURE_COOKIES === "true"))
 	.parse(config.COOKIE_SECURE === "" ? undefined : config.COOKIE_SECURE === "true");
 
 function sanitizeReturnPath(path: string | undefined | null): string | undefined {

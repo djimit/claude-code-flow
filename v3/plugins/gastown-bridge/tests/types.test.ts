@@ -20,10 +20,10 @@ const BeadStatusSchema = z.enum(['open', 'in_progress', 'closed']);
 const BeadSchema = z.object({
   id: z.string().min(1),
   title: z.string().min(1).max(500),
-  description: z.string().max(10000).default(''),
-  status: BeadStatusSchema.default('open'),
-  priority: z.number().int().min(0).max(4).default(2),
-  labels: z.array(z.string()).default([]),
+  description: z.string().max(10000).prefault(''),
+  status: BeadStatusSchema.prefault('open'),
+  priority: z.number().int().min(0).max(4).prefault(2),
+  labels: z.array(z.string()).prefault([]),
   parent_id: z.string().optional(),
   created_at: z.string().datetime().or(z.date()),
   updated_at: z.string().datetime().or(z.date()),
@@ -47,7 +47,7 @@ const FormulaTypeSchema = z.enum(['convoy', 'workflow', 'expansion', 'aspect']);
 const StepSchema = z.object({
   id: z.string().min(1),
   title: z.string().min(1),
-  description: z.string().default(''),
+  description: z.string().prefault(''),
   needs: z.array(z.string()).optional(),
 });
 
@@ -56,21 +56,21 @@ const LegSchema = z.object({
   id: z.string().min(1),
   title: z.string().min(1),
   focus: z.string(),
-  description: z.string().default(''),
+  description: z.string().prefault(''),
 });
 
 // Formula variable schema
 const VarSchema = z.object({
-  type: z.enum(['string', 'number', 'boolean', 'array']).default('string'),
+  type: z.enum(['string', 'number', 'boolean', 'array']).prefault('string'),
   default: z.unknown().optional(),
-  required: z.boolean().default(false),
+  required: z.boolean().prefault(false),
   description: z.string().optional(),
 });
 
 // Synthesis schema
 const SynthesisSchema = z.object({
   template: z.string(),
-  vars: z.record(z.string()).optional(),
+  vars: z.record(z.string(), z.string()).optional(),
 });
 
 // Template schema (for expansion formulas)
@@ -91,15 +91,15 @@ const AspectSchema = z.object({
 // Full Formula schema
 const FormulaSchema = z.object({
   name: z.string().min(1).max(64).regex(/^[a-z][a-z0-9_-]*$/i),
-  description: z.string().max(1000).default(''),
+  description: z.string().max(1000).prefault(''),
   type: FormulaTypeSchema,
-  version: z.number().int().positive().default(1),
+  version: z.number().int().positive().prefault(1),
   // Convoy-specific
   legs: z.array(LegSchema).optional(),
   synthesis: SynthesisSchema.optional(),
   // Workflow-specific
   steps: z.array(StepSchema).optional(),
-  vars: z.record(VarSchema).optional(),
+  vars: z.record(z.string(), VarSchema).optional(),
   // Expansion-specific
   template: z.array(TemplateSchema).optional(),
   // Aspect-specific
@@ -121,7 +121,7 @@ const ConvoySchema = z.object({
   id: z.string().min(1),
   name: z.string().min(1).max(200),
   tracked_issues: z.array(z.string()),
-  status: ConvoyStatusSchema.default('active'),
+  status: ConvoyStatusSchema.prefault('active'),
   started_at: z.string().datetime().or(z.date()),
   completed_at: z.string().datetime().or(z.date()).optional(),
   progress: ConvoyProgressSchema,
@@ -151,7 +151,7 @@ const AgentSchema = z.object({
 // Cooked formula schema (after variable substitution)
 const CookedFormulaSchema = FormulaSchema.extend({
   cooked_at: z.string().datetime().or(z.date()),
-  vars_applied: z.record(z.string()),
+  vars_applied: z.record(z.string(), z.string()),
 });
 
 // ============================================================================

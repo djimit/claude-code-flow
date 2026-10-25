@@ -87,7 +87,7 @@ export interface MCPTool<TInput = unknown, TOutput = unknown> {
   /** Execution layer (cli, wasm, hybrid) */
   layer: 'cli' | 'wasm' | 'hybrid';
   /** Input schema */
-  inputSchema: z.ZodType<TInput, z.ZodTypeDef, unknown>;
+  inputSchema: z.ZodType<TInput, unknown>;
   /** Handler function */
   handler: (input: TInput, context: ToolContext) => Promise<MCPToolResult<TOutput>>;
 }
@@ -139,7 +139,7 @@ export const BeadsCreateInputSchema = z.object({
   /** Bead description */
   description: z.string().max(10000).optional().describe('Bead description'),
   /** Priority (0 = highest) */
-  priority: z.number().int().min(0).max(10).default(2).describe('Priority (0 = highest)'),
+  priority: z.number().int().min(0).max(10).prefault(2).describe('Priority (0 = highest)'),
   /** Labels for categorization */
   labels: z.array(z.string().max(50)).max(20).optional().describe('Labels for categorization'),
   /** Parent bead ID for epics */
@@ -157,7 +157,7 @@ export const BeadsReadyInputSchema = z.object({
   /** Filter by rig */
   rig: z.string().max(100).optional().describe('Filter by rig (repository)'),
   /** Maximum beads to return */
-  limit: z.number().int().min(1).max(100).default(10).describe('Maximum beads to return'),
+  limit: z.number().int().min(1).max(100).prefault(10).describe('Maximum beads to return'),
   /** Filter by labels */
   labels: z.array(z.string().max(50)).max(10).optional().describe('Filter by labels'),
 });
@@ -193,11 +193,11 @@ export type BeadsDepInput = z.infer<typeof BeadsDepInputSchema>;
  */
 export const BeadsSyncInputSchema = z.object({
   /** Sync direction */
-  direction: z.enum(['pull', 'push', 'both']).default('both').describe('Sync direction'),
+  direction: z.enum(['pull', 'push', 'both']).prefault('both').describe('Sync direction'),
   /** Filter by rig */
   rig: z.string().max(100).optional().describe('Filter by rig (repository)'),
   /** AgentDB namespace for sync */
-  namespace: z.string().max(100).default('gastown:beads').describe('AgentDB namespace'),
+  namespace: z.string().max(100).prefault('gastown:beads').describe('AgentDB namespace'),
 });
 
 export type BeadsSyncInput = z.infer<typeof BeadsSyncInputSchema>;
@@ -225,7 +225,7 @@ export const ConvoyStatusInputSchema = z.object({
   /** Convoy ID (optional - shows all if omitted) */
   convoy_id: z.string().max(50).optional().describe('Convoy ID (shows all if omitted)'),
   /** Include detailed progress */
-  detailed: z.boolean().default(false).describe('Include detailed progress'),
+  detailed: z.boolean().prefault(false).describe('Include detailed progress'),
 });
 
 export type ConvoyStatusInput = z.infer<typeof ConvoyStatusInputSchema>;
@@ -254,7 +254,7 @@ export const FormulaListInputSchema = z.object({
   type: z.enum(['convoy', 'workflow', 'expansion', 'aspect']).optional()
     .describe('Filter by formula type'),
   /** Include built-in formulas */
-  include_builtin: z.boolean().default(true).describe('Include built-in formulas'),
+  include_builtin: z.boolean().prefault(true).describe('Include built-in formulas'),
 });
 
 export type FormulaListInput = z.infer<typeof FormulaListInputSchema>;
@@ -268,7 +268,7 @@ export const FormulaCookInputSchema = z.object({
   /** Variables for substitution */
   vars: z.record(z.string().max(50), z.string().max(5000)).describe('Variables for substitution'),
   /** Whether formula is TOML content (vs name) */
-  is_content: z.boolean().default(false).describe('Whether formula is TOML content (vs name)'),
+  is_content: z.boolean().prefault(false).describe('Whether formula is TOML content (vs name)'),
 });
 
 export type FormulaCookInput = z.infer<typeof FormulaCookInputSchema>;
@@ -285,7 +285,7 @@ export const FormulaExecuteInputSchema = z.object({
   target_agent: z.enum(['polecat', 'crew', 'mayor', 'refinery']).optional()
     .describe('Target agent for execution'),
   /** Dry run (don\'t actually execute) */
-  dry_run: z.boolean().default(false).describe('Dry run (don\'t actually execute)'),
+  dry_run: z.boolean().prefault(false).describe('Dry run (don\'t actually execute)'),
 });
 
 export type FormulaExecuteInput = z.infer<typeof FormulaExecuteInputSchema>;
@@ -345,7 +345,7 @@ export const AgentsInputSchema = z.object({
   role: z.enum(['mayor', 'polecat', 'refinery', 'witness', 'deacon', 'dog', 'crew']).optional()
     .describe('Filter by agent role'),
   /** Include inactive agents */
-  include_inactive: z.boolean().default(false).describe('Include inactive agents'),
+  include_inactive: z.boolean().prefault(false).describe('Include inactive agents'),
 });
 
 export type AgentsInput = z.infer<typeof AgentsInputSchema>;
@@ -365,7 +365,7 @@ export const MailInputSchema = z.object({
   /** Mail ID (for read) */
   mail_id: z.string().max(50).optional().describe('Mail ID (for read)'),
   /** Maximum messages to list */
-  limit: z.number().int().min(1).max(100).default(20).describe('Maximum messages to list'),
+  limit: z.number().int().min(1).max(100).prefault(20).describe('Maximum messages to list'),
 });
 
 export type MailInput = z.infer<typeof MailInputSchema>;
@@ -379,7 +379,7 @@ export const WasmParseFormulaInputSchema = z.object({
   /** TOML content to parse */
   content: z.string().min(1).max(100000).describe('TOML content to parse'),
   /** Validate against schema */
-  validate: z.boolean().default(true).describe('Validate against formula schema'),
+  validate: z.boolean().prefault(true).describe('Validate against formula schema'),
 });
 
 export type WasmParseFormulaInput = z.infer<typeof WasmParseFormulaInputSchema>;
@@ -394,7 +394,7 @@ export const WasmResolveDepsInputSchema = z.object({
     dependencies: z.array(z.string().max(50)).optional(),
   })).min(1).max(1000).describe('Beads to analyze'),
   /** Analysis action */
-  action: z.enum(['topo_sort', 'critical_path', 'cycle_detect']).default('topo_sort')
+  action: z.enum(['topo_sort', 'critical_path', 'cycle_detect']).prefault('topo_sort')
     .describe('Analysis action'),
 });
 
@@ -412,7 +412,7 @@ export const WasmCookBatchInputSchema = z.object({
   /** Variables for each formula */
   vars: z.array(z.record(z.string().max(50), z.string().max(5000))).describe('Variables for each formula'),
   /** Continue on error */
-  continue_on_error: z.boolean().default(false).describe('Continue on error'),
+  continue_on_error: z.boolean().prefault(false).describe('Continue on error'),
 });
 
 export type WasmCookBatchInput = z.infer<typeof WasmCookBatchInputSchema>;
@@ -426,9 +426,9 @@ export const WasmMatchPatternInputSchema = z.object({
   /** Candidate patterns to match against */
   candidates: z.array(z.string().max(50000)).min(1).max(1000).describe('Candidate patterns'),
   /** Number of results to return */
-  k: z.number().int().min(1).max(100).default(10).describe('Number of results to return'),
+  k: z.number().int().min(1).max(100).prefault(10).describe('Number of results to return'),
   /** Minimum similarity threshold (0-1) */
-  threshold: z.number().min(0).max(1).default(0.5).describe('Minimum similarity threshold'),
+  threshold: z.number().min(0).max(1).prefault(0.5).describe('Minimum similarity threshold'),
 });
 
 export type WasmMatchPatternInput = z.infer<typeof WasmMatchPatternInputSchema>;
@@ -440,7 +440,7 @@ export const WasmOptimizeConvoyInputSchema = z.object({
   /** Convoy ID to optimize */
   convoy_id: z.string().min(1).max(50).describe('Convoy ID to optimize'),
   /** Optimization strategy */
-  strategy: z.enum(['parallel', 'serial', 'hybrid']).default('hybrid')
+  strategy: z.enum(['parallel', 'serial', 'hybrid']).prefault('hybrid')
     .describe('Optimization strategy'),
   /** Consider resource constraints */
   resource_constraints: z.object({
