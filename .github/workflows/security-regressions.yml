@@ -1,0 +1,46 @@
+name: Security regressions
+
+on:
+  push:
+    branches: ['security/**']
+  pull_request:
+    branches: [main]
+    paths:
+      - '**/package.json'
+      - '**/package-lock.json'
+      - '**/pnpm-lock.yaml'
+      - 'scripts/security-dependencies.test.cjs'
+      - 'archive/v2/scripts/security-dependencies.test.cjs'
+      - 'ruflo/src/ruvocal/scripts/dompurify-security.test.cjs'
+      - '.github/workflows/security-regressions.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      matrix:
+        node: ['20.19.0', '22']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            archive/v2/package-lock.json
+            ruflo/src/ruvocal/package-lock.json
+      - run: npm ci --ignore-scripts --legacy-peer-deps
+      - run: env -i PATH="$PATH" HOME="$HOME" LANG=C.UTF-8 CI=1 node --test scripts/security-dependencies.test.cjs
+      - run: npm ci --ignore-scripts --legacy-peer-deps
+        working-directory: archive/v2
+      - run: env -i PATH="$PATH" HOME="$HOME" LANG=C.UTF-8 CI=1 node --test scripts/security-dependencies.test.cjs
+        working-directory: archive/v2
+      - run: npm ci --ignore-scripts --legacy-peer-deps
+        working-directory: ruflo/src/ruvocal
+      - run: env -i PATH="$PATH" HOME="$HOME" LANG=C.UTF-8 CI=1 node --test scripts/dompurify-security.test.cjs
+        working-directory: ruflo/src/ruvocal
