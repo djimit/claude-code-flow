@@ -15,10 +15,12 @@ test('template expressions split across removed shadow-root elements are scrubbe
 	const window = new JSDOM('').window;
 	try {
 		const purify = createDOMPurify(window);
-		for (const [before, after] of [['$', '{7*7}'], ['{', '{7*7}}'], ['<', '%7*7%>']]) {
+		for (const fragments of [['$', '{7*7}'], ['{', '{7*7}', '}'], ['<', '%7*7%', '>']]) {
 			const host = window.document.createElement('div');
 			const shadow = host.attachShadow({ mode: 'open' });
-			shadow.append(before, window.document.createElement('object'), after);
+			for (const fragment of fragments) {
+				shadow.append(fragment, window.document.createElement('object'));
+			}
 			purify.sanitize(host, { IN_PLACE: true, SAFE_FOR_TEMPLATES: true });
 			assert.doesNotMatch(shadow.textContent, /\$\{|\{\{|<%/);
 		}
