@@ -13,9 +13,12 @@ on:
       - 'archive/v2/scripts/security-dependencies.test.cjs'
       - 'archive/v2/scripts/security-agent-executor.test.cjs'
       - 'ruflo/src/ruvocal/scripts/dependency-compatibility.test.cjs'
-      - 'archive/v2/src/execution/agent-executor.ts'
+      - 'archive/v2/src/execution/**'
+      - 'archive/v2/src/cli/simple-commands/agent.js'
       - 'v3/@claude-flow/security/**'
       - 'v3/@claude-flow/shared/src/core/config/**'
+      - 'v3/plugins/gastown-bridge/src/**'
+      - 'v3/plugins/gastown-bridge/tests/plugin-schema.test.ts'
       - 'ruflo/src/ruvocal/scripts/dompurify-security.test.cjs'
       - '.github/workflows/security-regressions.yml'
 
@@ -39,6 +42,7 @@ jobs:
             package-lock.json
             archive/v2/package-lock.json
             ruflo/src/ruvocal/package-lock.json
+            v3/plugins/gastown-bridge/package-lock.json
       - run: npm ci --ignore-scripts --legacy-peer-deps
       - run: env -i PATH="$PATH" HOME="$HOME" LANG=C.UTF-8 CI=1 node --test scripts/security-dependencies.test.cjs
       - run: npm ci --ignore-scripts --legacy-peer-deps
@@ -53,4 +57,8 @@ jobs:
         working-directory: v3
       - run: env -i PATH="$PATH" HOME="$HOME" LANG=C.UTF-8 CI=1 corepack pnpm@8.15.0 --filter @claude-flow/security --filter @claude-flow/shared test
         working-directory: v3
+      - run: npm ci --ignore-scripts --legacy-peer-deps
+        working-directory: v3/plugins/gastown-bridge
+      - run: env -i PATH="$PATH" HOME="$HOME" LANG=C.UTF-8 CI=1 npm test -- --run
+        working-directory: v3/plugins/gastown-bridge
       - run: npm audit --audit-level=high

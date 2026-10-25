@@ -365,11 +365,14 @@ export function validateGtArgs(args: string[]): string[] {
   const result = GtArgsSchema.safeParse(args);
   if (!result.success) {
     const errors = result.error.issues;
-    const constraints = errors.map((e, idx) => ({
-      field: `args[${e.path[0] ?? idx}]`,
-      constraint: 'safe CLI argument',
-      actual: args[Number(e.path[0])]?.slice(0, 20) + '...',
-    }));
+    const constraints = errors.map((e, idx) => {
+      const index = typeof e.path[0] === 'number' ? e.path[0] : idx;
+      return {
+        field: `args[${index}]`,
+        constraint: 'safe CLI argument',
+        actual: args[index]?.slice(0, 20) + '...',
+      };
+    });
     throw new ValidationError(
       'Invalid CLI arguments',
       GasTownErrorCode.INVALID_ARGUMENTS,
@@ -449,7 +452,7 @@ export function validateCreateBeadOptions(options: unknown): z.infer<typeof Crea
   if (!result.success) {
     const errors = result.error.issues;
     const constraints = errors.map(e => ({
-      field: e.path.join('.'),
+      field: e.path.map(String).join('.'),
       constraint: e.message,
     }));
     throw new ValidationError(
@@ -469,7 +472,7 @@ export function validateCreateConvoyOptions(options: unknown): z.infer<typeof Cr
   if (!result.success) {
     const errors = result.error.issues;
     const constraints = errors.map(e => ({
-      field: e.path.join('.'),
+      field: e.path.map(String).join('.'),
       constraint: e.message,
     }));
     throw new ValidationError(
@@ -489,7 +492,7 @@ export function validateSlingOptions(options: unknown): z.infer<typeof SlingOpti
   if (!result.success) {
     const errors = result.error.issues;
     const constraints = errors.map(e => ({
-      field: e.path.join('.'),
+      field: e.path.map(String).join('.'),
       constraint: e.message,
     }));
     throw new ValidationError(

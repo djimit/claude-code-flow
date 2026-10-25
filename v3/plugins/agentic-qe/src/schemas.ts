@@ -614,7 +614,7 @@ export function validateInput<T>(
   }
 
   const errors = result.error.issues.map(
-    (e) => `${e.path.join('.')}: ${e.message}`
+    (e) => `${e.path.map(String).join('.')}: ${e.message}`
   );
 
   return { success: false, errors };
