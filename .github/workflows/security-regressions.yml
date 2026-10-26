@@ -10,6 +10,7 @@ on:
       - '**/package-lock.json'
       - '**/pnpm-lock.yaml'
       - 'scripts/security-dependencies.test.cjs'
+      - 'scripts/security-fastmcp.test.cjs'
       - 'archive/v2/scripts/security-dependencies.test.cjs'
       - 'archive/v2/scripts/security-agent-executor.test.cjs'
       - 'ruflo/src/ruvocal/scripts/dependency-compatibility.test.cjs'
@@ -55,6 +56,7 @@ jobs:
         working-directory: ruflo/src/ruvocal
       - run: corepack pnpm@8.15.0 install --frozen-lockfile --ignore-scripts
         working-directory: v3
+      - run: env -i PATH="$PATH" HOME="$HOME" LANG=C.UTF-8 CI=1 node --test scripts/security-fastmcp.test.cjs
       - run: env -i PATH="$PATH" HOME="$HOME" LANG=C.UTF-8 CI=1 corepack pnpm@8.15.0 --filter @claude-flow/security --filter @claude-flow/shared test
         working-directory: v3
       - run: npm ci --ignore-scripts --legacy-peer-deps
