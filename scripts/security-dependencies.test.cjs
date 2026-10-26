@@ -26,8 +26,8 @@ test('independent installation locks retain patched HTTP dependency versions', (
   }
 });
 
-test('FastMCP rejects oversized collections before visiting their elements', () => {
-  const { z } = require(require.resolve('zod', { paths: [require.resolve('fastmcp')] }));
+test('required root Zod rejects oversized collections before visiting their elements', () => {
+  const { z } = require('zod');
   const schema = z.array(z.string()).max(1);
   assert.deepEqual(schema.parse(['valid']), ['valid']);
   const input = Array(10000).fill(null);
