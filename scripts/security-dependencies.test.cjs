@@ -13,17 +13,24 @@ test('independent installation locks retain patched HTTP dependency versions', (
   for (const lock of locks) {
     const source = fs.readFileSync(lock, 'utf8');
     const versions = lock.endsWith('.json')
-      ? Object.entries(JSON.parse(source).packages).filter(([path]) => /(?:^|\/)node_modules\/(body-parser|undici)$/.test(path))
+      ? Object.entries(JSON.parse(source).packages).filter(([path]) => /(?:^|\/)node_modules\/(body-parser|undici|qs)$/.test(path))
         .map(([path, pkg]) => [path.split('/').at(-1), pkg.version])
-      : [...source.matchAll(/^\s{2}['"]?\/?(body-parser|undici)@(\d+\.\d+\.\d+)[^:\n]*:/gm)].map(match => [match[1], match[2]]);
+      : [...source.matchAll(/^\s{2}['"]?\/?(body-parser|undici|qs)@(\d+\.\d+\.\d+)[^:\n]*:/gm)].map(match => [match[1], match[2]]);
     assert.ok(versions.length, `${lock}: no HTTP dependency versions inspected`);
     for (const [name, version] of versions) {
       const major = semver.major(version);
-      const floor = name === 'body-parser' ? (major === 1 ? '1.20.9' : '2.4.0')
+      const floor = name === 'qs' ? '6.16.1' : name === 'body-parser' ? (major === 1 ? '1.20.9' : '2.4.0')
         : ({ 6: '6.29.1', 7: '7.30.1', 8: '8.12.2' })[major];
       if (floor) assert.ok(semver.gte(version, floor), `${lock}: ${name}@${version} is below ${floor}`);
     }
   }
+});
+
+test('patched query parser preserves ordinary nested fields and comma serialization', () => {
+  const qs = require(require.resolve('qs', { paths: [require.resolve('body-parser')] }));
+  const query = { filter: { owner: 'team A' }, tag: ['code', 'review'] };
+  assert.deepEqual(qs.parse(qs.stringify(query)), query);
+  assert.equal(qs.stringify({ tag: ['code', 'review'] }, { arrayFormat: 'comma' }), 'tag=code%2Creview');
 });
 
 test('required root Zod rejects oversized collections before visiting their elements', () => {
