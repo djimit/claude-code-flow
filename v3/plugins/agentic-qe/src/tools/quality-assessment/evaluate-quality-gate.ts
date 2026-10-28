@@ -15,15 +15,15 @@ export const EvaluateQualityGateInputSchema = z.object({
         metric: z.string().describe('Metric name'),
         operator: z.enum(['>', '<', '>=', '<=', '==']).describe('Comparison operator'),
         threshold: z.number().describe('Threshold value'),
-        weight: z.number().min(0).max(1).default(1).describe('Weight for overall score'),
-        blocking: z.boolean().default(true).describe('If true, failure blocks release'),
+        weight: z.number().min(0).max(1).prefault(1).describe('Weight for overall score'),
+        blocking: z.boolean().prefault(true).describe('If true, failure blocks release'),
       })
     )
     .optional()
     .describe('Custom quality gate definitions'),
   defaults: z
     .enum(['strict', 'standard', 'minimal'])
-    .default('standard')
+    .prefault('standard')
     .describe('Default gate preset if custom gates not provided'),
   projectPath: z.string().optional().describe('Path to project for metric collection'),
   includeMetrics: z
@@ -41,10 +41,10 @@ export const EvaluateQualityGateInputSchema = z.object({
         'maintainability',
       ])
     )
-    .default(['coverage', 'bugs', 'vulnerabilities', 'code-smells'])
+    .prefault(['coverage', 'bugs', 'vulnerabilities', 'code-smells'])
     .describe('Metrics to evaluate'),
-  failFast: z.boolean().default(false).describe('Stop on first gate failure'),
-  generateReport: z.boolean().default(true).describe('Generate detailed report'),
+  failFast: z.boolean().prefault(false).describe('Stop on first gate failure'),
+  generateReport: z.boolean().prefault(true).describe('Generate detailed report'),
 });
 
 export type EvaluateQualityGateInput = z.infer<typeof EvaluateQualityGateInputSchema>;

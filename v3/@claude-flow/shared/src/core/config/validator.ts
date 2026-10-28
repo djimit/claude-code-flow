@@ -43,8 +43,8 @@ export interface ValidationError {
  * Convert Zod error to validation errors
  */
 function zodErrorToValidationErrors(error: ZodError): ValidationError[] {
-  return error.errors.map((e) => ({
-    path: e.path.join('.'),
+  return error.issues.map((e) => ({
+    path: e.path.map(String).join('.'),
     message: e.message,
     code: e.code,
   }));
@@ -55,7 +55,7 @@ function zodErrorToValidationErrors(error: ZodError): ValidationError[] {
  * Uses parse + try/catch to get output types with defaults applied
  */
 function validate<TInput, TOutput>(
-  schema: z.ZodType<TOutput, z.ZodTypeDef, TInput>,
+  schema: z.ZodType<TOutput, TInput>,
   data: unknown
 ): ValidationResult<TOutput> {
   try {
@@ -132,7 +132,7 @@ export class ConfigValidator {
    * Validate and throw on error
    */
   static validateOrThrow<TInput, TOutput>(
-    schema: z.ZodType<TOutput, z.ZodTypeDef, TInput>,
+    schema: z.ZodType<TOutput, TInput>,
     data: unknown,
     configName: string
   ): TOutput {
@@ -201,7 +201,7 @@ export class ConfigValidator {
    * Check if data matches schema
    */
   static isValid<TInput, TOutput>(
-    schema: z.ZodType<TOutput, z.ZodTypeDef, TInput>,
+    schema: z.ZodType<TOutput, TInput>,
     data: unknown
   ): boolean {
     return validate(schema, data).success;

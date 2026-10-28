@@ -642,10 +642,10 @@ export const SemanticSearchInputSchema = z.object({
   scope: z.object({
     paths: z.array(z.string().max(500)).max(100).optional(),
     languages: z.array(Language).max(20).optional(),
-    excludeTests: z.boolean().default(false),
+    excludeTests: z.boolean().prefault(false),
   }).optional(),
-  searchType: SearchType.default('semantic'),
-  topK: z.number().int().min(1).max(1000).default(10),
+  searchType: SearchType.prefault('semantic'),
+  topK: z.number().int().min(1).max(1000).prefault(10),
 });
 
 export type SemanticSearchInput = z.infer<typeof SemanticSearchInputSchema>;
@@ -654,7 +654,7 @@ export type SemanticSearchInput = z.infer<typeof SemanticSearchInputSchema>;
  * Input schema for code/architecture-analyze
  */
 export const ArchitectureAnalyzeInputSchema = z.object({
-  rootPath: z.string().max(500).default('.'),
+  rootPath: z.string().max(500).prefault('.'),
   analysis: z.array(AnalysisType).optional(),
   baseline: z.string().max(100).optional(),
   outputFormat: OutputFormat.optional(),
@@ -672,8 +672,8 @@ export const RefactorImpactInputSchema = z.object({
     type: ChangeType,
     details: z.record(z.string(), z.unknown()).optional(),
   })).min(1).max(100),
-  depth: z.number().int().min(1).max(10).default(3),
-  includeTests: z.boolean().default(true),
+  depth: z.number().int().min(1).max(10).prefault(3),
+  includeTests: z.boolean().prefault(true),
 });
 
 export type RefactorImpactInput = z.infer<typeof RefactorImpactInputSchema>;
@@ -683,7 +683,7 @@ export type RefactorImpactInput = z.infer<typeof RefactorImpactInputSchema>;
  */
 export const SplitSuggestInputSchema = z.object({
   targetPath: z.string().max(500),
-  strategy: SplitStrategy.default('minimize_coupling'),
+  strategy: SplitStrategy.prefault('minimize_coupling'),
   constraints: z.object({
     maxModuleSize: z.number().optional(),
     minModuleSize: z.number().optional(),
@@ -699,12 +699,12 @@ export type SplitSuggestInput = z.infer<typeof SplitSuggestInputSchema>;
  */
 export const LearnPatternsInputSchema = z.object({
   scope: z.object({
-    gitRange: z.string().default('HEAD~100..HEAD'),
+    gitRange: z.string().prefault('HEAD~100..HEAD'),
     authors: z.array(z.string()).optional(),
     paths: z.array(z.string()).optional(),
   }).optional(),
   patternTypes: z.array(PatternType).optional(),
-  minOccurrences: z.number().int().min(1).max(100).default(3),
+  minOccurrences: z.number().int().min(1).max(100).prefault(3),
 });
 
 export type LearnPatternsInput = z.infer<typeof LearnPatternsInputSchema>;

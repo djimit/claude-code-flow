@@ -71,7 +71,7 @@
     "directory": "v3/plugins/ruvector-upstream"
   },
   "dependencies": {
-    "zod": "^3.22.4"
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",
@@ -90,14 +90,30 @@
     "@ruvector/sona": ">=0.1.0"
   },
   "peerDependenciesMeta": {
-    "@ruvector/micro-hnsw-wasm": { "optional": true },
-    "@ruvector/attention-wasm": { "optional": true },
-    "@ruvector/gnn-wasm": { "optional": true },
-    "@ruvector/hyperbolic-hnsw-wasm": { "optional": true },
-    "@ruvector/learning-wasm": { "optional": true },
-    "@ruvector/exotic-wasm": { "optional": true },
-    "@ruvector/cognitum-gate-kernel": { "optional": true },
-    "@ruvector/sona": { "optional": true }
+    "@ruvector/micro-hnsw-wasm": {
+      "optional": true
+    },
+    "@ruvector/attention-wasm": {
+      "optional": true
+    },
+    "@ruvector/gnn-wasm": {
+      "optional": true
+    },
+    "@ruvector/hyperbolic-hnsw-wasm": {
+      "optional": true
+    },
+    "@ruvector/learning-wasm": {
+      "optional": true
+    },
+    "@ruvector/exotic-wasm": {
+      "optional": true
+    },
+    "@ruvector/cognitum-gate-kernel": {
+      "optional": true
+    },
+    "@ruvector/sona": {
+      "optional": true
+    }
   },
   "engines": {
     "node": ">=18.0.0"

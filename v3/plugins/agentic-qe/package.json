@@ -51,7 +51,7 @@
     "url": "https://github.com/ruvnet/ruflo/issues"
   },
   "dependencies": {
-    "zod": "^3.23.0"
+    "zod": "^4.6.7"
   },
   "peerDependencies": {
     "@claude-flow/plugins": ">=3.0.0-0",

@@ -18,18 +18,18 @@ import { prepareMessagesWithFiles } from "$lib/server/textGeneration/utils/prepa
 // uuid import removed (no tool call ids)
 
 export const endpointOAIParametersSchema = z.object({
-	weight: z.number().int().positive().default(1),
+	weight: z.number().int().positive().prefault(1),
 	model: z.any(),
 	type: z.literal("openai"),
-	baseURL: z.string().url().default("https://api.openai.com/v1"),
+	baseURL: z.string().url().prefault("https://api.openai.com/v1"),
 	// Canonical auth token is OPENAI_API_KEY; keep HF_TOKEN as legacy alias
-	apiKey: z.string().default(config.OPENAI_API_KEY || config.HF_TOKEN || "sk-"),
+	apiKey: z.string().prefault(config.OPENAI_API_KEY || config.HF_TOKEN || "sk-"),
 	completion: z
 		.union([z.literal("completions"), z.literal("chat_completions")])
-		.default("chat_completions"),
-	defaultHeaders: z.record(z.string()).optional(),
-	defaultQuery: z.record(z.string()).optional(),
-	extraBody: z.record(z.any()).optional(),
+		.prefault("chat_completions"),
+	defaultHeaders: z.record(z.string(), z.string()).optional(),
+	defaultQuery: z.record(z.string(), z.string()).optional(),
+	extraBody: z.record(z.string(), z.any()).optional(),
 	multimodal: z
 		.object({
 			image: createImageProcessorOptionsValidator({
@@ -44,10 +44,10 @@ export const endpointOAIParametersSchema = z.object({
 				maxHeight: 1024,
 			}),
 		})
-		.default({}),
+		.prefault({}),
 	/* enable use of max_completion_tokens in place of max_tokens */
-	useCompletionTokens: z.boolean().default(false),
-	streamingSupported: z.boolean().default(true),
+	useCompletionTokens: z.boolean().prefault(false),
+	streamingSupported: z.boolean().prefault(true),
 });
 
 export async function endpointOai(

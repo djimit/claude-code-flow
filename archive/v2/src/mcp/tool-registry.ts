@@ -175,7 +175,7 @@ export class ClaudeFlowToolRegistry {
       if (p.type === 'string') {
         zodSchema[key] = p.enum ? z.enum(p.enum) : z.string();
         if (p.default !== undefined) {
-          zodSchema[key] = zodSchema[key].default(p.default);
+          zodSchema[key] = zodSchema[key].prefault(p.default);
         }
         if (!schema.required?.includes(key)) {
           zodSchema[key] = zodSchema[key].optional();
@@ -183,7 +183,7 @@ export class ClaudeFlowToolRegistry {
       } else if (p.type === 'number' || p.type === 'integer') {
         zodSchema[key] = z.number();
         if (p.default !== undefined) {
-          zodSchema[key] = zodSchema[key].default(p.default);
+          zodSchema[key] = zodSchema[key].prefault(p.default);
         }
         if (!schema.required?.includes(key)) {
           zodSchema[key] = zodSchema[key].optional();
@@ -191,7 +191,7 @@ export class ClaudeFlowToolRegistry {
       } else if (p.type === 'boolean') {
         zodSchema[key] = z.boolean();
         if (p.default !== undefined) {
-          zodSchema[key] = zodSchema[key].default(p.default);
+          zodSchema[key] = zodSchema[key].prefault(p.default);
         }
         if (!schema.required?.includes(key)) {
           zodSchema[key] = zodSchema[key].optional();
@@ -202,7 +202,7 @@ export class ClaudeFlowToolRegistry {
           zodSchema[key] = zodSchema[key].optional();
         }
       } else if (p.type === 'object') {
-        zodSchema[key] = z.record(z.any());
+        zodSchema[key] = z.record(z.string(), z.any());
         if (!schema.required?.includes(key)) {
           zodSchema[key] = zodSchema[key].optional();
         }

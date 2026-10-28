@@ -58,7 +58,7 @@ export async function updateUser(params: {
 				)
 				.optional(),
 		})
-		.setKey(OIDConfig.NAME_CLAIM, z.string())
+		.extend({ [OIDConfig.NAME_CLAIM]: z.string() })
 		.refine((data) => data.preferred_username || data.email, {
 			message: "Either preferred_username or email must be provided by the provider.",
 		})

@@ -15,15 +15,15 @@ export const createDocumentProcessorOptionsValidator = <TMimeType extends string
 		.object({
 			supportedMimeTypes: z
 				.array(
-					z.enum<string, [TMimeType, ...TMimeType[]]>([
+					z.enum([
 						defaults.supportedMimeTypes[0],
 						...defaults.supportedMimeTypes.slice(1),
 					])
 				)
-				.default(defaults.supportedMimeTypes),
-			maxSizeInMB: z.number().positive().default(defaults.maxSizeInMB),
+				.prefault(defaults.supportedMimeTypes),
+			maxSizeInMB: z.number().positive().prefault(defaults.maxSizeInMB),
 		})
-		.default(defaults);
+		.prefault(defaults);
 };
 
 // Removed unused DocumentProcessor type alias

@@ -19,7 +19,7 @@ const modelConfig = z.object({
 	/** Used as an identifier in DB */
 	id: z.string().optional(),
 	/** Used to link to the model page, and for inference */
-	name: z.string().default(""),
+	name: z.string().prefault(""),
 	displayName: z.string().min(1).optional(),
 	description: z.string().min(1).optional(),
 	logoUrl: z.string().url().optional(),
@@ -28,7 +28,7 @@ const modelConfig = z.object({
 	tokenizer: z.never().optional(),
 	datasetName: z.string().min(1).optional(),
 	datasetUrl: z.string().url().optional(),
-	preprompt: z.string().default(""),
+	preprompt: z.string().prefault(""),
 	prepromptUrl: z.string().url().optional(),
 	chatPromptTemplate: z.never().optional(),
 	promptExamples: z
@@ -54,19 +54,26 @@ const modelConfig = z.object({
 		})
 		.passthrough()
 		.optional(),
-	multimodal: z.boolean().default(false),
+	multimodal: z.boolean().prefault(false),
 	multimodalAcceptedMimetypes: z.array(z.string()).optional(),
 	// Aggregated tool-calling capability across providers (HF router)
-	supportsTools: z.boolean().default(false),
-	unlisted: z.boolean().default(false),
+	supportsTools: z.boolean().prefault(false),
+	unlisted: z.boolean().prefault(false),
 	embeddingModel: z.never().optional(),
 	/** Used to enable/disable system prompt usage */
-	systemRoleSupported: z.boolean().default(true),
+	systemRoleSupported: z.boolean().prefault(true),
 });
 
 type ModelConfig = z.infer<typeof modelConfig>;
 
 const overrideEntrySchema = modelConfig
+	.extend({
+		preprompt: modelConfig.shape.preprompt.unwrap(),
+		multimodal: modelConfig.shape.multimodal.unwrap(),
+		supportsTools: modelConfig.shape.supportsTools.unwrap(),
+		unlisted: modelConfig.shape.unlisted.unwrap(),
+		systemRoleSupported: modelConfig.shape.systemRoleSupported.unwrap(),
+	})
 	.partial()
 	.extend({
 		id: z.string().optional(),

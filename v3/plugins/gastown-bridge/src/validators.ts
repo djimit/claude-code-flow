@@ -267,7 +267,7 @@ export const LabelsSchema = z.array(
 export function validateBeadId(id: string): string {
   const result = BeadIdSchema.safeParse(id);
   if (!result.success) {
-    const errors = result.error.errors.map(e => e.message).join('; ');
+    const errors = result.error.issues.map(e => e.message).join('; ');
     throw ValidationError.invalidBeadId(id);
   }
   return result.data;
@@ -364,12 +364,15 @@ export function validateGtArgs(args: string[]): string[] {
 
   const result = GtArgsSchema.safeParse(args);
   if (!result.success) {
-    const errors = result.error.errors;
-    const constraints = errors.map((e, idx) => ({
-      field: `args[${e.path[0] ?? idx}]`,
-      constraint: 'safe CLI argument',
-      actual: args[Number(e.path[0])]?.slice(0, 20) + '...',
-    }));
+    const errors = result.error.issues;
+    const constraints = errors.map((e, idx) => {
+      const index = typeof e.path[0] === 'number' ? e.path[0] : idx;
+      return {
+        field: `args[${index}]`,
+        constraint: 'safe CLI argument',
+        actual: args[index]?.slice(0, 20) + '...',
+      };
+    });
     throw new ValidationError(
       'Invalid CLI arguments',
       GasTownErrorCode.INVALID_ARGUMENTS,
@@ -398,8 +401,8 @@ export const CreateBeadOptionsSchema = z.object({
   description: z.string()
     .max(4096, 'Description exceeds maximum length')
     .optional(),
-  priority: PrioritySchema.optional().default(50),
-  labels: LabelsSchema.optional().default([]),
+  priority: PrioritySchema.prefault(50),
+  labels: LabelsSchema.prefault([]),
   parent: BeadIdSchema.optional(),
   rig: RigNameSchema.optional(),
   assignee: z.string()
@@ -447,9 +450,9 @@ export const SlingOptionsSchema = z.object({
 export function validateCreateBeadOptions(options: unknown): z.infer<typeof CreateBeadOptionsSchema> {
   const result = CreateBeadOptionsSchema.safeParse(options);
   if (!result.success) {
-    const errors = result.error.errors;
+    const errors = result.error.issues;
     const constraints = errors.map(e => ({
-      field: e.path.join('.'),
+      field: e.path.map(String).join('.'),
       constraint: e.message,
     }));
     throw new ValidationError(
@@ -467,9 +470,9 @@ export function validateCreateBeadOptions(options: unknown): z.infer<typeof Crea
 export function validateCreateConvoyOptions(options: unknown): z.infer<typeof CreateConvoyOptionsSchema> {
   const result = CreateConvoyOptionsSchema.safeParse(options);
   if (!result.success) {
-    const errors = result.error.errors;
+    const errors = result.error.issues;
     const constraints = errors.map(e => ({
-      field: e.path.join('.'),
+      field: e.path.map(String).join('.'),
       constraint: e.message,
     }));
     throw new ValidationError(
@@ -487,9 +490,9 @@ export function validateCreateConvoyOptions(options: unknown): z.infer<typeof Cr
 export function validateSlingOptions(options: unknown): z.infer<typeof SlingOptionsSchema> {
   const result = SlingOptionsSchema.safeParse(options);
   if (!result.success) {
-    const errors = result.error.errors;
+    const errors = result.error.issues;
     const constraints = errors.map(e => ({
-      field: e.path.join('.'),
+      field: e.path.map(String).join('.'),
       constraint: e.message,
     }));
     throw new ValidationError(

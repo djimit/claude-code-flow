@@ -25,16 +25,16 @@ export const DetectSecretsInputSchema = z.object({
         'generic',
       ])
     )
-    .default(['api-key', 'password', 'private-key', 'token', 'aws-key'])
+    .prefault(['api-key', 'password', 'private-key', 'token', 'aws-key'])
     .describe('Types of secrets to detect'),
   excludePatterns: z
     .array(z.string())
-    .default(['*.test.ts', '*.spec.ts', 'node_modules', '.git'])
+    .prefault(['*.test.ts', '*.spec.ts', 'node_modules', '.git'])
     .describe('File patterns to exclude'),
-  includeEntropy: z.boolean().default(true).describe('Use entropy analysis for detection'),
-  entropyThreshold: z.number().min(0).max(8).default(4.5).describe('Entropy threshold (higher = stricter)'),
-  verifySecrets: z.boolean().default(false).describe('Attempt to verify if secrets are active'),
-  scanHistory: z.boolean().default(false).describe('Scan git history for secrets'),
+  includeEntropy: z.boolean().prefault(true).describe('Use entropy analysis for detection'),
+  entropyThreshold: z.number().min(0).max(8).prefault(4.5).describe('Entropy threshold (higher = stricter)'),
+  verifySecrets: z.boolean().prefault(false).describe('Attempt to verify if secrets are active'),
+  scanHistory: z.boolean().prefault(false).describe('Scan git history for secrets'),
 });
 
 export type DetectSecretsInput = z.infer<typeof DetectSecretsInputSchema>;

@@ -13,17 +13,17 @@ export const SuggestTestsInputSchema = z.object({
   coverageReport: z.string().optional().describe('Path to existing coverage report (lcov/json)'),
   focusAreas: z
     .array(z.enum(['branches', 'functions', 'lines', 'edge-cases', 'error-handling', 'boundaries']))
-    .default(['branches', 'functions'])
+    .prefault(['branches', 'functions'])
     .describe('Areas to focus suggestions on'),
-  maxSuggestions: z.number().min(1).max(50).default(10).describe('Maximum suggestions to return'),
+  maxSuggestions: z.number().min(1).max(50).prefault(10).describe('Maximum suggestions to return'),
   priorityBy: z
     .enum(['risk', 'complexity', 'coverage-impact', 'change-frequency'])
-    .default('risk')
+    .prefault('risk')
     .describe('How to prioritize suggestions'),
-  includeCode: z.boolean().default(true).describe('Include generated test code in suggestions'),
+  includeCode: z.boolean().prefault(true).describe('Include generated test code in suggestions'),
   framework: z
     .enum(['vitest', 'jest', 'mocha', 'pytest', 'junit'])
-    .default('vitest')
+    .prefault('vitest')
     .describe('Test framework for generated code'),
 });
 

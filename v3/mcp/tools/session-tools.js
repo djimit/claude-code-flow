@@ -28,44 +28,44 @@ const saveSessionSchema = z.object({
         .describe('Session name (auto-generated if not provided)'),
     description: z.string().max(500).optional()
         .describe('Session description'),
-    includeAgents: z.boolean().default(true)
+    includeAgents: z.boolean().prefault(true)
         .describe('Include agent states in the session'),
-    includeTasks: z.boolean().default(true)
+    includeTasks: z.boolean().prefault(true)
         .describe('Include task queue in the session'),
-    includeMemory: z.boolean().default(true)
+    includeMemory: z.boolean().prefault(true)
         .describe('Include memory entries in the session'),
-    includeSwarmState: z.boolean().default(true)
+    includeSwarmState: z.boolean().prefault(true)
         .describe('Include swarm coordination state'),
     tags: z.array(z.string()).optional()
         .describe('Tags for categorizing the session'),
-    metadata: z.record(z.unknown()).optional()
+    metadata: z.record(z.string(), z.unknown()).optional()
         .describe('Additional metadata'),
 });
 const restoreSessionSchema = z.object({
     sessionId: z.string().describe('ID of the session to restore'),
-    restoreAgents: z.boolean().default(true)
+    restoreAgents: z.boolean().prefault(true)
         .describe('Restore agent states'),
-    restoreTasks: z.boolean().default(true)
+    restoreTasks: z.boolean().prefault(true)
         .describe('Restore task queue'),
-    restoreMemory: z.boolean().default(true)
+    restoreMemory: z.boolean().prefault(true)
         .describe('Restore memory entries'),
-    restoreSwarmState: z.boolean().default(true)
+    restoreSwarmState: z.boolean().prefault(true)
         .describe('Restore swarm coordination state'),
-    clearExisting: z.boolean().default(false)
+    clearExisting: z.boolean().prefault(false)
         .describe('Clear existing state before restore'),
 });
 const listSessionsSchema = z.object({
-    limit: z.number().int().positive().max(1000).default(50)
+    limit: z.number().int().positive().max(1000).prefault(50)
         .describe('Maximum number of sessions to return'),
-    offset: z.number().int().nonnegative().default(0)
+    offset: z.number().int().nonnegative().prefault(0)
         .describe('Offset for pagination'),
     tags: z.array(z.string()).optional()
         .describe('Filter by tags'),
-    sortBy: z.enum(['created', 'name', 'size']).default('created')
+    sortBy: z.enum(['created', 'name', 'size']).prefault('created')
         .describe('Sort order'),
-    sortOrder: z.enum(['asc', 'desc']).default('desc')
+    sortOrder: z.enum(['asc', 'desc']).prefault('desc')
         .describe('Sort direction'),
-    includeMetadata: z.boolean().default(true)
+    includeMetadata: z.boolean().prefault(true)
         .describe('Include session metadata'),
 });
 // ============================================================================
